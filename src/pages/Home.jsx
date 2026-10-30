@@ -26,7 +26,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-charcoal/75" />
           <div className="relative px-8 py-16 md:py-20 text-center">
             <p className="text-[11px] tracking-[0.3em] uppercase text-gold">Free First Consultation</p>
-            <h2 className="font-serif text-3xl md:text-5xl text-cream mt-3">Want a Similar Space?</h2>
+            <h2 className="font-serif text-2xl md:text-3xl text-cream mt-3">Want a Similar Space?</h2>
             <p className="text-cream/70 mt-3 max-w-xl mx-auto text-[15px]">Share your floor plan or photos on WhatsApp — we will suggest a design direction within 24 hours.</p>
             <Link to="/contact" className="inline-flex items-center gap-2 mt-7 bg-gold text-charcoal px-8 py-3.5 rounded-full text-sm font-medium hover:bg-cream transition-colors">
               Book a Consultation <ArrowRight size={16} />

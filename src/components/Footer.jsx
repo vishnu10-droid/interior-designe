@@ -10,7 +10,11 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-5 md:px-8 py-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
           <div className="flex items-center gap-3">
-            <span className="w-10 h-10 rounded-lg bg-gold/15 border border-gold/30 grid place-items-center font-serif text-lg text-gold">AF</span>
+            <img
+              src="/logodp.jpeg"
+              alt="AF Interior Logo"
+              className="w-10 h-10 rounded-lg bg-gold/15 border border-gold/30 grid place-items-center font-serif text-lg text-gold"
+            />
             <span className="font-serif tracking-[0.18em]">AF INTERIOR</span>
           </div>
           <p className="text-sm text-cream/60 mt-5 leading-relaxed">Premium residential and commercial interior design studio in Agra — modern, elegant and functional spaces.</p>

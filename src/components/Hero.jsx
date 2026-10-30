@@ -23,10 +23,19 @@ export default function Hero() {
           className="inline-flex items-center gap-3 text-[11px] tracking-[0.35em] uppercase text-gold border border-gold/40 bg-white/5 backdrop-blur px-4 py-2 rounded-full">
           AF Interior • Agra
         </motion.p>
-        <motion.h1 initial={{ opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.12 }}
-          className="font-serif text-white text-[42px] leading-[1.05] md:text-7xl max-w-3xl mt-6">
-          Designing Spaces<br />That Feel Like <em className="text-gold not-italic font-serif italic">Home.</em>
-        </motion.h1>
+<motion.h1
+  initial={{ opacity: 0, y: 34 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.9, delay: 0.12 }}
+  className="font-serif text-white text-2xl md:text-3xl leading-tight max-w-3xl mt-6"
+>
+  Designing Spaces
+  <br />
+  That Feel Like{" "}
+  <em className="text-gold not-italic font-serif italic">
+    Home.
+  </em>
+</motion.h1>
         <motion.p initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25 }}
           className="text-white/75 max-w-xl mt-5 text-[15px] md:text-lg leading-relaxed">
           Premium interior design solutions crafted around your lifestyle, personality and vision.

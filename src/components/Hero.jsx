@@ -14,7 +14,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-charcoal/60 via-transparent to-transparent" />
 
       <div className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 flex-col items-center gap-4 text-white/50">
-        <span className="text-[10px] tracking-[0.4em] uppercase" style={{ writingMode: "vertical-rl" }}>Agra — 27.17° N</span>
+        <span className="text-[10px] tracking-[0.4em] uppercase" style={{ writingMode: "vertical-rl" }}>Ananya — 27.17° N</span>
         <span className="w-px h-20 bg-white/25" />
       </div>
 

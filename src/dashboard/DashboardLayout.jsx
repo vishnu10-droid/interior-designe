@@ -20,7 +20,7 @@ function SidebarContent({ onNav }) {
     <div className="flex flex-col h-full">
       <button onClick={() => { navigate("/"); onNav?.(); }} className="flex items-center gap-3 px-6 h-[72px] text-left">
         <span className="w-10 h-10 rounded-lg bg-charcoal text-gold grid place-items-center font-serif text-lg">AF</span>
-        <span><span className="block font-serif tracking-[0.15em] text-[15px]">AF INTERIOR</span><span className="block text-[10px] tracking-[0.3em] text-coffee">ADMIN PANEL</span></span>
+        <span><span className="block font-serif tracking-[0.15em] text-[15px]">Ananya Endless Decor</span><span className="block text-[10px] tracking-[0.3em] text-coffee">Agra</span></span>
       </button>
       <nav className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
         {dashLinks.map((l) => (
@@ -92,8 +92,8 @@ export default function DashboardLayout() {
                 {dark ? <Sun size={17} /> : <Moon size={17} />}
               </button>
               <div className="flex items-center gap-2.5 pl-1">
-                <span className="w-10 h-10 rounded-full bg-charcoal text-gold grid place-items-center font-serif">A</span>
-                <div className="hidden md:block leading-tight"><p className="text-sm font-medium">Admin</p><p className="text-xs opacity-60">AF Interior</p></div>
+                <img src="/Ananya Logo.png" alt="Ananya Logo" className="w-10 h-10 rounded-lg object-contain" />
+                <div className="hidden md:block leading-tight"><p className="text-sm font-medium">Admin</p><p className="text-xs opacity-60">Ananya Endless Decor</p></div>
               </div>
             </div>
           </div>

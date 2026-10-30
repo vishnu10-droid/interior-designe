@@ -29,7 +29,7 @@ export function AboutSection() {
     <section className="max-w-7xl mx-auto px-5 md:px-8 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
       <Reveal className="relative">
         <div className="rounded-2xl overflow-hidden shadow-soft img-zoom">
-          <img src={services[0].image} alt="AF Interior project" loading="lazy" className="w-full h-[480px] object-cover" />
+          <img src={services[0].image} alt="Ananya project" loading="lazy" className="w-full h-[480px] object-cover" />
         </div>
         <div className="absolute -bottom-6 -right-2 md:right-8 bg-charcoal text-cream rounded-2xl px-7 py-5 shadow-lift">
           <p className="font-serif text-4xl text-gold">4.9</p>
@@ -37,9 +37,9 @@ export function AboutSection() {
         </div>
       </Reveal>
       <div>
-        <Reveal><p className="text-[11px] tracking-[0.3em] uppercase text-golddark font-medium">About AF Interior</p>
-          <h2 className="font-serif text-3xl md:text-5xl mt-3 leading-tight">Spaces Designed<br />Around You.</h2></Reveal>
-        <Reveal delay={0.1}><p className="text-coffee mt-5 leading-relaxed">AF Interior is an Agra-based interior design studio focused on creating elegant, functional and personalized spaces for modern living.</p></Reveal>
+        <Reveal><p className="text-[11px] tracking-[0.3em] uppercase text-golddark font-medium">About Ananya</p>
+          <h2 className="font-serif text-3xl md:text-5xl mt-3 leading-tight">Spaces Designed Around You.</h2></Reveal>
+        <Reveal delay={0.1}><p className="text-coffee mt-5 leading-relaxed">Ananya, a front-runner one-stop interior and exterior products mall have it's origin in the year1995. A humble start-up by Mr. Vikas Bansal by the name of "M/s Bansal Wood Decor (P) Ltd.", focusing on a single point i.e. plywood, laminates, doors, veneers and other interior & exterior products. It's been almost two and half decade in the journey of providing the best of the products in the best of the class under one roof.</p></Reveal>
         <Reveal delay={0.15}>
           <ul className="mt-6 space-y-3">
             {points.map((p) => (

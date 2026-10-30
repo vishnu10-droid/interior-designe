@@ -34,9 +34,9 @@ export function ContactSection() {
         <Reveal className="lg:col-span-2">
           <div className="bg-charcoal rounded-3xl p-8 text-cream h-full flex flex-col gap-6">
             <div>
-              <p className="text-[11px] tracking-[0.3em] uppercase text-gold">AF Interior</p>
+              <p className="text-[11px] tracking-[0.3em] uppercase text-gold">Ananya</p>
               <p className="flex items-center gap-2 mt-3 text-sm"><Star size={15} className="text-gold" fill="currentColor" /> 4.9 rated • 254+ reviews</p>
-              <a href={PHONE_LINK} className="font-serif text-3xl mt-2 block hover:text-gold transition-colors">{PHONE}</a>
+              <a href={PHONE_LINK} className="font-serif text-3xl mt-2 block hover:text-gold transition-colors">+91 7351400063 / +91 9837027055</a>
               <p className="flex items-start gap-2 text-sm text-cream/70 mt-4 leading-relaxed"><MapPin size={16} className="mt-0.5 shrink-0 text-gold" />{ADDRESS}</p>
               <p className="flex items-center gap-2 text-sm text-cream/70 mt-3"><Clock size={15} className="text-gold" /> Open 24 Hours, all days</p>
             </div>

@@ -55,7 +55,7 @@ export function WhySection() {
           <Reveal key={f.title} delay={(i % 4) * 0.07}>
             <div className="bg-white rounded-2xl p-7 shadow-card hover:shadow-lift hover:-translate-y-1 transition-all duration-300 h-full border border-charcoal/5">
               <span className="w-12 h-12 rounded-xl bg-beige text-espresso grid place-items-center"><f.icon size={20} /></span>
-              <h3 className="font-serif text-lg mt-5">{f.title}</h3>
+              <h3 className="font-serif text-xl mt-5">{f.title}</h3>
               <p className="text-sm text-coffee mt-2 leading-relaxed">{f.desc}</p>
             </div>
           </Reveal>

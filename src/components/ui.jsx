@@ -18,7 +18,7 @@ export function SectionHeading({ eyebrow, title, desc, center = true, light = fa
   return (
     <Reveal className={`${center ? "text-center mx-auto" : ""} max-w-2xl`}>
       <p className="text-[11px] tracking-[0.3em] uppercase text-golddark font-medium">{eyebrow}</p>
-      <h2 className={`font-serif text-3xl md:text-5xl leading-tight mt-3 ${light ? "text-cream" : "text-charcoal"}`}>{title}</h2>
+      <h2 className={`font-serif text-3xl md:text-3xl leading-tight mt-3 ${light ? "text-cream" : "text-charcoal"}`}>{title}</h2>
       <div className={`mt-4 h-px w-16 bg-gold ${center ? "mx-auto" : ""}`} />
       {desc && <p className={`mt-4 text-[15px] leading-relaxed ${light ? "text-cream/70" : "text-coffee"}`}>{desc}</p>}
     </Reveal>

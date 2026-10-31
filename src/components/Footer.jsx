@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, MapPin, Clock, ArrowUp } from "lucide-react";
 import { ADDRESS, PHONE, PHONE_LINK } from "../data/services";
+import logo from "../assets/logo.png";
 
 export default function Footer() {
   const nav = [["/", "Home"], ["/about", "About"], ["/services", "Services"], ["/projects", "Projects"], ["/gallery", "Gallery"], ["/contact", "Contact"]];
@@ -11,11 +12,10 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-3">
             <img
-              src="/logodp.jpeg"
+              src={logo}
               alt="AF Interior Logo"
-              className="w-10 h-10 rounded-lg bg-gold/15 border border-gold/30 grid place-items-center font-serif text-lg text-gold"
+              className="w-16 h-14 object-contain rounded-lg bg-gold/15 border border-gold/30 grid place-items-center font-serif text-lg text-gold"
             />
-            <span className="font-serif tracking-[0.18em]">AF INTERIOR</span>
           </div>
           <p className="text-sm text-cream/60 mt-5 leading-relaxed">Premium residential and commercial interior design studio in Agra — modern, elegant and functional spaces.</p>
           <p className="text-gold text-sm mt-4">★★★★★ 4.9 • 254+ Reviews</p>

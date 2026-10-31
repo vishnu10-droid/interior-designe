@@ -68,7 +68,7 @@ export function AboutSection() {
           <p className="text-[11px] tracking-[0.3em] uppercase text-golddark font-medium">
             About Ananya
           </p>
-          <h2 className="font-serif text-2xl md:text-4xl mt-3 leading-tight">
+          <h2 className="font-serif  text-4xl md:text-5xl  text-charcoal font-semibold tracking-tight leading-tight">
             Spaces Designed Around You.
           </h2>
         </Reveal>{" "}

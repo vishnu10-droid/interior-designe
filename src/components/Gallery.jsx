@@ -102,7 +102,7 @@ export function GalleryGrid({ limit, showFilter = true }) {
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute bottom-0 inset-x-0 p-5 flex items-center justify-between opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                 <div>
-                  <p className="text-white font-serif text-lg leading-tight">
+                  <p className="font-serif text-lg leading-tight">
                     {g.title}
                   </p>
                   <p className="text-white/60 text-xs mt-0.5">{g.category}</p>

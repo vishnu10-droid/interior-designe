@@ -8,12 +8,12 @@ import { Reveal } from "../components/ui";
 export function PageHero({ eyebrow, title, desc, image }) {
   return (
     <section className="relative py-28 md:py-36 overflow-hidden bg-charcoal">
-      <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-30" />
+      <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-30 text-3xl md:text-4xl" />
       <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-charcoal/40" />
       <div className="relative max-w-7xl mx-auto px-5 md:px-8">
         <Reveal>
           <p className="text-[11px] tracking-[0.3em] uppercase text-gold">{eyebrow}</p>
-          <h1 className="font-serif text-4xl md:text-6xl text-cream mt-4">{title}</h1>
+          <h1 className="font-serif text-4xl md:text-5xl text-cream mt-4">{title}</h1>
           {desc && <p className="text-cream/70 max-w-xl mt-4">{desc}</p>}
         </Reveal>
       </div>

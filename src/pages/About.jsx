@@ -13,7 +13,7 @@ export default function About() {
         <div className="relative max-w-7xl mx-auto px-5 md:px-8">
           <Reveal>
             <p className="text-[11px] tracking-[0.3em] uppercase text-gold">About AF Interior</p>
-            <h1 className="font-serif text-4xl md:text-6xl text-cream mt-4 max-w-2xl leading-tight">Your space. Reimagined tomorrow.</h1>
+            <h1 className="font-serif text-4xl md:text-5xl text-cream mt-4 max-w-2xl leading-tight">Your space. Reimagined tomorrow.</h1>
           </Reveal>
         </div>
       </section>
@@ -45,8 +45,10 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-5">
           {[["4.9/5", "Google rating"], ["254+", "Happy reviews"], ["24+", "Projects delivered"], ["8", "Design services"]].map(([v, l]) => (
             <Reveal key={l} className="bg-white rounded-2xl p-7 text-center shadow-card">
-              <p className="font-serif text-3xl md:text-4xl text-espresso">{v}</p>
-              <p className="text-xs tracking-[0.2em] uppercase text-coffee mt-2">G-8, near ICICI bank</p>
+              <div className="inline-flex items-center gap-2">
+                <p className="font-serif text-3xl md:text-4xl text-espresso">{v}</p>
+                <p className="text-xs tracking-[0.2em] uppercase text-coffee">{l}</p>
+              </div>
             </Reveal>
           ))}
         </div>

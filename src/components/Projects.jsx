@@ -47,12 +47,12 @@ export function SectionHeading({
   return (
     <div className={`mb-3 ${center ? "text-center" : ""}`}>
       {eyebrow && (
-        <span className="text-[10px] uppercase tracking-[0.2em] text-gold font-medium block mb-1">
+        <span className="text-[4px] text-[16px] uppercase tracking-[0.2em] text-gold font-medium block mb-1">
           {eyebrow}
         </span>
       )}
 
-      <h2 className="font-serif text-2xl md:text-3xl text-charcoal font-semibold tracking-tight leading-tight">
+      <h2 className="font-serif font-medium tracking-tight leading-tight heading-3xl">
         {title}
       </h2>
 

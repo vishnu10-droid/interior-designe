@@ -243,7 +243,7 @@ export default function Navbar() {
                     <NavLink
                       to={l.to}
                       className={({ isActive }) =>
-                        `flex items-center justify-between py-3.5 border-b border-charcoal/8 font-serif text-2xl ${
+                        `flex items-center justify-between py-3.5 border-b border-charcoal/8 font-serif text-[20px] ${
                           isActive
                             ? "text-golddark"
                             : "text-charcoal"

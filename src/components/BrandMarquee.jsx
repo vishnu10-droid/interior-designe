@@ -37,7 +37,7 @@ export function BrandMarquee() {
                     const fallback = image.nextElementSibling;
                     if (fallback) fallback.classList.remove("hidden");
                   }}
-                  className="max-h-12 w-full object-contain grayscale transition-all duration-500 group-hover:grayscale-0 sm:max-h-14"
+                  className="max-h-12 w-full object-contain transition-all duration-500 sm:max-h-14"
                 />
                 <span className="hidden text-center font-serif text-lg text-charcoal">{brand.name}</span>
               </Link>

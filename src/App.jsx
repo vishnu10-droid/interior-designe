@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FloatingButtons from "./components/FloatingButtons";
+import OfferPopup from "./components/OfferPopup";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import ServicesPage, { ServiceDetail } from "./pages/Services";
@@ -42,6 +43,7 @@ function PublicLayout({ children }) {
       <main className="flex-1">{children}</main>
       <Footer />
       <FloatingButtons />
+      <OfferPopup />
     </div>
   );
 }

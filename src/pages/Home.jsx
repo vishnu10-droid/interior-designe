@@ -7,6 +7,7 @@ import { TestimonialsSection } from "../components/Testimonials";
 import { ProjectsSection } from "../components/Projects";
 import { BlogSection } from "../components/Blog";
 import { BrandMarquee } from "../components/BrandMarquee";
+import TrendingVideos from "../components/TrendingVideos";
 
 export default function Home() {
   return (
@@ -41,7 +42,10 @@ export default function Home() {
       {/* 11 — About / Information */}
       <AboutSection />
 
-      {/* 12 — CTA / Consultation Banner */}
+      {/* 12 — Trending design & decor tips / Video carousel */}
+      <TrendingVideos />
+
+      {/* 13 — CTA / Consultation Banner */}
       <ConsultationBanner />
     </>
   );

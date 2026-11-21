@@ -238,17 +238,17 @@ export function AboutSection() {
     {
       icon: Lightbulb,
       label: "Our Vision",
-      text: "To make considered, beautiful interiors attainable — crafting spaces that feel personal, function effortlessly and stand the test of time.",
+      text: "Thoughtful, beautiful interiors made for real life.",
     },
     {
       icon: Compass,
       label: "Design Philosophy",
-      text: "We plan storage, light and movement before selecting finishes — so every space looks premium and works beautifully every day.",
+      text: "Plan light, storage and flow before finishes.",
     },
     {
       icon: Award,
       label: "Our Experience",
-      text: "Since 1995, two and a half decades of delivering the best products and interior solutions under one roof, trusted across Agra.",
+      text: "Since 1995 — trusted across Agra.",
     },
   ];
 
@@ -303,6 +303,21 @@ export function AboutSection() {
               <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1.5" />
             </Link>
           </div>
+
+          {/* Our Vision / Design Philosophy / Our Experience — placed below Discover Our Story. */}
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            {principles.map(({ icon: Icon, label, text }, i) => (
+              <Reveal key={label} delay={0.18 + i * 0.06} className="h-full">
+                <div className="h-full rounded-2xl bg-beige/50 border border-charcoal/5 p-5 hover:border-gold/40 hover:shadow-card transition-all duration-300">
+                  <span className="w-10 h-10 rounded-xl bg-charcoal text-gold grid place-items-center shrink-0">
+                    <Icon size={18} />
+                  </span>
+                  <h4 className="font-serif text-lg text-charcoal mt-4">{label}</h4>
+                  <p className="text-coffee text-[13px] leading-relaxed mt-2">{text}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </Reveal>
 
         {/* Right: detailed company information */}
@@ -326,22 +341,8 @@ export function AboutSection() {
             </div>
           </Reveal>
 
-          {principles.map(({ icon: Icon, label, text }, i) => (
-            <Reveal key={label} delay={0.12 + i * 0.06}>
-              <div className="grid gap-4 sm:grid-cols-[auto_1fr] sm:items-start rounded-2xl bg-beige/50 border border-charcoal/5 p-6 hover:border-gold/40 transition-colors duration-300">
-                <span className="w-12 h-12 rounded-xl bg-charcoal text-gold grid place-items-center shrink-0">
-                  <Icon size={20} />
-                </span>
-                <div>
-                  <h4 className="font-serif text-xl text-charcoal">{label}</h4>
-                  <p className="text-coffee text-[14px] leading-relaxed mt-1.5">{text}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-
-          {/* Preserved "How We Work" content from the original homepage, nested here as supporting detail. */}
-          <Reveal delay={0.3}>
+          {/* "How We Work" — process overview in the right column. */}
+          <Reveal delay={0.12}>
             <div className="rounded-3xl bg-charcoal p-7 md:p-9 text-cream">
               <p className="text-[11px] tracking-[0.3em] uppercase text-gold">How We Work</p>
               <h4 className="font-serif text-2xl mt-2">From Vision to Reality</h4>

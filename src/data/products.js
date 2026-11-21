@@ -380,14 +380,15 @@ export const allBrands = [
   "VOX", "VOX Primerra",
 ];
 
-// Local wordmark-logo assets for every brand shown in the homepage marquee.
+// Official brand logos (downloaded from each brand's own website / Wikimedia Commons)
+// used in the homepage marquee and on the Brands page.
 export const featuredBrands = [
   { name: "Greenply", image: "/images/brands/greenply.svg" },
-  { name: "Merino", image: "/images/brands/merino.svg" },
-  { name: "Greenlam", image: "/images/brands/greenlam.svg" },
-  { name: "Century", image: "/images/brands/century.svg" },
-  { name: "Decmore", image: "/images/brands/decmore.svg" },
-  { name: "Ramco", image: "/images/brands/ramco.svg" },
+  { name: "Merino", image: "/images/brands/merino.png" },
+  { name: "Greenlam", image: "/images/brands/greenlam.png" },
+  { name: "Century", image: "/images/brands/century.png" },
+  { name: "Decmore", image: "/images/brands/decmore.jpg" },
+  { name: "Ramco", image: "/images/brands/ramco.png" },
   { name: "VOX", image: "/images/brands/vox.svg" },
-  { name: "Rehau", image: "/images/brands/rehau.svg" },
+  { name: "Rehau", image: "/images/brands/rehau.png" },
 ];

@@ -8,11 +8,11 @@ export default function About() {
   return (
     <div className="pt-[72px]">
       <section className="relative py-24 md:py-32 overflow-hidden bg-charcoal">
-        <img src={IMAGES.about} alt="About AF Interior" className="absolute inset-0 w-full h-full object-cover opacity-30" />
+        <img src={IMAGES.about} alt="About Ananya Interior" className="absolute inset-0 w-full h-full object-cover opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-charcoal/40" />
         <div className="relative max-w-7xl mx-auto px-5 md:px-8">
           <Reveal>
-            <p className="text-[11px] tracking-[0.3em] uppercase text-gold">About AF Interior</p>
+            <p className="text-[11px] tracking-[0.3em] uppercase text-gold">About Ananya</p>
             <h1 className="font-serif text-4xl md:text-5xl text-cream mt-4 max-w-2xl leading-tight">Your space. Reimagined tomorrow.</h1>
           </Reveal>
         </div>
@@ -42,8 +42,8 @@ export default function About() {
       </section>
 
       <section className="bg-beige/60 py-16">
-        <div className="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-5">
-          {[["4.9/5", "Google rating"], ["254+", "Happy reviews"], ["24+", "Projects delivered"], ["8", "Design services"]].map(([v, l]) => (
+        <div className="max-w-7xl mx-auto px-5 md:px-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {[["24+", "Projects delivered"], ["8", "Design services"], ["1995", "Founded"]].map(([v, l]) => (
             <Reveal key={l} className="bg-white rounded-2xl p-7 text-center shadow-card">
               <div className="inline-flex items-center gap-2">
                 <p className="font-serif text-3xl md:text-4xl text-espresso">{v}</p>
@@ -58,7 +58,7 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-5 md:px-8 pb-20">
         <SectionHeading eyebrow="Visit Us" title="Our Agra Studio" desc="Shop No. 1, Block No. 4, Cloth Market, Sanjay Place, Civil Lines, Agra â€“ 282002. Open 24 Hours." center />
         <Reveal className="mt-8 rounded-3xl overflow-hidden shadow-card border border-charcoal/10">
-          <iframe title="AF Interior location map" src="https://www.google.com/maps?q=Sanjay+Place+Civil+Lines+Agra+282002&output=embed" className="w-full h-[380px] border-0" loading="lazy" />
+          <iframe title="Ananya Interior location map" src="https://www.google.com/maps?q=Sanjay+Place+Civil+Lines+Agra+282002&output=embed" className="w-full h-[380px] border-0" loading="lazy" />
         </Reveal>
       </div>
     </div>

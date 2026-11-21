@@ -6,16 +6,32 @@ import FloatingButtons from "./components/FloatingButtons";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import ServicesPage, { ServiceDetail } from "./pages/Services";
-import ProjectsPage, { ProjectDetail } from "./pages/Projects";
-import { GalleryPage, ReviewsPage, ContactPage, NotFound } from "./pages/Misc";
+import { ContactPage, NotFound } from "./pages/Misc";
+import Products from "./pages/Products";
+import ProductDetails from "./pages/ProductDetails";
+import Brands from "./pages/Brands";
+import Categories from "./pages/Categories";
+import BlogPage from "./pages/BlogPage";
 import DashboardLayout from "./dashboard/DashboardLayout";
 import { DashHome, DashProjects, DashServices, DashGallery, DashLeads, DashReviews, DashMessages, DashSettings } from "./dashboard/pages";
+import { allKeywords } from "./data/seo";
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }, [pathname]);
+    if (!hash) {
+      window.scrollTo({ top: 0, behavior: "instant" });
+      return undefined;
+    }
+    // Hash links (Projects / Blog in the navbar) may point to sections on the
+    // home page that have just mounted, so scroll after the next paint.
+    const timer = window.setTimeout(() => {
+      const target = document.getElementById(hash.slice(1));
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      else window.scrollTo({ top: 0, behavior: "instant" });
+    }, 60);
+    return () => window.clearTimeout(timer);
+  }, [pathname, hash]);
   return null;
 }
 
@@ -31,6 +47,11 @@ function PublicLayout({ children }) {
 }
 
 export default function App() {
+  useEffect(() => {
+    const meta = document.querySelector('meta[name="keywords"]');
+    if (meta) meta.setAttribute("content", allKeywords.join(", "));
+  }, []);
+
   return (
     <BrowserRouter>
       <ScrollToTop />
@@ -39,11 +60,12 @@ export default function App() {
         <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
         <Route path="/services" element={<PublicLayout><ServicesPage /></PublicLayout>} />
         <Route path="/services/:id" element={<PublicLayout><ServiceDetail /></PublicLayout>} />
-        <Route path="/projects" element={<PublicLayout><ProjectsPage /></PublicLayout>} />
-        <Route path="/projects/:id" element={<PublicLayout><ProjectDetail /></PublicLayout>} />
-        <Route path="/gallery" element={<PublicLayout><GalleryPage /></PublicLayout>} />
-        <Route path="/reviews" element={<PublicLayout><ReviewsPage /></PublicLayout>} />
         <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />
+        <Route path="/products" element={<PublicLayout><Products /></PublicLayout>} />
+        <Route path="/products/:slug" element={<PublicLayout><ProductDetails /></PublicLayout>} />
+        <Route path="/brands" element={<PublicLayout><Brands /></PublicLayout>} />
+        <Route path="/categories" element={<PublicLayout><Categories /></PublicLayout>} />
+        <Route path="/blog" element={<PublicLayout><BlogPage /></PublicLayout>} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<DashHome />} />
           <Route path="projects" element={<DashProjects />} />

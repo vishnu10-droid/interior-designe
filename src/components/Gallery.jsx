@@ -1,136 +1,83 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { X, Maximize2 } from "lucide-react";
+import { Maximize2 } from "lucide-react";
 import { galleryItems } from "../data/content";
-import { Reveal, SectionHeading } from "./ui";
+import { DetailModal, Reveal, SectionHeading } from "./ui";
 
-export const galleryCats = [
-  "All",
-  "Living Rooms",
-  "Bedrooms",
-  "Kitchens",
-  "Offices",
-  "Commercial Spaces",
+// Curated from the studio's existing gallery, with a bathroom view added to
+// complete the set of spaces requested for the showcase.
+const showcase = [
+  { ...galleryItems[0], featured: true },
+  galleryItems[2],
+  galleryItems[4],
+  {
+    id: "bathrooms-1",
+    title: "Spa Bathroom",
+    category: "Bathrooms",
+    src: "https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=1200&auto=format&fit=crop",
+  },
+  galleryItems[8],
+  galleryItems[6],
+  galleryItems[11],
+  galleryItems[10],
+  galleryItems[1],
 ];
 
-export function Lightbox({ item, onClose }) {
-  return (
-    <motion.div
-      className="fixed inset-0 z-[80] grid place-items-center p-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <div
-        className="absolute inset-0 bg-charcoal/90 backdrop-blur"
-        onClick={onClose}
-      />
-      <motion.div
-        initial={{ scale: 0.92, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.94, opacity: 0 }}
-        className="relative max-w-4xl w-full bg-cream rounded-2xl overflow-hidden shadow-lift"
-      >
-        <img
-          src={item.src}
-          alt={item.title}
-          className="w-full max-h-[75vh] object-cover"
-        />
-        <div className="flex items-center justify-between px-6 py-4">
-          <div>
-            <p className="font-serif text-xl">{item.title}</p>
-            <p className="text-xs tracking-[0.2em] uppercase text-coffee mt-1">
-              {item.category}
-            </p>
-          </div>
-          <button
-            onClick={onClose}
-            aria-label="Close preview"
-            className="w-10 h-10 rounded-full bg-charcoal text-cream grid place-items-center"
-          >
-            <X size={17} />
-          </button>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-}
-
-export function GalleryGrid({ limit, showFilter = true }) {
-  const [cat, setCat] = useState("All");
+export function GallerySection() {
   const [active, setActive] = useState(null);
-  const list = galleryItems
-    .filter((g) => cat === "All" || g.category === cat)
-    .slice(0, limit || undefined);
 
   return (
-    <>
-      {showFilter && (
-        <Reveal className="flex flex-wrap justify-center gap-2 mt-10">
-          {galleryCats.map((c) => (
+    <section id="gallery" className="max-w-7xl mx-auto px-5 md:px-8 py-20 md:py-28">
+      <SectionHeading
+        eyebrow="Design Showcase"
+        title="A Glimpse Inside Our Work"
+        desc="Living rooms, bedrooms, kitchens, bathrooms and workspaces — each one considered down to the last detail."
+      />
+
+      <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[150px] sm:auto-rows-[190px] md:auto-rows-[210px] gap-3 md:gap-4 mt-12">
+        {showcase.map((item, i) => (
+          <Reveal
+            key={item.id ?? item.title}
+            delay={(i % 4) * 0.06}
+            className={item.featured ? "col-span-2 row-span-2" : ""}
+          >
             <button
-              key={c}
-              onClick={() => setCat(c)}
-              className={`px-5 py-2.5 rounded-full text-[13px] tracking-wide transition-all ${cat === c ? "bg-charcoal text-cream" : "bg-white border border-charcoal/10 text-coffee hover:border-gold"}`}
-            >
-              {c}
-            </button>
-          ))}
-        </Reveal>
-      )}
-      <motion.div
-        layout
-        className="columns-2 md:columns-3 gap-4 mt-10 [&>div]:mb-4"
-      >
-        <AnimatePresence mode="popLayout">
-          {list.map((g) => (
-            <motion.div
-              key={g.id}
-              layout
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setActive(g)}
-              className="group relative rounded-2xl overflow-hidden cursor-pointer break-inside-avoid img-zoom shadow-card"
+              type="button"
+              onClick={() => setActive(item)}
+              aria-label={`View ${item.title}`}
+              className="group relative block h-full w-full overflow-hidden rounded-2xl bg-charcoal text-left shadow-card"
             >
               <img
-                src={g.src}
-                alt={g.title}
+                src={item.src}
+                alt={item.title}
                 loading="lazy"
-                className="w-full object-cover"
+                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 inset-x-0 p-5 flex items-center justify-between opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/10 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-95" />
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-4 md:p-5">
                 <div>
-                  <p className="font-serif text-lg leading-tight">
-                    {g.title}
-                  </p>
-                  <p className="text-white/60 text-xs mt-0.5">{g.category}</p>
+                  <p className="font-serif text-base text-cream leading-tight md:text-lg">{item.title}</p>
+                  <p className="text-[10px] tracking-[0.2em] uppercase text-cream/60 mt-1">{item.category}</p>
                 </div>
-                <span className="w-10 h-10 rounded-full bg-cream text-charcoal grid place-items-center">
-                  <Maximize2 size={15} />
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-cream/90 text-charcoal opacity-0 transition-all duration-300 group-hover:opacity-100">
+                  <Maximize2 size={14} />
                 </span>
               </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </motion.div>
-      <AnimatePresence>
-        {active && <Lightbox item={active} onClose={() => setActive(null)} />}
-      </AnimatePresence>
-    </>
-  );
-}
+            </button>
+          </Reveal>
+        ))}
+      </div>
 
-export function GallerySection({ limit = 6 }) {
-  return (
-    <section className="max-w-7xl mx-auto px-5 md:px-8 py-20 md:py-28">
-      <SectionHeading
-        eyebrow="Inspiration"
-        title="Spaces We Love"
-        desc="Tap any image for a closer look."
-      />
-      <GalleryGrid limit={limit} showFilter={false} />
+      <DetailModal open={Boolean(active)} onClose={() => setActive(null)} label={active?.title || "Gallery image"}>
+        {active && (
+          <div>
+            <img src={active.src} alt={active.title} className="max-h-[65vh] w-full object-cover" />
+            <div className="px-6 py-5 md:px-8">
+              <p className="font-serif text-2xl text-charcoal">{active.title}</p>
+              <p className="mt-1 text-[11px] tracking-[0.2em] uppercase text-golddark">{active.category}</p>
+            </div>
+          </div>
+        )}
+      </DetailModal>
     </section>
   );
 }

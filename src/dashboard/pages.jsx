@@ -31,7 +31,7 @@ export function DashHome() {
   ];
   return (
     <>
-      <PageTitle title="Welcome back, Admin" desc="Here is what is happening at AF Interior today." />
+      <PageTitle title="Welcome back, Admin" desc="Here is what is happening at Ananya Interior today." />
       <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
         {stats.map((s, i) => (
           <motion.div key={s.label} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}>
@@ -343,7 +343,7 @@ export function DashMessages() {
 
 export function DashSettings() {
   const [saved, setSaved] = useState(false);
-  const [form, setForm] = useState({ studio: "AF Interior", phone: "098973 13419", hours: "Open 24 Hours", address: "Sanjay Place, Civil Lines, Agra – 282002" });
+  const [form, setForm] = useState({ studio: "Ananya Interior", phone: "098973 13419", hours: "Open 24 Hours", address: "Sanjay Place, Civil Lines, Agra – 282002" });
   return (
     <>
       <PageTitle title="Settings" desc="Studio profile (stored in UI state only)." />

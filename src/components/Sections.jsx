@@ -1,12 +1,20 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { useLayoutEffect, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, BadgeCheck } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BadgeCheck, Compass, Lightbulb, Award, MapPin, Clock } from "lucide-react";
 import { services } from "../data/services";
+import { productCategories } from "../data/products";
+import { steps } from "./Process";
+import { ProductCard } from "./ProductCard";
 import { Reveal, SectionHeading } from "./ui";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function ServiceCard({ s }) {
   const Icon = s.icon;
+  const reduceMotion = useReducedMotion();
   
   // 3D Tilt Mouse Setup for Service Card
   const x = useMotionValue(0);
@@ -37,17 +45,17 @@ export function ServiceCard({ s }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: reduceMotion ? 0 : 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: reduceMotion ? 0 : 0.6, ease: [0.16, 1, 0.3, 1] }}
       style={{ perspective: 1000 }}
       className="h-full"
     >
       <motion.div
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        style={{ rotateX: reduceMotion ? 0 : rotateX, rotateY: reduceMotion ? 0 : rotateY, transformStyle: "preserve-3d" }}
         className="h-full"
       >
         <Link
@@ -66,7 +74,7 @@ export function ServiceCard({ s }) {
 
             {/* Animated 3D Icon Badge */}
             <motion.span
-              whileHover={{ rotate: 15, scale: 1.15 }}
+              whileHover={reduceMotion ? undefined : { rotate: 15, scale: 1.15 }}
               transition={{ type: "spring", stiffness: 400, damping: 12 }}
               className="absolute top-4 left-4 w-11 h-11 rounded-xl bg-cream/95 backdrop-blur-md grid place-items-center text-espresso shadow-lg"
             >
@@ -89,8 +97,8 @@ export function ServiceCard({ s }) {
               <span className="inline-flex items-center gap-1.5 text-[13px] tracking-wide text-golddark font-medium">
                 Explore Service{" "}
                 <motion.span
-                  animate={{ x: [0, 3, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  animate={reduceMotion ? undefined : { x: [0, 3, 0] }}
+                  transition={{ duration: reduceMotion ? 0 : 1.5, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <ArrowUpRight
                     size={16}
@@ -106,18 +114,118 @@ export function ServiceCard({ s }) {
   );
 }
 
+export function InteriorCategories() {
+  const reduceMotion = useReducedMotion();
+  const sectionRef = useRef(null);
+  const viewportRef = useRef(null);
+  const trackRef = useRef(null);
+
+  // useLayoutEffect (not useEffect) so GSAP's pin-spacer is reverted BEFORE
+  // React removes the section from the DOM on route change — otherwise React
+  // throws "removeChild: node is not a child" and the next page stays blank.
+  useLayoutEffect(() => {
+    if (reduceMotion) return undefined;
+    const section = sectionRef.current;
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!section || !viewport || !track) return undefined;
+
+    // Travel exactly as far as the track overflows the viewport, so the last
+    // card is completely visible before the pinned section releases.
+    const getTravel = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
+
+    const ctx = gsap.context(() => {
+      gsap.to(track, {
+        x: () => -getTravel(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => `+=${getTravel()}`,
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+    }, section);
+
+    const refresh = () => ScrollTrigger.refresh();
+    const timer = window.setTimeout(refresh, 300);
+    window.addEventListener("load", refresh);
+
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("load", refresh);
+      ctx.revert(); // kills tween + ScrollTrigger + pin spacer on unmount
+    };
+  }, [reduceMotion]);
+
+  return (
+    <section
+      ref={sectionRef}
+      id="categories"
+      className={`relative bg-beige/60 ${
+        reduceMotion ? "py-20" : "flex h-screen flex-col justify-center overflow-hidden"
+      }`}
+    >
+      <div className="mx-auto w-full max-w-7xl px-5 md:px-8">
+        <SectionHeading
+          eyebrow="All Categories"
+          title="Browse Every Category"
+          desc="From the first sketch to the final detail — interiors shaped around the way you live and work. Open a category to see all its products."
+        />
+      </div>
+
+      <div
+        ref={viewportRef}
+        className={`mt-6 overflow-hidden py-12 ${reduceMotion ? "overflow-x-auto" : ""}`}
+        style={{
+          WebkitMaskImage: "linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent)",
+          maskImage: "linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent)",
+        }}
+      >
+        <div ref={trackRef} className="flex w-max gap-5 px-5 md:gap-6 md:px-8">
+          {productCategories.map((category, i) => (
+            <div
+              key={category.id}
+              className={`w-[210px] shrink-0 sm:w-[240px] lg:w-[280px] ${
+                i % 2 === 0 ? "-translate-y-6" : "translate-y-6"
+              }`}
+            >
+              <ProductCard category={category} index={i} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Static grid version used by the dedicated /categories page (no slider/pin). */
+export function CategoryGrid() {
+  return (
+    <section id="categories" className="bg-beige/60 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-5 md:px-8">
+        <SectionHeading
+          eyebrow="All Categories"
+          title="Browse Every Category"
+          desc="From the first sketch to the final detail — interiors shaped around the way you live and work. Open a category to see all its products."
+        />
+
+        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {productCategories.map((category, i) => (
+            <Reveal key={category.id} delay={Math.min((i % 8) * 0.05, 0.3)} className="h-full">
+              <ProductCard category={category} index={i} />
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function AboutSection() {
-  const containerRef = useRef(null);
-
-  // Advanced Scroll Parallax & Scale Effect for About Image
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const imageParallaxY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 1.05]);
-
   const points = [
     "Residential interiors",
     "Commercial interiors",
@@ -126,116 +234,134 @@ export function AboutSection() {
     "Modern aesthetics",
   ];
 
+  const principles = [
+    {
+      icon: Lightbulb,
+      label: "Our Vision",
+      text: "To make considered, beautiful interiors attainable — crafting spaces that feel personal, function effortlessly and stand the test of time.",
+    },
+    {
+      icon: Compass,
+      label: "Design Philosophy",
+      text: "We plan storage, light and movement before selecting finishes — so every space looks premium and works beautifully every day.",
+    },
+    {
+      icon: Award,
+      label: "Our Experience",
+      text: "Since 1995, two and a half decades of delivering the best products and interior solutions under one roof, trusted across Agra.",
+    },
+  ];
+
   return (
-    <section
-      ref={containerRef}
-      className="max-w-7xl mx-auto px-5 md:px-8 py-20 md:py-32 grid md:grid-cols-2 gap-12 lg:gap-16 items-center overflow-hidden"
-    >
-      {/* Left Image Column with 3D Depth & Scroll Parallax */}
-      <Reveal className="relative">
-        <motion.div
-          style={{ scale: imageScale }}
-          className="rounded-3xl overflow-hidden shadow-2xl relative bg-charcoal will-change-transform"
-        >
-          <motion.div
-            style={{ y: imageParallaxY }}
-            className="w-full h-[520px] will-change-transform"
-          >
-            <img
-              src={services[0].image}
-              alt="Ananya project"
-              loading="lazy"
-              className="w-full h-full object-cover scale-110 filter brightness-95"
-            />
-          </motion.div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-        </motion.div>
-
-        {/* Floating Continuous 3D Float Animation Review Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 40, rotateX: -10 }}
-          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-          animate={{ y: [0, -8, 0] }}
-          viewport={{ once: true }}
-          transition={{
-            y: { duration: 3.5, repeat: Infinity, ease: "easeInOut" },
-            opacity: { duration: 0.8, delay: 0.3 },
-          }}
-          className="absolute -bottom-6 -right-2 md:right-8 bg-charcoal text-cream rounded-2xl px-8 py-5 shadow-2xl border border-white/10 backdrop-blur-xl"
-        >
-          <p className="font-serif text-4xl text-gold font-bold">4.9</p>
-          <p className="text-[11px] tracking-[0.25em] uppercase text-cream/70 mt-1 font-medium">
-            254+ happy reviews
-          </p>
-        </motion.div>
-      </Reveal>
-
-      {/* Right Content Column with Staggered Entrance */}
-      <div className="flex flex-col justify-center">
+    <section id="about" className="max-w-7xl mx-auto px-5 md:px-8 py-20 md:py-28">
+      <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        {/* Left: introduction and supporting information */}
         <Reveal>
           <span className="inline-block text-[11px] tracking-[0.35em] uppercase text-golddark font-semibold mb-3">
             About Ananya
           </span>
-          <h2 className="font-serif text-2xl md:text-3xl lg:text-5xl text-charcoal font-semibold tracking-tight leading-[1.15]">
-            Spaces Designed Around You.
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-charcoal font-semibold tracking-tight leading-[1.15]">
+            Spaces Designed <br className="hidden md:block" /> Around You.
           </h2>
-        </Reveal>
-
-        <Reveal delay={0.1}>
+          <div className="mt-5 h-px w-20 bg-gold" />
           <p className="text-coffee mt-6 leading-relaxed font-light text-base md:text-lg">
             Ananya, a front-runner one-stop interior and exterior products mall
-            has it's origin in the year 1995. A humble start-up by Mr. Vikas
-            Bansal by the name of "M/s Bansal Wood Decor (P) Ltd.", focusing on
-            a single point i.e. plywood, laminates, doors, veneers and other
-            interior & exterior products. It's been almost two and half decades
-            in the journey of providing the best of the products in the best of
-            the class under one roof.
+            has its origin in the year 1995. A humble start-up by Mr. Vikas
+            Bansal by the name of “M/s Bansal Wood Decor (P) Ltd.”, focusing on a
+            single point — plywood, laminates, doors, veneers and other interior
+            &amp; exterior products.
           </p>
-        </Reveal>
 
-        <Reveal delay={0.15}>
-          <ul className="mt-8 space-y-3.5">
-            {points.map((p, idx) => (
-              <motion.li
-                key={p}
-                initial={{ opacity: 0, x: -25 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 + idx * 0.08 }}
-                className="flex items-center gap-3 text-[15px] text-charcoal/85 font-medium"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.25, rotate: 12 }}
-                  className="w-6 h-6 rounded-full bg-gold/10 grid place-items-center text-golddark shrink-0 cursor-pointer shadow-sm"
-                >
-                  <BadgeCheck size={16} />
-                </motion.div>
+          <div className="grid grid-cols-3 gap-4 mt-8 max-w-md">
+            {[
+              ["1995", "Founded"],
+              ["24+", "Years of craft"],
+              ["Agra", "Our home"],
+            ].map(([value, label]) => (
+              <div key={label} className="border-l-2 border-gold/60 pl-4">
+                <p className="font-serif text-2xl md:text-3xl text-espresso">{value}</p>
+                <p className="text-[11px] tracking-[0.18em] uppercase text-stonewarm mt-1">{label}</p>
+              </div>
+            ))}
+          </div>
+
+          <ul className="mt-8 grid sm:grid-cols-2 gap-3 max-w-lg">
+            {points.map((p) => (
+              <li key={p} className="flex items-center gap-2.5 text-sm text-charcoal/85 bg-white border border-charcoal/8 rounded-xl px-4 py-3 shadow-card">
+                <BadgeCheck size={16} className="text-golddark shrink-0" />
                 {p}
-              </motion.li>
+              </li>
             ))}
           </ul>
-        </Reveal>
 
-        <Reveal delay={0.25}>
-          <div className="mt-10">
-            <motion.div
-              whileHover={{ scale: 1.04, y: -2 }}
-              whileTap={{ scale: 0.96 }}
-              className="inline-block"
+          <div className="mt-9">
+            <Link
+              to="/about"
+              className="group inline-flex items-center gap-3 bg-charcoal text-cream px-8 py-4 rounded-full text-sm font-medium tracking-wide shadow-xl hover:bg-espresso transition-colors duration-300"
             >
-              <Link
-                to="/about"
-                className="group inline-flex items-center gap-3 bg-charcoal text-cream px-8 py-4 rounded-full text-sm font-medium tracking-wide shadow-xl hover:bg-espresso transition-colors duration-300"
-              >
-                Discover Our Story
-                <ArrowRight
-                  size={16}
-                  className="transition-transform duration-300 group-hover:translate-x-1.5"
-                />
-              </Link>
-            </motion.div>
+              Discover Our Story
+              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1.5" />
+            </Link>
           </div>
         </Reveal>
+
+        {/* Right: detailed company information */}
+        <div className="space-y-5">
+          <Reveal delay={0.08}>
+            <div className="rounded-3xl border border-charcoal/5 bg-white p-7 md:p-9 shadow-card">
+              <p className="text-[11px] tracking-[0.3em] uppercase text-golddark font-medium">Our Story</p>
+              <h3 className="font-serif text-2xl md:text-3xl text-charcoal mt-3">
+                Two decades of crafting under one roof.
+              </h3>
+              <p className="text-coffee text-[15px] leading-relaxed mt-4">
+                It's been almost two and a half decades in the journey of
+                providing the best products in the best class under one roof.
+                What began with plywood and laminates has grown into a complete
+                interior and exterior destination — backed by a design studio
+                that plans, executes and handovers with care.
+              </p>
+              <p className="flex items-center gap-2 text-sm text-stonewarm mt-5">
+                <MapPin size={15} className="text-gold" /> Agra, Uttar Pradesh · Open 24 Hours
+              </p>
+            </div>
+          </Reveal>
+
+          {principles.map(({ icon: Icon, label, text }, i) => (
+            <Reveal key={label} delay={0.12 + i * 0.06}>
+              <div className="grid gap-4 sm:grid-cols-[auto_1fr] sm:items-start rounded-2xl bg-beige/50 border border-charcoal/5 p-6 hover:border-gold/40 transition-colors duration-300">
+                <span className="w-12 h-12 rounded-xl bg-charcoal text-gold grid place-items-center shrink-0">
+                  <Icon size={20} />
+                </span>
+                <div>
+                  <h4 className="font-serif text-xl text-charcoal">{label}</h4>
+                  <p className="text-coffee text-[14px] leading-relaxed mt-1.5">{text}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+
+          {/* Preserved "How We Work" content from the original homepage, nested here as supporting detail. */}
+          <Reveal delay={0.3}>
+            <div className="rounded-3xl bg-charcoal p-7 md:p-9 text-cream">
+              <p className="text-[11px] tracking-[0.3em] uppercase text-gold">How We Work</p>
+              <h4 className="font-serif text-2xl mt-2">From Vision to Reality</h4>
+              <div className="grid sm:grid-cols-2 gap-4 mt-6">
+                {steps.map((step) => (
+                  <div key={step.n} className="flex items-start gap-3 border-t border-white/10 pt-3">
+                    <step.icon size={16} className="text-gold shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-sm text-cream/90">{step.title}</p>
+                      <p className="text-xs text-cream/50 mt-0.5">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="flex items-center gap-2 text-xs text-cream/50 mt-6">
+                <Clock size={14} className="text-gold" /> Open 24 Hours — call or WhatsApp anytime for guidance.
+              </p>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

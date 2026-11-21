@@ -8,6 +8,7 @@ import {
   X,
   LayoutDashboard,
   ArrowRight,
+  ChevronDown,
 } from "lucide-react";
 
 import { PHONE, PHONE_LINK } from "../data/services";
@@ -16,11 +17,17 @@ import logo from "../assets/logo.png";
 const links = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
-  { to: "/services", label: "Services" },
-  { to: "/projects", label: "Projects" },
-  { to: "/gallery", label: "Gallery" },
-  { to: "/reviews", label: "Reviews" },
+  { to: "/products", label: "Product" },
+  { to: "/categories", label: "Category" },
+  { to: "/blog", label: "Blog" },
   { to: "/contact", label: "Contact" },
+];
+
+// Existing Services / Projects / Brands routes stay reachable from both menus.
+const extraLinks = [
+  { to: "/services", label: "Services" },
+  { to: "/#projects", label: "Projects" },
+  { to: "/brands", label: "Brands" },
 ];
 
 export default function Navbar() {
@@ -94,7 +101,7 @@ export default function Navbar() {
 
           {/* DESKTOP NAVIGATION */}
 
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
             {links.map((l) => (
               <NavLink
                 key={l.to}
@@ -112,6 +119,28 @@ export default function Navbar() {
                 {l.label}
               </NavLink>
             ))}
+
+            <details key={pathname} className="group relative">
+              <summary
+                className={`flex cursor-pointer list-none items-center gap-1 text-[13px] tracking-[0.14em] uppercase transition-colors [&::-webkit-details-marker]:hidden ${
+                  solid ? "text-charcoal/80 hover:text-charcoal" : "text-white/85 hover:text-white"
+                }`}
+              >
+                More
+                <ChevronDown size={13} className="transition-transform duration-300 group-open:rotate-180" />
+              </summary>
+              <div className="absolute right-0 top-full mt-4 w-40 rounded-2xl border border-charcoal/5 bg-white p-2 shadow-lift">
+                {extraLinks.map((l) => (
+                  <Link
+                    key={l.to}
+                    to={l.to}
+                    className="block rounded-xl px-4 py-2.5 text-sm text-charcoal/80 transition-colors hover:bg-beige hover:text-charcoal"
+                  >
+                    {l.label}
+                  </Link>
+                ))}
+              </div>
+            </details>
           </nav>
 
           {/* RIGHT SIDE BUTTONS */}
@@ -130,7 +159,7 @@ export default function Navbar() {
               onClick={() => navigate("/contact")}
               className="hidden sm:inline-flex items-center gap-2 bg-charcoal text-cream text-[13px] tracking-wide px-5 py-2.5 rounded-full hover:bg-espresso transition-colors"
             >
-              Get Consultation
+              Get a Quote
               <ArrowRight size={14} />
             </button>
 
@@ -259,6 +288,32 @@ export default function Navbar() {
                     </NavLink>
                   </motion.div>
                 ))}
+
+                {/* EXISTING PRODUCT & BRAND ROUTES */}
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {extraLinks.map((l) => (
+                    <Link
+                      key={l.to}
+                      to={l.to}
+                      className="rounded-full border border-charcoal/10 bg-white px-4 py-2 text-xs tracking-wide text-coffee hover:border-gold hover:text-charcoal"
+                    >
+                      {l.label}
+                    </Link>
+                  ))}
+                </div>
+
+                {/* GET A QUOTE */}
+
+                <button
+                  onClick={() => {
+                    setOpen(false);
+                    navigate("/contact");
+                  }}
+                  className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-gold px-5 py-3.5 text-sm font-medium text-charcoal"
+                >
+                  Get a Quote <ArrowRight size={16} />
+                </button>
 
                 {/* DASHBOARD LINK */}
 

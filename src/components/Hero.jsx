@@ -3,7 +3,6 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring } from "fram
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles, ChevronDown } from "lucide-react";
 import { IMAGES } from "../data/services";
-import { Stars } from "./ui";
 
 export default function Hero() {
   const containerRef = useRef(null);
@@ -78,7 +77,7 @@ export default function Hero() {
       >
         <img
           src={IMAGES.hero}
-          alt="Luxury home interior by AF Interior Agra"
+          alt="Luxury home interior by Ananya Interior Agra"
           className="w-full h-full object-cover object-center filter brightness-90"
         />
       </motion.div>
@@ -104,6 +103,21 @@ export default function Hero() {
         <div className="w-px h-24 bg-gradient-to-b from-gold/60 via-white/20 to-transparent" />
       </motion.div>
 
+      {/* Decorative circular heritage badge */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
+        transition={{ opacity: { duration: 1, delay: 0.7 }, scale: { duration: 1, delay: 0.7 }, y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1.2 } }}
+        className="hidden lg:grid absolute right-12 top-28 z-10 h-36 w-36 place-items-center rounded-full border border-gold/40 bg-charcoal/30 text-center shadow-xl backdrop-blur-md"
+      >
+        <span className="absolute inset-2 rounded-full border border-dashed border-gold/25" />
+        <span className="relative">
+          <span className="block text-[9px] tracking-[0.35em] uppercase text-gold/80">Est.</span>
+          <span className="block font-serif text-3xl text-cream leading-tight">1995</span>
+          <span className="block text-[9px] tracking-[0.28em] uppercase text-cream/60">Ananya · Agra</span>
+        </span>
+      </motion.div>
+
       {/* Main Content Area */}
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
@@ -117,7 +131,7 @@ export default function Hero() {
         >
           <span className="inline-flex items-center gap-2.5 text-[11px] font-medium tracking-[0.35em] uppercase text-gold border border-gold/30 bg-charcoal/40 backdrop-blur-md px-4 py-2 rounded-full shadow-lg shadow-black/20">
             <Sparkles className="w-3.5 h-3.5 text-gold animate-pulse" />
-            AF Interior • Agra
+            Ananya Interior • Agra
           </span>
         </motion.div>
 
@@ -155,10 +169,10 @@ export default function Hero() {
         >
           <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
             <Link
-              to="/projects"
+              to="/#projects"
               className="group inline-flex items-center gap-2.5 bg-gradient-to-r from-gold via-amber-400 to-gold text-charcoal px-6 py-3 rounded-full text-xs font-semibold tracking-wider uppercase shadow-xl hover:shadow-gold/25 transition-all duration-300"
             >
-              Explore Our Work
+              Explore Projects
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </motion.div>
@@ -173,23 +187,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Social Proof / Rating Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.55 }}
-          className="mt-10 inline-flex items-center gap-3.5 rounded-2xl bg-charcoal/50 border border-white/15 backdrop-blur-xl px-5 py-3 shadow-2xl"
-        >
-          <Stars />
-          <div className="flex flex-col">
-            <span className="font-serif text-white text-lg font-bold leading-none">
-              4.9 <span className="text-[11px] text-white/50 font-normal">/ 5.0</span>
-            </span>
-            <span className="text-[11px] text-white/75 mt-1 tracking-wide">
-              254+ Google Reviews • Open 24 Hours
-            </span>
-          </div>
-        </motion.div>
       </motion.div>
 
       {/* Interactive Bouncing Scroll Down Indicator */}

@@ -4,7 +4,7 @@ import { ADDRESS, PHONE, PHONE_LINK } from "../data/services";
 import logo from "../assets/logo.png";
 
 export default function Footer() {
-  const nav = [["/", "Home"], ["/about", "About"], ["/services", "Services"], ["/projects", "Projects"], ["/gallery", "Gallery"], ["/contact", "Contact"]];
+  const nav = [["/", "Home"], ["/about", "About"], ["/products", "Products"], ["/brands", "Brands"], ["/services", "Services"], ["/contact", "Contact"]];
   const svc = [["/services/home-interiors", "Home Interior"], ["/services/modular-kitchen", "Modular Kitchen"], ["/services/bedroom", "Bedroom"], ["/services/living-room", "Living Room"], ["/services/office-interiors", "Office Interior"]];
   return (
     <footer className="bg-charcoal text-cream">
@@ -13,12 +13,31 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <img
               src={logo}
-              alt="AF Interior Logo"
+              alt="Ananya Interior Logo"
               className="w-16 h-14 object-contain rounded-lg bg-gold/15 border border-gold/30 grid place-items-center font-serif text-lg text-gold"
             />
           </div>
           <p className="text-sm text-cream/60 mt-5 leading-relaxed">Premium residential and commercial interior design studio in Agra — modern, elegant and functional spaces.</p>
-          <p className="text-gold text-sm mt-4">★★★★★ 4.9 • 254+ Reviews</p>
+          <div className="mt-6 flex items-center gap-2.5">
+            {[
+              { label: "Instagram", short: "IG", href: "https://www.instagram.com/" },
+              { label: "Facebook", short: "FB", href: "https://www.facebook.com/" },
+              { label: "YouTube", short: "YT", href: "https://www.youtube.com/" },
+              { label: "LinkedIn", short: "IN", href: "https://www.linkedin.com/" },
+            ].map(({ label, short, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                title={label}
+                className="grid h-9 w-9 place-items-center rounded-full border border-white/15 text-[10px] font-semibold tracking-wide text-cream/70 transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold"
+              >
+                {short}
+              </a>
+            ))}
+          </div>
         </div>
         <div>
           <p className="text-[11px] tracking-[0.3em] uppercase text-gold">Navigation</p>
@@ -43,7 +62,7 @@ export default function Footer() {
       </div>
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-5 md:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/50">
-          <p>© 2026 AF Interior. All Rights Reserved.</p>
+          <p>© 2026 Ananya Interior. All Rights Reserved.</p>
           <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="inline-flex items-center gap-2 border border-white/15 rounded-full px-4 py-2 hover:bg-white/10 transition-colors">
             Back to top <ArrowUp size={13} />
           </button>

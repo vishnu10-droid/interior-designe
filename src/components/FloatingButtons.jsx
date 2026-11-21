@@ -103,7 +103,7 @@ export default function FloatingButtons() {
         <UserRound size={19} strokeWidth={2.5} />
 
         <span className="whitespace-nowrap font-serif text-sm tracking-wide sm:text-base">
-          Are you
+          Are you ?
         </span>
       </motion.button>
 

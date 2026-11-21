@@ -48,7 +48,7 @@ export function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden bg-[#faf5ef] py-20 md:py-28"
+      className="relative overflow-hidden bg-[#faf5ef] py-18 md:py-26"
     >
       {/* Decorative Background */}
       <div className="pointer-events-none absolute -left-20 -top-24 h-64 w-64 rounded-full border border-[#d6a45c]/30" />
@@ -66,7 +66,7 @@ export function TestimonialsSection() {
             <span className="h-px w-16 bg-[#c89542]" />
           </div>
 
-          <h2 className="font-serif text-4xl leading-tight text-[#171411] md:text-6xl">
+          <h2 className="font-serif text-2xl leading-tight text-[#171411] md:text-4xl">
             What Our Clients Say
           </h2>
 

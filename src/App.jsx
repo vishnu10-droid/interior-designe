@@ -37,12 +37,14 @@ function ScrollToTop() {
 }
 
 function PublicLayout({ children }) {
+  const { pathname } = useLocation();
+  const isCategoryPage = pathname.startsWith("/categories");
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer />
-      <FloatingButtons />
+      {!isCategoryPage && <FloatingButtons />}
     </div>
   );
 }
@@ -67,6 +69,7 @@ export default function App() {
         <Route path="/products/:slug" element={<PublicLayout><ProductDetails /></PublicLayout>} />
         <Route path="/brands" element={<PublicLayout><Brands /></PublicLayout>} />
         <Route path="/categories" element={<PublicLayout><Categories /></PublicLayout>} />
+        <Route path="/categories/:slug" element={<PublicLayout><Categories /></PublicLayout>} />
         <Route path="/blog" element={<PublicLayout><BlogPage /></PublicLayout>} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<DashHome />} />

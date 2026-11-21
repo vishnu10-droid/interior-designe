@@ -1,10 +1,7 @@
-import { CategoryGrid } from "../components/Sections";
+import { useParams } from "react-router-dom";
+import CategoryShowcase from "../components/CategoryShowcase";
 
 export default function Categories() {
-  return (
-    <div className="pt-[72px]">
-      {/* Dedicated page: static 4-column grid, no pinned horizontal slider */}
-      <CategoryGrid />
-    </div>
-  );
+  const { slug } = useParams();
+  return <CategoryShowcase initialSlug={slug} />;
 }

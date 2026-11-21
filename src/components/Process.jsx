@@ -67,34 +67,36 @@ const highlights = [
 
 export function HighlightsSection() {
   return (
-    <section id="highlights" className="max-w-7xl mx-auto px-5 md:px-8 py-8 md:py-12">
-      <SectionHeading
-        eyebrow="The Studio Difference"
-        title="Why Choose Ananya?"
-        desc="Three things we never compromise on — the people, the materials and the promise of time."
-      />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-        {highlights.map(({ icon: Icon, title, desc }, i) => (
-          <Reveal key={title} delay={i * 0.08}>
-            <motion.div
-              whileHover={{ y: -6 }}
-              transition={{ type: "spring", stiffness: 260, damping: 22 }}
-              className="group flex h-full items-start gap-5 rounded-2xl border border-charcoal/5 bg-white p-7 shadow-card hover:border-gold/40 hover:shadow-lift transition-colors duration-300"
-            >
-              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-beige text-espresso transition-colors duration-300 group-hover:bg-gold group-hover:text-charcoal">
-                <Icon size={22} />
-              </span>
-              <div>
-                <h3 className="font-serif text-xl text-charcoal">{title}</h3>
-                <p className="text-sm text-coffee mt-2 leading-relaxed">{desc}</p>
-              </div>
-            </motion.div>
-          </Reveal>
-        ))}
+    <section id="highlights" className="bg-cream py-16 md:py-20">
+      <div className="max-w-7xl mx-auto px-5 md:px-8">
+        <SectionHeading
+          eyebrow="The Studio Difference"
+          title="Why Choose Ananya?"
+          desc="Three things we never compromise on — the people, the materials and the promise of time."
+        />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+          {highlights.map(({ icon: Icon, title, desc }, i) => (
+            <Reveal key={title} delay={i * 0.08}>
+              <motion.div
+                whileHover={{ y: -6 }}
+                transition={{ type: "spring", stiffness: 260, damping: 22 }}
+                className="group flex h-full items-start gap-5 rounded-2xl border border-charcoal/5 bg-white p-7 shadow-card hover:border-gold/40 hover:shadow-lift transition-colors duration-300"
+              >
+                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-beige text-espresso transition-colors duration-300 group-hover:bg-gold group-hover:text-charcoal">
+                  <Icon size={22} />
+                </span>
+                <div>
+                  <h3 className="font-serif text-xl text-charcoal">{title}</h3>
+                  <p className="text-sm text-coffee mt-2 leading-relaxed">{desc}</p>
+                </div>
+              </motion.div>
+            </Reveal>
+          ))}
+        </div>
+        <p className="text-center text-xs text-stonewarm mt-10 flex items-center justify-center gap-2">
+          <Headset size={14} /> Open 24 Hours — call or WhatsApp anytime for guidance.
+        </p>
       </div>
-      <p className="text-center text-xs text-stonewarm mt-10 flex items-center justify-center gap-2">
-        <Headset size={14} /> Open 24 Hours — call or WhatsApp anytime for guidance.
-      </p>
     </section>
   );
 }

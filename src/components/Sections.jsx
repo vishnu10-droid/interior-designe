@@ -285,14 +285,7 @@ export function AboutSection() {
             ))}
           </div>
 
-          <ul className="mt-8 grid sm:grid-cols-2 gap-3 max-w-lg">
-            {points.map((p) => (
-              <li key={p} className="flex items-center gap-2.5 text-sm text-charcoal/85 bg-white border border-charcoal/8 rounded-xl px-4 py-3 shadow-card">
-                <BadgeCheck size={16} className="text-golddark shrink-0" />
-                {p}
-              </li>
-            ))}
-          </ul>
+       
 
           <div className="mt-9">
             <Link

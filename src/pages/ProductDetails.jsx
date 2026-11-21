@@ -1,10 +1,24 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Mail, Phone, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowDown, ChevronRight, Mail, Phone, MapPin } from "lucide-react";
 import { SectionHeading } from "../components/ui";
-import { getProductImages, productCategories } from "../data/products";
+import { getProductImages, productCategories, PRODUCT_RANGE_FALLBACK_IMAGE } from "../data/products";
 import { ProductCard } from "../components/ProductCard";
 import { PHONE_LINK, ADDRESS, DISPLAY_CENTRE } from "../data/services";
+
+function SafeImage({ src, alt, className = "" }) {
+  const [failed, setFailed] = useState(false);
+  return (
+    <img
+      src={failed ? PRODUCT_RANGE_FALLBACK_IMAGE : src}
+      alt={alt}
+      loading="lazy"
+      onError={() => setFailed(true)}
+      className={className}
+    />
+  );
+}
 
 export default function ProductDetails() {
   const { slug } = useParams();
@@ -27,26 +41,100 @@ export default function ProductDetails() {
 
   return (
     <div className="pt-[72px]">
-      <section className="relative h-[55vh] min-h-[400px] overflow-hidden bg-charcoal">
-        <img
-          src={category.image}
-          alt={category.name}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent" />
-        <div className="relative h-full max-w-7xl mx-auto px-5 md:px-8 flex flex-col justify-end pb-12">
-          <Link
-            to="/products"
-            className="inline-flex items-center gap-2 text-cream/70 text-sm hover:text-cream w-fit"
-          >
-            <ArrowLeft size={15} /> All Products
-          </Link>
-          <span className="w-fit text-[11px] tracking-[0.25em] uppercase bg-gold text-charcoal px-4 py-1.5 rounded-full mt-5">
-            {category.name}
-          </span>
-          <h1 className="font-serif text-4xl md:text-6xl text-white mt-4 leading-tight">
-            {category.name}
-          </h1>
+      <section className="relative overflow-hidden bg-[#1C1109] text-[#F7EEDF]">
+        {/* ambient gold glow + hairline framing */}
+        <div className="pointer-events-none absolute -left-32 -top-24 h-96 w-96 rounded-full bg-[#D9B45B]/[0.07] blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-40 right-0 h-96 w-96 rounded-full bg-[#D9B45B]/[0.05] blur-3xl" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#D9B45B]/35 to-transparent" />
+
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-5 pb-14 pt-10 md:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14 lg:pb-16 lg:pt-14">
+          {/* ---------------------------- copy ---------------------------- */}
+          <div>
+            {/* breadcrumb */}
+            <nav className="flex flex-wrap items-center gap-1.5 text-[11px] text-[#D9CBB4]/70">
+              <Link to="/" className="hover:text-[#D9B45B]">Home</Link>
+              <ChevronRight size={12} className="text-[#8A6A46]" />
+              <Link to="/products" className="hover:text-[#D9B45B]">Products</Link>
+              <ChevronRight size={12} className="text-[#8A6A46]" />
+              <span className="text-[#F4E4C6]">{category.name}</span>
+            </nav>
+
+            <div className="mt-9 flex items-center gap-3">
+              <span className="h-px w-10 bg-[#D9B45B]" />
+              <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#D9B45B]">
+                The Collection · Premium Materials
+              </p>
+            </div>
+
+            <h1 className="mt-4 font-serif text-[40px] leading-[1.05] text-[#FBF3E7] sm:text-5xl lg:text-[56px]">
+              {category.name}
+            </h1>
+            <p className="mt-4 max-w-xl text-[13px] leading-relaxed text-[#D9CBB4]">
+              {category.description}
+            </p>
+
+            {/* featured brands */}
+            {category.brands?.length > 0 && (
+              <div className="mt-6 flex flex-wrap items-center gap-2">
+                <span className="mr-1 text-[10px] uppercase tracking-[0.2em] text-[#D9CBB4]/55">
+                  Featured brands
+                </span>
+                {category.brands.slice(0, 4).map((brand) => (
+                  <span
+                    key={brand}
+                    className="rounded-full border border-[#D9B45B]/25 bg-[#D9B45B]/5 px-3 py-1 text-[10px] tracking-wide text-[#F4E4C6]"
+                  >
+                    {brand}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* actions */}
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a
+                href="#category-products"
+                className="group inline-flex items-center gap-2 rounded-full bg-[#D9B45B] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#24160D] transition-colors hover:bg-[#F0D48A]"
+              >
+                Explore the collection
+                <ArrowDown size={14} className="transition-transform duration-300 group-hover:translate-y-0.5" />
+              </a>
+              <Link
+                to="/products"
+                className="inline-flex items-center gap-2 rounded-full border border-[#D9B45B]/45 px-6 py-3 text-[11px] font-medium uppercase tracking-[0.1em] text-[#F4E4C6] transition-colors hover:bg-[#D9B45B]/10"
+              >
+                <ArrowLeft size={14} /> All products
+              </Link>
+            </div>
+          </div>
+
+          {/* ---------------------------- image --------------------------- */}
+          <div className="relative h-[280px] sm:h-[340px] lg:h-[440px]">
+            <div className="absolute inset-0 overflow-hidden rounded-2xl border border-[#D9B45B]/20 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]">
+              <SafeImage
+                src={category.image}
+                alt={category.name}
+                className="h-full w-full object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1C1109]/45 via-transparent to-transparent" />
+            </div>
+
+            {/* decorative gold arc + circular material close-up */}
+            <svg className="pointer-events-none absolute -left-6 -top-6 h-[120%] w-[120%]" viewBox="0 0 500 500" fill="none" aria-hidden="true">
+              <path d="M -20 380 C 90 120, 360 -20, 520 120" stroke="#D9B45B" strokeWidth="1" opacity="0.55" />
+              <path d="M 40 430 C 140 230, 340 150, 500 220" stroke="#D9B45B" strokeWidth="0.8" opacity="0.35" />
+            </svg>
+            <div className="absolute -bottom-5 -left-5 hidden h-24 w-24 overflow-hidden rounded-full border-[3px] border-[#D9B45B] shadow-[0_0_30px_rgba(217,180,91,0.35)] sm:block">
+              <SafeImage
+                src={category.image}
+                alt={`${category.name} detail`}
+                className="h-full w-full scale-150 object-cover object-center"
+              />
+            </div>
+            <span className="absolute -right-3 top-6 hidden rounded-full border border-[#D9B45B]/30 bg-[#140C07]/85 px-4 py-2 font-serif text-[11px] tracking-[0.18em] text-[#F4E4C6] backdrop-blur sm:block">
+              THE EDIT · 01
+            </span>
+          </div>
         </div>
       </section>
 
@@ -146,7 +234,7 @@ export default function ProductDetails() {
       </section>
 
       {productImages.length > 0 && (
-        <section className="max-w-7xl mx-auto px-5 md:px-8 pb-16">
+        <section id="category-products" className="max-w-7xl mx-auto scroll-mt-24 px-5 md:px-8 pb-16">
           <SectionHeading
             eyebrow="Category Products"
             title={`All ${category.name} Products`}
@@ -155,10 +243,9 @@ export default function ProductDetails() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
             {productImages.map((src, index) => (
               <div key={src} className="rounded-2xl overflow-hidden bg-white border border-charcoal/5 shadow-card">
-                <img
+                <SafeImage
                   src={src}
                   alt={`${category.name} product ${index + 1}`}
-                  loading="lazy"
                   className="w-full h-72 object-contain p-3"
                 />
               </div>

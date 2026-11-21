@@ -8,7 +8,7 @@ export function ProjectsSection() {
   const featured = projects.slice(0, 4);
 
   return (
-    <section id="projects" className="max-w-7xl mx-auto px-5 md:px-8 py-20 md:py-28">
+    <section id="projects" className="max-w-7xl mx-auto px-3 md:px-5 py-17 md:py-25">
       <SectionHeading
         eyebrow="Featured Projects"
         title="Spaces We're Proud Of"

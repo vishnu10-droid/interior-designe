@@ -186,6 +186,13 @@ export const productCategories = [
     image: "/images/company-profile/page-14-image-06.png",
     pdfPage: 14,
     pdfImageCount: 6,
+    additionalImages: [
+      "/images/company-profile/page-21-image-01.png",
+      "/images/company-profile/page-23-image-01.png",
+      "/images/company-profile/page-22-image-01.png",
+      "/images/company-profile/page-09-image-01.png",
+      "/images/company-profile/page-16-image-01.png",
+    ],
   },
   {
     id: "flooring",
@@ -342,12 +349,18 @@ export const productFilters = [
   },
 ];
 
-// Identical copies produced while extracting images from the company-profile PDF.
-// Filtered so a category never shows the same product twice.
-const duplicateProfileImages = new Set([
+// Images that must never be used as product photos: identical copies produced
+// while extracting the company-profile PDF, plus the brand logos that were
+// extracted from page 14 (they are logos, not product photographs).
+const excludedProfileImages = new Set([
   "/images/company-profile/page-01-image-04.png",
   "/images/company-profile/page-05-image-05.png",
   "/images/company-profile/page-05-image-06.png",
+  "/images/company-profile/page-14-image-01.png",
+  "/images/company-profile/page-14-image-02.png",
+  "/images/company-profile/page-14-image-03.png",
+  "/images/company-profile/page-14-image-04.png",
+  "/images/company-profile/page-14-image-05.png",
 ]);
 
 export function getProductImages(category) {
@@ -358,7 +371,7 @@ export function getProductImages(category) {
   );
 
   const images = [...pageImages, ...(category.additionalImages || [])]
-    .filter((src) => !duplicateProfileImages.has(src));
+    .filter((src) => !excludedProfileImages.has(src));
   const unique = [...new Set(images)];
   return unique.length > 0 ? unique : [category.image];
 }

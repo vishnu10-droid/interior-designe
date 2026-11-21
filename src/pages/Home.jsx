@@ -10,46 +10,39 @@ import { BrandMarquee } from "../components/BrandMarquee";
 import TrendingVideos from "../components/TrendingVideos";
 import FeaturedMaterials from "../components/FeaturedMaterials";
 
+/**
+ * Home page narrative — four deliberate acts with an alternating
+ * light / dark rhythm so the scroll never feels monotonous:
+ *
+ *   D  L  L  L  |  D  L  L  L  |  D  L  L  L  |  D
+ *
+ *   I.   The Promise   — hero, trusted brands, categories, why us
+ *   II.  The Craft     — materials, work, projects, client stories
+ *   III. The Story     — featured space, our story, journal, reels
+ *   IV.  The Invitation— consultation CTA
+ */
 export default function Home() {
   return (
     <>
-      {/* 02 — Hero */}
+      {/* ============ ACT I — THE PROMISE ============ */}
       <Hero />
-
-      {/* 03 — Brand / Partner Slider */}
       <BrandMarquee />
-
-      {/* 04 — Services / Interior Categories */}
       <InteriorCategories />
-
-      {/* 05 — Highlighted materials */}
-      <FeaturedMaterials />
-
-      {/* 07 — Interior Gallery / Trade Showcase */}
-      <GallerySection />
-
-      {/* 08 — Why Choose Us / Highlights */}
       <HighlightsSection />
 
-      {/* 09 — Featured Interior Banner */}
-      <FeatureBanner />
-
-      {/* 10 — Testimonials / Client Stories */}
+      {/* ============ ACT II — THE CRAFT ============ */}
+      <FeaturedMaterials />
+      <GallerySection />
+      <ProjectsSection />
       <TestimonialsSection />
 
-      {/* 11 — Featured Projects / Portfolio */}
-      <ProjectsSection />
-
-      {/* 12 — Blog / Latest News */}
-      <BlogSection />
-
-      {/* 13 — About / Information */}
+      {/* ============ ACT III — THE STORY ============ */}
+      <FeatureBanner />
       <AboutSection />
-
-      {/* 14 — Trending trade & decor tips / Video carousel */}
+      <BlogSection />
       <TrendingVideos />
 
-      {/* 15 — CTA / Consultation Banner */}
+      {/* ============ ACT IV — THE INVITATION ============ */}
       <ConsultationBanner />
     </>
   );

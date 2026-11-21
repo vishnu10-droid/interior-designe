@@ -9,18 +9,18 @@ export default function PdfContentExtractor() {
     // The user can edit this or replace it with extracted text
     setManualContent(`Ananya Company Profile - May 2025
 
-Welcome to Ananya Interior Designs, your premier destination for sophisticated interior solutions in Agra. Specializing in residential and commercial spaces, we blend traditional Indian aesthetics with contemporary global design trends to create personalized living and working environments.
+Welcome to Ananya Interior Trades, your premier destination for sophisticated interior solutions in Agra. Specializing in residential and commercial spaces, we blend traditional Indian aesthetics with contemporary global trade trends to create personalized living and working environments.
 
 Our Services:
-• Residential Interior Design
-• Commercial Interior Design  
-• Modular Kitchen Design
+• Residential Interior Trade
+• Commercial Interior Trade  
+• Modular Kitchen Trade
 • 3D Visualization & Rendering
 • Project Management
 • Site Execution & Supervision
 
 Why Choose Ananya:
-• Personalized design solutions tailored to your needs
+• Personalized trade solutions tailored to your needs
 • Quality materials and finishes for lasting beauty
 • Transparent pricing with no hidden costs
 • Timely project delivery and execution
@@ -32,7 +32,7 @@ Contact Us:
 • Phone: +91 98765 43210
 • Location: Sanjay Place, Agra
 
-Founded in 2020, Open 24 Hours support for all your interior design needs.
+Founded in 2020, Open 24 Hours support for all your interior trade needs.
 `);
     setShowInstructions(false);
   }, []);

@@ -74,7 +74,7 @@ export function ConsultationBanner() {
           Let's Create Your <em className="italic text-gold">Dream Space.</em>
         </h2>
         <p className="text-cream/75 mt-5 max-w-xl mx-auto text-[15px] leading-relaxed">
-          Share your floor plan or photos on WhatsApp — we will suggest a design
+          Share your floor plan or photos on WhatsApp — we will suggest a trade
           direction within 24 hours.
         </p>
         <Link

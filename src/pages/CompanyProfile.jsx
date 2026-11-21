@@ -21,13 +21,13 @@ export default function CompanyProfileSection() {
                 className="w-full h-[300px] object-cover"
               />
               <div className="p-6">
-                <h2 className="font-serif text-3xl md:text-4xl text-cream mb-4">Ananya Interior Designs</h2>
+                <h2 className="font-serif text-3xl md:text-4xl text-cream mb-4">Ananya Interior Trades</h2>
                 <p className="text-coffee text-base mb-4">
-                  Premier interior design studio specializing in residential and commercial spaces.
+                  Premier interior trade studio specializing in residential and commercial spaces.
                 </p>
                 <p className="text-coffee/70 text-sm leading-relaxed">
                   Based in Agra, we create elegant, functional, and personalized living spaces that blend
-                  traditional Indian aesthetics with contemporary global design trends.
+                  traditional Indian aesthetics with contemporary global trade trends.
                 </p>
                 <ul className="mt-6 grid grid-cols-2 gap-3 text-sm">
                   <li className="flex items-center gap-2 text-coffee">
@@ -51,9 +51,9 @@ export default function CompanyProfileSection() {
             <div className="space-y-6">
               <h3 className="font-serif text-2xl text-cream border-b border-charcoal/8 pb-3">Our Services</h3>
               <ul className="space-y-3 text-coffee">
-                <li>Residential Interior Design</li>
-                <li>Commercial Interior Design</li>
-                <li>Modular Kitchen Design</li>
+                <li>Residential Interior Trade</li>
+                <li>Commercial Interior Trade</li>
+                <li>Modular Kitchen Trade</li>
                 <li>3D Visualization & Rendering</li>
                 <li>Project Management</li>
                 <li>Site Execution & Supervision</li>
@@ -61,7 +61,7 @@ export default function CompanyProfileSection() {
 
               <h3 className="font-serif text-2xl text-cream border-b border-charcoal/8 pb-3">Why Choose Ananya</h3>
               <ul className="space-y-3 text-coffee">
-                <li>Personalized design solutions</li>
+                <li>Personalized trade solutions</li>
                 <li>Quality materials and finishes</li>
                 <li>Transparent pricing</li>
                 <li>Timely project delivery</li>

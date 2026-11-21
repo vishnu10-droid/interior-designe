@@ -10,13 +10,13 @@ export const keywordGroups = {
   doors: [
     "Wooden Door", "Flush Door", "Panel Door", "Laminated Door", "Veneer Door", "Teak Door",
     "Sagwan Door", "Main Door", "Bedroom Door", "Bathroom Door", "PVC Door", "WPC Door",
-    "Glass Door", "Sliding Door", "Folding Door", "Designer Door", "Door Manufacturer in Agra",
+    "Glass Door", "Sliding Door", "Folding Door", "Tradeer Door", "Door Manufacturer in Agra",
     "Door Shop in Agra",
   ],
   laminates: [
     "Decorative Laminate", "Glossy Laminate", "Matte Laminate", "Textured Laminate",
     "Wooden Laminate", "Acrylic Laminate", "Super Matte Laminate", "Anti Fingerprint Laminate",
-    "Designer Laminate", "Sunmica", "Laminate Sheet", "Laminate for Kitchen",
+    "Tradeer Laminate", "Sunmica", "Laminate Sheet", "Laminate for Kitchen",
     "Laminate for Wardrobe", "Laminate Dealer in Agra",
   ],
   veneers: [
@@ -27,12 +27,12 @@ export const keywordGroups = {
   wallPanelsInterior: [
     "Wall Panel", "PVC Wall Panel", "WPC Wall Panel", "Wooden Wall Panel", "Charcoal Panel",
     "Louver Panel", "Fluted Panel", "3D Wall Panel", "Acoustic Panel", "TV Wall Panel",
-    "Bed Back Panel", "Wall Cladding", "Interior Wall Panel", "Wall Panel Design",
+    "Bed Back Panel", "Wall Cladding", "Interior Wall Panel", "Wall Panel Trade",
   ],
   wallPanelsExterior: [
     "Exterior Wall Panel", "ACP Panel", "HPL Panel", "Exterior Cladding", "WPC Exterior Panel",
     "Stone Cladding", "Facade Panel", "Outdoor Wall Panel", "Building Elevation",
-    "Shop Front Panel", "Exterior Wall Design",
+    "Shop Front Panel", "Exterior Wall Trade",
   ],
   highSearch: [
     "Bansal Wood Decor", "Wood Decor Agra", "Interior Material Shop Agra",
@@ -52,7 +52,7 @@ export const keywordGroups = {
     "Century Doors", "Green Doors", "Duro Doors", "Kitply Doors", "Niki Doors",
     "Fenesta Doors", "Century Flush Door", "Green Flush Door", "Masonite Door", "Godrej Door",
     "Action Tesa Door", "Century Door Price", "Teak Door in Agra", "Flush Door Dealer Agra",
-    "Designer Door Agra",
+    "Tradeer Door Agra",
   ],
   brandsLaminates: [
     "Merino Laminates", "Century Laminates", "Greenlam Laminates", "CenturyPly Laminates",

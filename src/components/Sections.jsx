@@ -229,7 +229,7 @@ export function AboutSection() {
   const points = [
     "Residential interiors",
     "Commercial interiors",
-    "Customized design solutions",
+    "Customized trade solutions",
     "Quality-focused execution",
     "Modern aesthetics",
   ];
@@ -242,7 +242,7 @@ export function AboutSection() {
     },
     {
       icon: Compass,
-      label: "Design Philosophy",
+      label: "Trade Philosophy",
       text: "Plan light, storage and flow before finishes.",
     },
     {
@@ -261,7 +261,7 @@ export function AboutSection() {
             About Ananya
           </span>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-charcoal font-semibold tracking-tight leading-[1.15]">
-            Spaces Designed <br className="hidden md:block" /> Around You.
+            Spaces Tradeed <br className="hidden md:block" /> Around You.
           </h2>
           <div className="mt-5 h-px w-20 bg-gold" />
           <p className="text-coffee mt-6 leading-relaxed font-light text-base md:text-lg">
@@ -304,7 +304,7 @@ export function AboutSection() {
             </Link>
           </div>
 
-          {/* Our Vision / Design Philosophy / Our Experience — placed below Discover Our Story. */}
+          {/* Our Vision / Trade Philosophy / Our Experience — placed below Discover Our Story. */}
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             {principles.map(({ icon: Icon, label, text }, i) => (
               <Reveal key={label} delay={0.18 + i * 0.06} className="h-full">
@@ -332,7 +332,7 @@ export function AboutSection() {
                 It's been almost two and a half decades in the journey of
                 providing the best products in the best class under one roof.
                 What began with plywood and laminates has grown into a complete
-                interior and exterior destination — backed by a design studio
+                interior and exterior destination — backed by a trade studio
                 that plans, executes and handovers with care.
               </p>
               <p className="flex items-center gap-2 text-sm text-stonewarm mt-5">
@@ -382,7 +382,7 @@ export function ServicesSection({ limit }) {
       <div className="max-w-7xl mx-auto px-5 md:px-8 relative z-10">
         <SectionHeading
           eyebrow="Our Expertise"
-          title="What We Design"
+          title="What We Trade"
           desc="From single rooms to complete homes and workplaces — every detail planned around you."
         />
 

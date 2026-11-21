@@ -1,6 +1,6 @@
 export const reviews = [
   { id: 1, name: "Rohit Sharma", location: "Agra", rating: 5, date: "Feb 2026", status: "Approved", text: "Excellent work, planning and explanation. The overall experience was very good. Team understood our needs and finished on time." },
-  { id: 2, name: "Priya Verma", location: "Agra", rating: 5, date: "Jan 2026", status: "Approved", text: "Amazing design, great experience and beautiful finishing. Our living room now feels like a hotel lounge." },
+  { id: 2, name: "Priya Verma", location: "Agra", rating: 5, date: "Jan 2026", status: "Approved", text: "Amazing trade, great experience and beautiful finishing. Our living room now feels like a hotel lounge." },
   { id: 3, name: "Amit Agarwal", location: "Agra", rating: 5, date: "Jan 2026", status: "Approved", text: "Good work and professional behaviour. Kitchen storage planning is very practical for daily use." },
   { id: 4, name: "Neha Singh", location: "Agra", rating: 5, date: "Dec 2025", status: "Approved", text: "They renovated our bedroom beautifully. Transparent pricing and polite site team. Highly recommended in Agra." },
   { id: 5, name: "Vikas Gupta", location: "Agra", rating: 4, date: "Dec 2025", status: "Approved", text: "Nice office interior, modern look and comfortable lighting. Small delay in material delivery but overall satisfied." },
@@ -11,8 +11,8 @@ export const reviews = [
 export const blogPosts = [
   {
     id: "calm-living-room",
-    title: "Designing a Calm, Luxurious Living Room",
-    category: "Design Ideas",
+    title: "Tradeing a Calm, Luxurious Living Room",
+    category: "Trade Ideas",
     date: "12 Jan 2026",
     image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop",
     excerpt: "Warm minimalism — beige stone, walnut veneer and soft gold lighting layered for a calm, premium family lounge.",

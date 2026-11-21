@@ -77,8 +77,8 @@ export default function ServicesPage() {
     <div className="pt-[72px]">
       <PageHero
         eyebrow="Our Services"
-        title="What We Design"
-        desc="Explore interior design services and trusted materials for every space."
+        title="What We Trade"
+        desc="Explore interior trade services and trusted materials for every space."
         image={services[1].image}
       />
       <section className="max-w-7xl mx-auto px-5 md:px-8 py-16 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">

@@ -12,7 +12,7 @@ export default function BrandsPage() {
       <PageHero
         eyebrow="Brand Partners"
         title="Trusted Brand Partnerships"
-        desc="We partner with India's leading interior and exterior material brands to bring you quality, durability, and design excellence under one roof."
+        desc="We partner with India's leading interior and exterior material brands to bring you quality, durability, and trade excellence under one roof."
         image={IMAGES.luxury}
       />
 

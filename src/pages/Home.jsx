@@ -8,6 +8,7 @@ import { ProjectsSection } from "../components/Projects";
 import { BlogSection } from "../components/Blog";
 import { BrandMarquee } from "../components/BrandMarquee";
 import TrendingVideos from "../components/TrendingVideos";
+import FeaturedMaterials from "../components/FeaturedMaterials";
 
 export default function Home() {
   return (
@@ -21,31 +22,34 @@ export default function Home() {
       {/* 04 — Services / Interior Categories */}
       <InteriorCategories />
 
-      {/* 05 — Interior Gallery / Design Showcase */}
+      {/* 05 — Highlighted materials */}
+      <FeaturedMaterials />
+
+      {/* 07 — Interior Gallery / Trade Showcase */}
       <GallerySection />
 
-      {/* 06 — Why Choose Us / Highlights */}
+      {/* 08 — Why Choose Us / Highlights */}
       <HighlightsSection />
 
-      {/* 07 — Featured Interior Banner */}
+      {/* 09 — Featured Interior Banner */}
       <FeatureBanner />
 
-      {/* 08 — Testimonials / Client Stories */}
+      {/* 10 — Testimonials / Client Stories */}
       <TestimonialsSection />
 
-      {/* 09 — Featured Projects / Portfolio */}
+      {/* 11 — Featured Projects / Portfolio */}
       <ProjectsSection />
 
-      {/* 10 — Blog / Latest News */}
+      {/* 12 — Blog / Latest News */}
       <BlogSection />
 
-      {/* 11 — About / Information */}
+      {/* 13 — About / Information */}
       <AboutSection />
 
-      {/* 12 — Trending design & decor tips / Video carousel */}
+      {/* 14 — Trending trade & decor tips / Video carousel */}
       <TrendingVideos />
 
-      {/* 13 — CTA / Consultation Banner */}
+      {/* 15 — CTA / Consultation Banner */}
       <ConsultationBanner />
     </>
   );

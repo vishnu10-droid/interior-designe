@@ -34,7 +34,7 @@ const REELS = [
   },
   {
     id: "bathroom",
-    title: "Luxury Bathroom Design",
+    title: "Luxury Bathroom Trade",
     src: "/Trending/best-bathroom-ideas-for-every-home-video.mp4",
     overlay: { text: "APNE BATHROOM", position: "bottom" },
   },
@@ -298,7 +298,7 @@ export default function TrendingVideos() {
             id="trending-heading"
             className="mt-3 font-serif text-[30px] leading-[1.2] text-charcoal md:whitespace-nowrap md:text-[36px]"
           >
-            <span>Trending</span> <em className="italic text-[#A9795E]">design and decor</em> <span>tips</span>
+            <span>Trending</span> <em className="italic text-[#A9795E]">trade and decor</em> <span>tips</span>
           </h2>
         </div>
 

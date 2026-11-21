@@ -17,7 +17,7 @@ export default function Footer() {
               className="w-16 h-14 object-contain rounded-lg bg-gold/15 border border-gold/30 grid place-items-center font-serif text-lg text-gold"
             />
           </div>
-          <p className="text-sm text-cream/60 mt-5 leading-relaxed">Premium residential and commercial interior design studio in Agra — modern, elegant and functional spaces.</p>
+          <p className="text-sm text-cream/60 mt-5 leading-relaxed">Premium residential and commercial interior trade studio in Agra — modern, elegant and functional spaces.</p>
           <div className="mt-6 flex items-center gap-2.5">
             {[
               { label: "Instagram", short: "IG", href: "https://www.instagram.com/" },

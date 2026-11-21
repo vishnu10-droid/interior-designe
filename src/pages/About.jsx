@@ -23,14 +23,14 @@ export default function About() {
           <img src={IMAGES.aboutSmall} alt="Studio work" loading="lazy" className="w-full h-[460px] object-cover" />
         </Reveal>
         <div>
-          <Reveal><h2 className="font-serif text-3xl md:text-4xl leading-tight">Spaces Designed Around You.</h2></Reveal>
+          <Reveal><h2 className="font-serif text-3xl md:text-4xl leading-tight">Spaces Tradeed Around You.</h2></Reveal>
           <Reveal delay={0.1}>
             <p className="text-coffee mt-5 leading-relaxed">Ananya, a front-runner one-stop interior and exterior products mall have it's origin in the year1995. A humble start-up by Mr. Vikas Bansal by the name of "M/s Bansal Wood Decor (P) Ltd.", focusing on a single point i.e. plywood, laminates, doors, veneers and other interior & exterior products. It's been almost two and half decade in the journey of providing the best of the products in the best of the class under one roof.</p>
             
           </Reveal>
           <Reveal delay={0.15}>
             <ul className="mt-6 grid sm:grid-cols-2 gap-3">
-              {["Residential interiors", "Commercial interiors", "Customized design solutions", "Quality-focused execution", "Modern aesthetics", "Open 24 Hours support"].map((p) => (
+              {["Residential interiors", "Commercial interiors", "Customized trade solutions", "Quality-focused execution", "Modern aesthetics", "Open 24 Hours support"].map((p) => (
                 <li key={p} className="flex items-center gap-2.5 text-sm bg-white border border-charcoal/8 rounded-xl px-4 py-3 shadow-card"><BadgeCheck size={17} className="text-golddark shrink-0" />{p}</li>
               ))}
             </ul>
@@ -43,7 +43,7 @@ export default function About() {
 
       <section className="bg-beige/60 py-16">
         <div className="max-w-7xl mx-auto px-5 md:px-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {[["24+", "Projects delivered"], ["8", "Design services"], ["1995", "Founded"]].map(([v, l]) => (
+          {[["24+", "Projects delivered"], ["8", "Trade services"], ["1995", "Founded"]].map(([v, l]) => (
             <Reveal key={l} className="bg-white rounded-2xl p-7 text-center shadow-card">
               <div className="inline-flex items-center gap-2">
                 <p className="font-serif text-3xl md:text-4xl text-espresso">{v}</p>

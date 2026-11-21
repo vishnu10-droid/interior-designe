@@ -31,7 +31,7 @@ function WhatsAppIcon({ size = 24, className = "" }) {
 const emptyForm = {
   name: "",
   contact: "",
-  role: "Interior Designer",
+  role: "Interior Tradeer",
 };
 
 const inputCls =
@@ -98,7 +98,7 @@ export default function FloatingButtons() {
         }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-20 md:bottom-24 left-5 z-40 flex items-center gap-2.5 rounded-full bg-red-600 px-5 py-3 text-white shadow-xl backdrop-blur-md transition-colors hover:bg-red-700 sm:px-7"
+        className="fixed bottom-10 md:bottom-14 left-5 z-40 flex items-center gap-2.5 rounded-full bg-red-600 px-5 py-3 text-white shadow-xl backdrop-blur-md transition-colors hover:bg-red-700 sm:px-7"
       >
         <UserRound size={19} strokeWidth={2.5} />
 
@@ -153,12 +153,12 @@ export default function FloatingButtons() {
             <h3 className="mt-2 font-serif text-2xl text-charcoal md:text-3xl">
               Are you looking for{" "}
               <em className="italic text-golddark">
-                interior design?
+                interior trade?
               </em>
             </h3>
 
             <p className="mt-2 text-sm leading-relaxed text-coffee">
-              Tell us who you are — we'll get in touch with the right design
+              Tell us who you are — we'll get in touch with the right trade
               guidance.
             </p>
 
@@ -221,7 +221,7 @@ export default function FloatingButtons() {
                   onChange={set("role")}
                   className={`${inputCls} mt-1.5`}
                 >
-                  <option>Interior Designer</option>
+                  <option>Interior Tradeer</option>
                   <option>Architect</option>
                   <option>Builder</option>
                   <option>Contractor</option>

@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FloatingButtons from "./components/FloatingButtons";
-import OfferPopup from "./components/OfferPopup";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import ServicesPage, { ServiceDetail } from "./pages/Services";
@@ -16,6 +15,7 @@ import BlogPage from "./pages/BlogPage";
 import DashboardLayout from "./dashboard/DashboardLayout";
 import { DashHome, DashProjects, DashServices, DashGallery, DashLeads, DashReviews, DashMessages, DashSettings } from "./dashboard/pages";
 import { allKeywords } from "./data/seo";
+import { ShopProvider } from "./context/ShopContext";
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -43,7 +43,6 @@ function PublicLayout({ children }) {
       <main className="flex-1">{children}</main>
       <Footer />
       <FloatingButtons />
-      <OfferPopup />
     </div>
   );
 }
@@ -55,6 +54,7 @@ export default function App() {
   }, []);
 
   return (
+    <ShopProvider>
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
@@ -81,5 +81,6 @@ export default function App() {
         <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
       </Routes>
     </BrowserRouter>
+    </ShopProvider>
   );
 }

@@ -257,7 +257,7 @@ export function ContactSection() {
                   </option>
 
                   {[
-                    "Interior Designer",
+                    "Interior Tradeer",
                     "Architect",
                     "Builder",
                     "Contractor",

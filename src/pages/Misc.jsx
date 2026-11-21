@@ -27,7 +27,7 @@ export function NotFound() {
     <div className="pt-[72px] min-h-[70vh] grid place-items-center px-5">
       <div className="text-center">
         <p className="font-serif text-7xl text-sand">404</p>
-        <h1 className="font-serif text-3xl mt-2">This space is still being designed.</h1>
+        <h1 className="font-serif text-3xl mt-2">This space is still being tradeed.</h1>
         <Link to="/" className="inline-flex items-center gap-2 mt-6 bg-charcoal text-cream px-7 py-3.5 rounded-full text-sm">Back to Home <ArrowRight size={15} /></Link>
       </div>
     </div>

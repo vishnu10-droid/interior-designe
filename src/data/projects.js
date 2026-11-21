@@ -26,7 +26,7 @@ export const projects = [
     image: img("photo-1600210492486-724fe5c67fb0"),
     gallery: [img("photo-1600210492486-724fe5c67fb0"), img("photo-1600585154340-be6161a56a0c"), img("photo-1600607687920-4e2a09cf159d")],
     concept: "Airy contemporary living with double-height feel, linen fabrics and sculptural lighting.",
-    description: "Designed around natural light — sheer curtains, light oak flooring and a statement arc lamp anchor this contemporary lounge.",
+    description: "Tradeed around natural light — sheer curtains, light oak flooring and a statement arc lamp anchor this contemporary lounge.",
     highlights: ["Daylight-first layout", "Oak flooring & linen palette", "Sculptural floor lamp", "Hidden storage wall"],
   },
   {
@@ -78,7 +78,7 @@ export const projects = [
     image: img("photo-1617806118233-18e1de247200"),
     gallery: [img("photo-1617806118233-18e1de247200"), img("photo-1615873968403-89e068629265"), img("photo-1618220179428-22790b461013")],
     concept: "Restaurant-warm dining with fluted panels, pendant clusters and easy-maintenance finishes.",
-    description: "A compact commercial dining interior designed for quick turnover and memorable evenings — fluted wood, brass pendants, banquette seating.",
+    description: "A compact commercial dining interior tradeed for quick turnover and memorable evenings — fluted wood, brass pendants, banquette seating.",
     highlights: ["Banquette seating", "Brass pendant cluster", "Fluted wood panels", "Stain-proof finishes"],
   },
 ];

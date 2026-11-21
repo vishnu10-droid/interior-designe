@@ -71,7 +71,7 @@ export function TestimonialsSection() {
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#68615b] md:text-lg">
-            Real experiences from homeowners, architects and designers who trust
+            Real experiences from homeowners, architects and tradeers who trust
             us for quality, service and long-term value.
           </p>
         </div>

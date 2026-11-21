@@ -28,7 +28,7 @@ export function GallerySection() {
   return (
     <section id="gallery" className="max-w-7xl mx-auto px-5 md:px-8 py-20 md:py-28">
       <SectionHeading
-        eyebrow="Design Showcase"
+        eyebrow="Trade Showcase"
         title="A Glimpse Inside Our Work"
         desc="Living rooms, bedrooms, kitchens, bathrooms and workspaces — each one considered down to the last detail."
       />

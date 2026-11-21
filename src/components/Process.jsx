@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export const steps = [
   { n: "01", title: "Consultation", desc: "We listen to your needs, lifestyle and budget.", icon: MessagesSquare },
   { n: "02", title: "Understanding Your Space", desc: "Site visit, measurements and light study.", icon: Ruler },
-  { n: "03", title: "Concept & Design", desc: "Moodboards, layouts and 3D views.", icon: PenTool },
+  { n: "03", title: "Concept & Trade", desc: "Moodboards, layouts and 3D views.", icon: PenTool },
   { n: "04", title: "Material Selection", desc: "Curated finishes, fabrics and fixtures.", icon: Layers },
   { n: "05", title: "Execution", desc: "Skilled site team with quality checks.", icon: HardHat },
   { n: "06", title: "Final Reveal", desc: "Deep-cleaned, styled and ready to move in.", icon: KeyRound },
@@ -37,21 +37,21 @@ export function ProcessSection() {
 }
 
 const feats = [
-  { icon: Compass, title: "Personalized Design", desc: "Every plan starts from your lifestyle, not a catalogue." },
+  { icon: Compass, title: "Personalized Trade", desc: "Every plan starts from your lifestyle, not a catalogue." },
   { icon: Gem, title: "Modern Aesthetics", desc: "Timeless palettes with quiet luxury detailing." },
   { icon: LayoutGrid, title: "Functional Planning", desc: "Storage, movement and light — resolved first." },
   { icon: Award, title: "Quality Materials", desc: "Branded hardware and verified finishes." },
   { icon: PenTool, title: "Attention to Detail", desc: "Joints, edges and paint lines we obsess over." },
   { icon: MessagesCircle, title: "Transparent Communication", desc: "Clear quotes, weekly site updates." },
-  { icon: Users, title: "Experienced Team", desc: "Designers + site supervisors under one roof." },
-  { icon: PackageCheck, title: "End-to-End Solutions", desc: "Design to handover — one accountable partner." },
+  { icon: Users, title: "Experienced Team", desc: "Tradeers + site supervisors under one roof." },
+  { icon: PackageCheck, title: "End-to-End Solutions", desc: "Trade to handover — one accountable partner." },
 ];
 
 const highlights = [
   {
     icon: Users,
-    title: "Expert Designers",
-    desc: "Designers and site supervisors under one roof, translating your lifestyle into thoughtful, detail-led interiors.",
+    title: "Expert Tradeers",
+    desc: "Tradeers and site supervisors under one roof, translating your lifestyle into thoughtful, detail-led interiors.",
   },
   {
     icon: Gem,

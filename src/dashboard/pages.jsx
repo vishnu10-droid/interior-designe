@@ -132,7 +132,7 @@ export function DashServices() {
   const add = (e) => {
     e.preventDefault();
     if (!form.name.trim()) return;
-    setList([{ id: form.name.toLowerCase().replace(/\s+/g, "-") + "-" + Date.now(), name: form.name, desc: form.desc || "Custom design service.", icon: Layers, image: services[0].image, status: "Active" }, ...list]);
+    setList([{ id: form.name.toLowerCase().replace(/\s+/g, "-") + "-" + Date.now(), name: form.name, desc: form.desc || "Custom trade service.", icon: Layers, image: services[0].image, status: "Active" }, ...list]);
     setForm({ name: "", desc: "" });
     setModal(false);
   };
@@ -162,7 +162,7 @@ export function DashServices() {
             <button type="button" onClick={() => setModal(false)} aria-label="Close" className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white border border-charcoal/10 grid place-items-center"><X size={16} /></button>
             <h3 className="font-serif text-2xl">Add New Service</h3>
             <label className="block text-xs uppercase tracking-wider text-coffee mt-5">Service name</label>
-            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="e.g. Lighting Design" className="mt-1.5 w-full bg-white border border-charcoal/10 rounded-xl px-4 py-3 text-sm" />
+            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="e.g. Lighting Trade" className="mt-1.5 w-full bg-white border border-charcoal/10 rounded-xl px-4 py-3 text-sm" />
             <label className="block text-xs uppercase tracking-wider text-coffee mt-4">Description</label>
             <textarea value={form.desc} onChange={(e) => setForm({ ...form, desc: e.target.value })} rows={3} placeholder="Short description…" className="mt-1.5 w-full bg-white border border-charcoal/10 rounded-xl px-4 py-3 text-sm resize-none" />
             <button className="mt-6 w-full bg-charcoal text-cream rounded-full py-3.5 text-sm hover:bg-espresso">Save Service</button>
@@ -308,7 +308,7 @@ export function DashReviews() {
 export function DashMessages() {
   const [msgs] = useState([
     { id: 1, from: "Rahul Mehta", text: "Hi, I want a 3BHK interior quote for Kamla Nagar.", time: "2h ago" },
-    { id: 2, from: "Sana Khan", text: "Can you share modular kitchen designs under 3 lakh?", time: "5h ago" },
+    { id: 2, from: "Sana Khan", text: "Can you share modular kitchen trades under 3 lakh?", time: "5h ago" },
     { id: 3, from: "Deepak Yadav", text: "Office site visit possible this Saturday?", time: "1d ago" },
   ]);
   const [active, setActive] = useState(msgs[0]);

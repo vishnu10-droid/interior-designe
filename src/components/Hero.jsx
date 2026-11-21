@@ -142,7 +142,7 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className="font-serif text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.15] max-w-3xl mt-5 tracking-tight drop-shadow-md"
         >
-          Designing Spaces <br />
+          Brand Spaces <br />
           <span className="text-white/90">That Feel Like </span>
           <em className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-gold to-amber-400 not-italic font-serif italic">
             Home.
@@ -156,7 +156,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="text-white/80 max-w-xl mt-4 text-sm md:text-base leading-relaxed font-light drop-shadow-sm"
         >
-          Premium interior design solutions crafted around your lifestyle,
+          Premium interior trade solutions crafted around your lifestyle,
           personality, and architectural vision.
         </motion.p>
 

@@ -9,9 +9,14 @@ import {
   LayoutDashboard,
   ArrowRight,
   ChevronDown,
+  Search,
+  Heart,
+  ShoppingBag,
+  UserRound,
 } from "lucide-react";
 
 import { PHONE, PHONE_LINK } from "../data/services";
+import { useShop } from "../context/ShopContext";
 import logo from "../assets/logo.png";
 
 const links = [
@@ -33,6 +38,8 @@ const extraLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const { wishlist, cart } = useShop();
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -83,7 +90,7 @@ export default function Navbar() {
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-5 md:px-8 h-[72px] flex items-center justify-between gap-4">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-6 h-[72px] flex items-center justify-between gap-2 lg:gap-4">
 
           {/* ANANYA LOGO */}
 
@@ -101,7 +108,7 @@ export default function Navbar() {
 
           {/* DESKTOP NAVIGATION */}
 
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
+          <nav className="hidden lg:flex items-center gap-3 xl:gap-5">
             {links.map((l) => (
               <NavLink
                 key={l.to}
@@ -145,19 +152,60 @@ export default function Navbar() {
 
           {/* RIGHT SIDE BUTTONS */}
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+                navigate(search.trim() ? `/products?q=${encodeURIComponent(search.trim())}` : "/products");
+              }}
+              className="relative hidden xl:block"
+            >
+              <Search size={14} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-stonewarm" />
+              <input
+                type="search"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                placeholder="Search materials"
+                aria-label="Search materials"
+                className="w-36 rounded-full border border-charcoal/10 bg-white/90 py-2 pl-9 pr-3 text-[12px] text-charcoal placeholder:text-stonewarm xl:w-44"
+              />
+            </form>
 
-            
+            {/* <button
+              type="button"
+              onClick={() => navigate("/products?view=wishlist")}
+              aria-label={`Wishlist, ${wishlist.length} items`}
+              title="Wishlist"
+              className={`relative grid h-10 w-10 place-items-center rounded-full border transition-colors ${solid ? "border-charcoal/15 bg-white text-charcoal hover:bg-beige" : "border-white/25 bg-white/10 text-white"}`}
+            >
+              <Heart size={17} />
+              {wishlist.length > 0 && <span className="absolute -right-0.5 -top-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-[#C2564B] px-1 text-[9px] font-semibold text-white">{wishlist.length}</span>}
+            </button> */}
+{/* 
+            <button
+              type="button"
+              onClick={() => navigate("/products?view=cart")}
+              aria-label={`Cart, ${cart.length} items`}
+              title="Cart"
+              className={`relative grid h-10 w-10 place-items-center rounded-full border transition-colors ${solid ? "border-charcoal/15 bg-white text-charcoal hover:bg-beige" : "border-white/25 bg-white/10 text-white"}`}
+            >
+              <ShoppingBag size={17} />
+              {cart.length > 0 && <span className="absolute -right-0.5 -top-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-gold px-1 text-[9px] font-semibold text-charcoal">{cart.length}</span>}
+            </button> */}
 
-            
-              
-                
-
-              
+            {/* <button
+              type="button"
+              onClick={() => navigate("/contact")}
+              aria-label="Account"
+              title="Account"
+              className={`hidden h-10 w-10 place-items-center rounded-full border transition-colors sm:grid ${solid ? "border-charcoal/15 bg-white text-charcoal hover:bg-beige" : "border-white/25 bg-white/10 text-white"}`}
+            >
+              <UserRound size={17} />
+            </button> */}
 
             <button
               onClick={() => navigate("/contact")}
-              className="hidden sm:inline-flex items-center gap-2 bg-charcoal text-cream text-[13px] tracking-wide px-5 py-2.5 rounded-full hover:bg-espresso transition-colors"
+              className="hidden items-center gap-2 whitespace-nowrap bg-charcoal text-cream text-[12px] tracking-wide px-4 py-2.5 rounded-full hover:bg-espresso transition-colors lg:inline-flex xl:px-5"
             >
               Get a Quote
               <ArrowRight size={14} />

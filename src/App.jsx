@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FloatingButtons from "./components/FloatingButtons";
+import FeaturedMaterials from "./components/FeaturedMaterials";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import ServicesPage, { ServiceDetail } from "./pages/Services";
@@ -41,10 +42,14 @@ function PublicLayout({ children }) {
   const isCategoryPage = pathname.startsWith("/categories");
   // The About layout keeps its editorial composition free of floating widgets.
   const isAboutPage = pathname === "/about";
+  // Home renders this section in its own narrative, so skip it here to avoid
+  // showing it twice. Every other public page gets it just before the footer.
+  const isHomePage = pathname === "/";
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1">{children}</main>
+      {!isHomePage && <FeaturedMaterials />}
       <Footer />
       {!isCategoryPage && !isAboutPage && <FloatingButtons />}
     </div>

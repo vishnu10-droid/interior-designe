@@ -34,7 +34,7 @@ export default function FeaturedMaterials() {
       <div className="pointer-events-none absolute -bottom-40 -left-32 h-[380px] w-[380px] rounded-full bg-[#D9B45B]/[0.05] blur-3xl" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#D9B45B]/35 to-transparent" />
 
-      <div className="relative mx-auto max-w-7xl px-5 md:px-8">
+      <div className="relative mx-auto max-w-[1400px] px-5 md:px-8">
         {/* header — unchanged editorial direction */}
         <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
           <RevealLeft>
@@ -86,7 +86,7 @@ export default function FeaturedMaterials() {
                 features={item.category?.features || []}
                 variants={item.category?.types || []}
                 slug={item.slug}
-                className="h-[480px]"
+                className="h-[420px]"
               />
             </StaggerItem>
           ))}

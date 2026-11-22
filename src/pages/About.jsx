@@ -31,6 +31,7 @@ import {
   StaggerContainer,
   StaggerItem,
 } from "../components/ui";
+import AboutFooter from "../components/AboutFooter";
 
 /* Premium editorial imagery — interiors, materials and the Ananya studio. */
 const IMG = {
@@ -462,6 +463,7 @@ export default function About() {
       <WhyChoose />
       <Philosophy />
       <VisitStudio />
+      <AboutFooter />
     </div>
   );
 }

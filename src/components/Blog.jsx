@@ -7,7 +7,7 @@ export function BlogSection() {
   const [active, setActive] = useState(null);
 
   return (
-    <section id="blog" className="bg-beige/40 py-20 md:py-28">
+    <section id="blog" className="bg-beige/40 py-18 md:py-26">
       <div className="max-w-7xl mx-auto px-5 md:px-8">
         <SectionHeading
           eyebrow="Journal"

@@ -48,7 +48,7 @@ export function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden bg-[#faf5ef] py-18 md:py-26"
+      className="relative overflow-hidden bg-[#faf5ef] py-20 md:py-28"
     >
       {/* Decorative Background */}
       <div className="pointer-events-none absolute -left-20 -top-24 h-64 w-64 rounded-full border border-[#d6a45c]/30" />

@@ -1,11 +1,11 @@
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, BadgeCheck, Compass, Lightbulb, Award, MapPin, Clock } from "lucide-react";
 import { services } from "../data/services";
-import { productCategories } from "../data/products";
+import { productCategories, PRODUCT_RANGE_FALLBACK_IMAGE } from "../data/products";
 import { steps } from "./Process";
 import { ProductCard } from "./ProductCard";
 import { Reveal, SectionHeading } from "./ui";
@@ -114,8 +114,67 @@ export function ServiceCard({ s }) {
   );
 }
 
+/** Mobile = below Tailwind's md breakpoint (768px). Desktop keeps the slider. */
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia("(max-width: 767px)").matches : false
+  );
+
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+
+  return isMobile;
+}
+
+/** Static catalogue card — used only in the mobile 2-column grid. */
+function MobileCategoryCard({ category }) {
+  return (
+    <Link
+      to={`/products/${category.slug}`}
+      className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border border-gold/40 bg-white shadow-card transition-shadow duration-300 hover:shadow-lift active:shadow-lift"
+    >
+      <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-t-xl bg-beige">
+        <img
+          src={category.image}
+          alt={category.name}
+          loading="lazy"
+          onError={(event) => {
+            const image = event.currentTarget;
+            if (!image.src.endsWith(PRODUCT_RANGE_FALLBACK_IMAGE)) {
+              image.src = PRODUCT_RANGE_FALLBACK_IMAGE;
+            }
+          }}
+          className="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105 group-active:scale-105"
+        />
+      </div>
+
+      <div className="flex flex-1 flex-col gap-1.5 p-3">
+        <h3 className="line-clamp-1 font-serif text-[13px] font-semibold leading-tight text-charcoal transition-colors group-hover:text-golddark">
+          {category.name}
+        </h3>
+        <p className="line-clamp-1 text-[10px] leading-tight text-coffee">
+          {category.brands?.length ? category.brands.slice(0, 3).join(" · ") : "Premium materials"}
+        </p>
+        <div className="mt-auto flex items-center justify-between border-t border-gold/20 pt-2">
+          <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-golddark">Explore</span>
+          <ArrowRight
+            size={13}
+            className="shrink-0 text-golddark transition-transform duration-300 group-hover:translate-x-0.5 group-active:translate-x-0.5"
+          />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export function InteriorCategories() {
   const reduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
   const sectionRef = useRef(null);
   const viewportRef = useRef(null);
   const trackRef = useRef(null);
@@ -124,7 +183,7 @@ export function InteriorCategories() {
   // React removes the section from the DOM on route change — otherwise React
   // throws "removeChild: node is not a child" and the next page stays blank.
   useLayoutEffect(() => {
-    if (reduceMotion) return undefined;
+    if (reduceMotion || isMobile) return undefined;
     const section = sectionRef.current;
     const viewport = viewportRef.current;
     const track = trackRef.current;
@@ -159,7 +218,27 @@ export function InteriorCategories() {
       window.removeEventListener("load", refresh);
       ctx.revert(); // kills tween + ScrollTrigger + pin spacer on unmount
     };
-  }, [reduceMotion]);
+  }, [reduceMotion, isMobile]);
+
+  // Mobile never mounts the pinned slider track — no scrolling, no animation.
+  if (isMobile) {
+    return (
+      <section id="categories" className="relative overflow-hidden bg-beige/60 py-14">
+        <div className="mx-auto w-full max-w-7xl px-5">
+          <SectionHeading
+            eyebrow="All Categories"
+            title="Browse Every Category"
+            desc="From the first sketch to the final detail — interiors shaped around the way you live and work. Open a category to see all its products."
+          />
+          <div className="mt-8 grid grid-cols-2 gap-3">
+            {productCategories.map((category) => (
+              <MobileCategoryCard key={category.id} category={category} />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section

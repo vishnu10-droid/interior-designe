@@ -97,7 +97,7 @@ export default function CategoryNavStrip({
       <div className="mx-auto max-w-[1600px] px-4 md:px-8">
         <div className="flex items-center justify-between gap-4 py-3">
           <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-golddark">
-            Shop by Category
+            Product range
           </p>
           <div className="flex items-center gap-2">
             {onViewAll ? (

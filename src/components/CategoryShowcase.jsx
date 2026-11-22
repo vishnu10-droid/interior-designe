@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   Heart, X,
-  ChevronDown, ChevronLeft, ChevronRight, Layers, DoorOpen, Layers3,
+  ChevronDown, ChevronRight, Layers, DoorOpen, Layers3,
   ScrollText, PanelTop, ShieldCheck, Gem, Headphones, Truck, Download,
   ArrowRight, LayoutGrid, List, MessageCircle, SlidersHorizontal, Leaf,
 } from "lucide-react";
@@ -180,43 +180,47 @@ function CategoryHero({ category, rangeItem, onExplore }) {
 /* -------------------------- CATEGORY CARDS -------------------------- */
 
 function CategoryCards({ activeSlug, onSelect }) {
-  const scroll = (dir) => {
-    const el = document.getElementById("category-card-track");
-    el?.scrollBy({ left: dir * 260, behavior: "smooth" });
-  };
+  const [showAll, setShowAll] = useState(false);
   return (
-    <section className="bg-[#F8F4ED] px-4 py-6 sm:px-8">
-      <div className="relative mx-auto max-w-[1600px]">
-        <div className="absolute -left-2 top-1/2 z-10 -translate-y-1/2 md:left-0">
-          <button type="button" onClick={() => scroll(-1)} aria-label="Previous categories" className="grid h-8 w-8 place-items-center rounded-full border border-[#D9B45B]/50 bg-white text-[#3A2A1B] shadow-md hover:bg-[#D9B45B]/10"><ChevronLeft size={16} /></button>
+    <section className="bg-[#F8F4ED] px-4 py-8 sm:px-8">
+      <div className="mx-auto max-w-[1600px]">
+        <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#B58A22]">Product range</p>
+            <h2 className="mt-1 font-serif text-xl text-[#3A2A1B] sm:text-2xl">Explore by category</h2>
+          </div>
+          <button
+            type="button"
+            onClick={() => setShowAll((value) => !value)}
+            aria-expanded={showAll}
+            className="inline-flex items-center gap-1.5 rounded-full border border-[#D9B45B]/60 bg-white px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8A6A16] transition-colors hover:bg-[#D9B45B] hover:text-[#24160D]"
+          >
+            {showAll ? "Show Less" : "View All"}
+            <ChevronRight size={14} className={`transition-transform ${showAll ? "-rotate-90" : ""}`} />
+          </button>
         </div>
-        <div id="category-card-track" className="no-scrollbar flex gap-3 overflow-x-auto px-4 pb-2 md:px-0">
-          {CATEGORIES.map((item) => {
-            const range = productRange.find((r) => r.name === item.name);
+        <div className={`grid grid-cols-2 gap-3 overflow-hidden transition-[max-height] duration-500 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 ${showAll ? "max-h-[4000px]" : "max-h-[175px]"}`}>
+          {productCategories.map((item) => {
             const active = item.slug === activeSlug;
-            const Icon = item.icon;
             return (
               <button
-                key={item.slug}
+                key={item.id}
                 type="button"
                 onClick={() => onSelect(item.slug)}
-                className={`group relative flex w-[210px] shrink-0 items-center gap-3 overflow-hidden rounded-xl border bg-white p-2.5 text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${active ? "border-[#D9B45B] ring-1 ring-[#D9B45B]/50" : "border-[#E3D8C7]"}`}
+                className={`group flex h-[175px] flex-col overflow-hidden rounded-xl border bg-white text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${active ? "border-[#D9B45B] ring-1 ring-[#D9B45B]/50" : "border-[#E3D8C7]"}`}
               >
-                <div className="h-16 w-20 shrink-0 overflow-hidden rounded-lg bg-[#EFE6D9]">
-                  <SafeImage src={range?.image || productCategories.find((c) => c.slug === item.slug)?.image} alt={item.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div className="flex h-[128px] shrink-0 items-center justify-center overflow-hidden bg-[#EFE6D9] p-1.5">
+                  <SafeImage src={item.image} alt={item.name} className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110" />
                 </div>
-                <div className="min-w-0 flex-1">
-                  <Icon size={16} className={active ? "text-[#B58A22]" : "text-[#8B7355]"} />
-                  <p className="mt-1 line-clamp-2 text-[11px] font-semibold leading-tight text-[#3A2A1B]">{item.name}</p>
+                <div className="flex flex-1 items-center gap-2 px-2">
+                  <p className={`line-clamp-2 text-[11px] font-semibold leading-tight transition-colors ${active ? "text-[#8A6A16]" : "text-[#3A2A1B] group-hover:text-[#8A6A16]"}`}>
+                    {item.name}
+                  </p>
+                  {active && <span className="h-2 w-2 shrink-0 rounded-full bg-[#B58A22]" />}
                 </div>
-                <ChevronRight size={14} className="shrink-0 text-[#B58A22]" />
-                {active && <span className="absolute inset-0 rounded-xl bg-[#24160D]/[0.04] ring-1 ring-inset ring-[#D9B45B]/30" />}
               </button>
             );
           })}
-        </div>
-        <div className="absolute -right-2 top-1/2 z-10 -translate-y-1/2 md:right-0">
-          <button type="button" onClick={() => scroll(1)} aria-label="Next categories" className="grid h-8 w-8 place-items-center rounded-full border border-[#D9B45B]/50 bg-white text-[#3A2A1B] shadow-md hover:bg-[#D9B45B]/10"><ChevronRight size={16} /></button>
         </div>
       </div>
     </section>
@@ -239,7 +243,7 @@ function Accordion({ title, children, defaultOpen = false }) {
   );
 }
 
-function FilterPanel({ category, brands, brandFilter, viewAllBrands, onBrandToggle, onAllBrands, price, setPrice, onClear }) {
+function FilterPanel({ category, brands, brandFilter, viewAllBrands, onBrandToggle, onAllBrands, onClear }) {
   const brandOptions = brands.length ? brands : [];
   return (
     <div className="rounded-xl border border-[#E6DCCB] bg-white p-4 shadow-sm">
@@ -260,17 +264,6 @@ function FilterPanel({ category, brands, brandFilter, viewAllBrands, onBrandTogg
               {brand}
             </label>
           ))}
-        </div>
-      </Accordion>
-
-      <Accordion title="Price Range" defaultOpen>
-        <div className="space-y-3">
-          <input type="range" min={0} max={50000} step={1000} value={price} onChange={(e) => setPrice(Number(e.target.value))} className="w-full accent-[#B58A22]" aria-label="Maximum price" />
-          <div className="flex items-center gap-2 text-[10px] text-[#5A4A38]">
-            <span className="rounded border border-[#E6DCCB] px-2 py-1">₹ 0</span>
-            <span className="text-[#B58A22]">—</span>
-            <span className="rounded border border-[#E6DCCB] px-2 py-1">₹ {price.toLocaleString("en-IN")}</span>
-          </div>
         </div>
       </Accordion>
 
@@ -334,7 +327,6 @@ export default function CategoryShowcase({ initialSlug }) {
   const [activeSlug, setActiveSlug] = useState(initialSlug || "plywood");
   const [brandFilter, setBrandFilter] = useState([]);
   const [viewAllBrands, setViewAllBrands] = useState(true);
-  const [price, setPrice] = useState(50000);
   const [sort, setSort] = useState("featured");
   const [view, setView] = useState("grid");
   const [mobileFilters, setMobileFilters] = useState(false);
@@ -398,7 +390,6 @@ export default function CategoryShowcase({ initialSlug }) {
   const clearFilters = () => {
     setBrandFilter([]);
     setViewAllBrands(false);
-    setPrice(50000);
   };
 
   const selectCategory = (slug) => {
@@ -420,7 +411,7 @@ export default function CategoryShowcase({ initialSlug }) {
       <section id="catalogue-grid" className="mx-auto max-w-[1600px] scroll-mt-20 px-4 py-6 sm:px-8">
         <div className="flex gap-5">
           <aside className="hidden w-[250px] shrink-0 lg:block">
-            <FilterPanel category={category} brands={availableBrands} brandFilter={brandFilter} viewAllBrands={viewAllBrands} onBrandToggle={toggleBrand} onAllBrands={selectAllBrands} price={price} setPrice={setPrice} onClear={clearFilters} />
+            <FilterPanel category={category} brands={availableBrands} brandFilter={brandFilter} viewAllBrands={viewAllBrands} onBrandToggle={toggleBrand} onAllBrands={selectAllBrands} onClear={clearFilters} />
           </aside>
 
           <div className="min-w-0 flex-1">
@@ -469,7 +460,7 @@ export default function CategoryShowcase({ initialSlug }) {
         <div className="fixed inset-0 z-[80] flex justify-end bg-black/50 lg:hidden" onClick={() => setMobileFilters(false)}>
           <div className="h-full w-[85%] max-w-sm overflow-y-auto bg-[#F8F4ED] p-4" onClick={(e) => e.stopPropagation()}>
             <div className="mb-3 flex items-center justify-between"><p className="font-serif text-lg">Filters</p><button type="button" onClick={() => setMobileFilters(false)} aria-label="Close filters"><X size={18} /></button></div>
-            <FilterPanel category={category} brands={availableBrands} brandFilter={brandFilter} viewAllBrands={viewAllBrands} onBrandToggle={toggleBrand} onAllBrands={selectAllBrands} price={price} setPrice={setPrice} onClear={clearFilters} />
+            <FilterPanel category={category} brands={availableBrands} brandFilter={brandFilter} viewAllBrands={viewAllBrands} onBrandToggle={toggleBrand} onAllBrands={selectAllBrands} onClear={clearFilters} />
           </div>
         </div>
       )}

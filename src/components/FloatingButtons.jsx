@@ -98,7 +98,7 @@ export default function FloatingButtons() {
         }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-10 md:bottom-14 left-5 z-40 flex items-center gap-2.5 rounded-full bg-red-600 px-5 py-3 text-white shadow-xl backdrop-blur-md transition-colors hover:bg-red-700 sm:px-7"
+        className="fixed bottom-10 md:bottom-14 left-5 z-40 hidden items-center gap-2.5 rounded-full bg-red-600 px-5 py-3 text-white shadow-xl backdrop-blur-md transition-colors hover:bg-red-700 sm:px-7 md:flex"
       >
         <UserRound size={19} strokeWidth={2.5} />
 

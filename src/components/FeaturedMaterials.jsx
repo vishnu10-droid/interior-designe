@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, ArrowRight, Sparkles } from "lucide-react";
 import { productRange, PRODUCT_RANGE_FALLBACK_IMAGE } from "../data/products";
-import { Reveal } from "./ui";
+import { RevealLeft, RevealRight, RevealZoom, StaggerContainer, StaggerItem } from "./ui";
 
 // Maps each highlighted range item to an existing product-category slug,
 // and layers on the editorial copy used by the showcase.
@@ -127,7 +127,7 @@ export default function FeaturedMaterials() {
       <div className="relative mx-auto max-w-7xl px-5 md:px-8">
         {/* header */}
         <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
-          <Reveal>
+          <RevealLeft>
             <div className="flex items-center gap-3">
               <span className="h-px w-10 bg-[#D9B45B]" />
               <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-[#D9B45B]">
@@ -137,9 +137,9 @@ export default function FeaturedMaterials() {
             <h2 className="mt-4 font-serif text-4xl leading-[1.08] text-[#FBF3E7] md:text-5xl">
               Materials that <em className="italic text-[#D9B45B]">lead the way</em>
             </h2>
-          </Reveal>
+          </RevealLeft>
 
-          <Reveal delay={0.1}>
+          <RevealRight delay={0.1}>
             <p className="max-w-md text-[14px] leading-relaxed text-[#D9CBB4]">
               The finishes our clients ask for again and again — chosen for the way they look,
               feel and hold up in everyday life.
@@ -151,21 +151,21 @@ export default function FeaturedMaterials() {
               View the full collection
               <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
-          </Reveal>
+          </RevealRight>
         </div>
 
         {/* editorial grid: one hero + four supporting materials */}
         <div className="mt-10 grid gap-4 lg:grid-cols-12">
-          <Reveal className="h-full lg:col-span-5">
+          <RevealZoom className="h-full lg:col-span-5">
             <FeatureCard item={hero} />
-          </Reveal>
-          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
+          </RevealZoom>
+          <StaggerContainer className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
             {rest.map((item, index) => (
-              <Reveal key={item.name} delay={0.08 * (index + 1)} className="h-full">
+              <StaggerItem key={item.name} direction={["left", "up", "right", "up"][index % 4]} scale={0.94} className="h-full">
                 <SmallCard item={item} index={index} />
-              </Reveal>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </div>
     </section>

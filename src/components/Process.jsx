@@ -1,5 +1,5 @@
 import { MessagesSquare, Ruler, PenTool, Layers, HardHat, KeyRound } from "lucide-react";
-import { Reveal, SectionHeading } from "./ui";
+import { SectionHeading, StaggerContainer, StaggerItem } from "./ui";
 import { Award, Compass, LayoutGrid, Gem, MessagesCircle, Users, PackageCheck, Headset, Timer } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -17,9 +17,9 @@ export function ProcessSection() {
     <section className="bg-charcoal py-20 md:py-28">
       <div className="max-w-7xl mx-auto px-5 md:px-8">
         <SectionHeading light eyebrow="How We Work" title="From Vision to Reality" desc="A calm, transparent process — you always know what happens next." />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12">
+        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12" stagger={0.1}>
           {steps.map((s, i) => (
-            <Reveal key={s.n} delay={(i % 3) * 0.08}>
+            <StaggerItem key={s.n} direction={["left", "up", "right"][i % 3]}>
               <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur p-7 hover:border-gold/50 hover:bg-white/[0.07] transition-colors h-full">
                 <div className="flex items-center justify-between">
                   <span className="w-12 h-12 rounded-xl bg-gold/15 text-gold grid place-items-center"><s.icon size={20} /></span>
@@ -28,9 +28,9 @@ export function ProcessSection() {
                 <h3 className="font-serif text-xl text-cream mt-5">{s.title}</h3>
                 <p className="text-sm text-cream/60 mt-2 leading-relaxed">{s.desc}</p>
               </div>
-            </Reveal>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
@@ -74,9 +74,9 @@ export function HighlightsSection() {
           title="Why Choose Ananya?"
           desc="Three things we never compromise on — the people, the materials and the promise of time."
         />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12" stagger={0.12}>
           {highlights.map(({ icon: Icon, title, desc }, i) => (
-            <Reveal key={title} delay={i * 0.08}>
+            <StaggerItem key={title} direction={["left", "up", "right"][i % 3]}>
               <motion.div
                 whileHover={{ y: -6 }}
                 transition={{ type: "spring", stiffness: 260, damping: 22 }}
@@ -90,9 +90,9 @@ export function HighlightsSection() {
                   <p className="text-sm text-coffee mt-2 leading-relaxed">{desc}</p>
                 </div>
               </motion.div>
-            </Reveal>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
         <p className="text-center text-xs text-stonewarm mt-10 flex items-center justify-center gap-2">
           <Headset size={14} /> Open 24 Hours — call or WhatsApp anytime for guidance.
         </p>
@@ -105,17 +105,17 @@ export function WhySection() {
   return (
     <section className="max-w-7xl mx-auto px-5 md:px-8 py-20 md:py-28">
       <SectionHeading eyebrow="The Studio Difference" title="Why Choose Ananya?" />
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
+      <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12" stagger={0.1}>
         {feats.map((f, i) => (
-          <Reveal key={f.title} delay={(i % 4) * 0.07}>
+          <StaggerItem key={f.title} direction={["left", "up", "right", "up"][i % 4]}>
             <div className="bg-white rounded-2xl p-7 shadow-card hover:shadow-lift hover:-translate-y-1 transition-all duration-300 h-full border border-charcoal/5">
               <span className="w-12 h-12 rounded-xl bg-beige text-espresso grid place-items-center"><f.icon size={20} /></span>
               <h3 className="font-serif text-xl mt-5">{f.title}</h3>
               <p className="text-sm text-coffee mt-2 leading-relaxed">{f.desc}</p>
             </div>
-          </Reveal>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
       <p className="text-center text-xs text-stonewarm mt-10 flex items-center justify-center gap-2"><Headset size={14} /> Open 24 Hours — call or WhatsApp anytime for guidance.</p>
     </section>
   );

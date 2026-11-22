@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
-import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Reveal } from "./ui";
+
+// Left → bottom → right, repeating — keeps a natural rhythm across the row.
+const DIRECTIONS = ["left", "up", "right"];
 
 export function ProductCard({ category, index = 0 }) {
-  const reduceMotion = useReducedMotion();
+  const direction = DIRECTIONS[index % DIRECTIONS.length];
 
   return (
-    <motion.div
-      initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: reduceMotion ? 0 : 0.5, delay: Math.min((index % 10) * 0.035, 0.25), ease: [0.16, 1, 0.3, 1] }}
+    <Reveal
+      direction={direction}
+      delay={(index % 3) * 0.1}
+      scale={0.94}
+      distance={40}
       className="h-full"
     >
       <Link
@@ -51,6 +54,6 @@ export function ProductCard({ category, index = 0 }) {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </Reveal>
   );
 }

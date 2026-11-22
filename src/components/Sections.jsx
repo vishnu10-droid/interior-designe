@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,7 +8,7 @@ import { services } from "../data/services";
 import { productCategories, PRODUCT_RANGE_FALLBACK_IMAGE } from "../data/products";
 import { steps } from "./Process";
 import { ProductCard } from "./ProductCard";
-import { Reveal, SectionHeading } from "./ui";
+import { Reveal, RevealLeft, RevealRight, SectionHeading, StaggerContainer, StaggerItem, useIsMobile } from "./ui";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -114,23 +114,6 @@ export function ServiceCard({ s }) {
   );
 }
 
-/** Mobile = below Tailwind's md breakpoint (768px). Desktop keeps the slider. */
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== "undefined" ? window.matchMedia("(max-width: 767px)").matches : false
-  );
-
-  useEffect(() => {
-    const query = window.matchMedia("(max-width: 767px)");
-    const update = () => setIsMobile(query.matches);
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
-
-  return isMobile;
-}
-
 /** Static catalogue card — used only in the mobile 2-column grid. */
 function MobileCategoryCard({ category }) {
   return (
@@ -230,11 +213,13 @@ export function InteriorCategories() {
             title="Browse Every Category"
             desc="From the first sketch to the final detail — interiors shaped around the way you live and work. Open a category to see all its products."
           />
-          <div className="mt-8 grid grid-cols-2 gap-3">
-            {productCategories.map((category) => (
-              <MobileCategoryCard key={category.id} category={category} />
+          <StaggerContainer className="mt-8 grid grid-cols-2 gap-3" stagger={0.09}>
+            {productCategories.map((category, i) => (
+              <StaggerItem key={category.id} direction={["left", "up", "right"][i % 3]} scale={0.96}>
+                <MobileCategoryCard category={category} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
     );
@@ -335,7 +320,7 @@ export function AboutSection() {
     <section id="about" className="max-w-7xl mx-auto px-5 md:px-8 py-20 md:py-28">
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
         {/* Left: introduction and supporting information */}
-        <Reveal>
+        <RevealLeft>
           <span className="inline-block text-[11px] tracking-[0.35em] uppercase text-golddark font-semibold mb-3">
             About Ananya
           </span>
@@ -379,7 +364,7 @@ export function AboutSection() {
           {/* Our Vision / Trade Philosophy / Our Experience — placed below Discover Our Story. */}
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             {principles.map(({ icon: Icon, label, text }, i) => (
-              <Reveal key={label} delay={0.18 + i * 0.06} className="h-full">
+              <Reveal key={label} direction={["left", "up", "right"][i % 3]} delay={0.18 + i * 0.06} className="h-full">
                 <div className="h-full rounded-2xl bg-beige/50 border border-charcoal/5 p-5 hover:border-gold/40 hover:shadow-card transition-all duration-300">
                   <span className="w-10 h-10 rounded-xl bg-charcoal text-gold grid place-items-center shrink-0">
                     <Icon size={18} />
@@ -390,11 +375,11 @@ export function AboutSection() {
               </Reveal>
             ))}
           </div>
-        </Reveal>
+        </RevealLeft>
 
         {/* Right: detailed company information */}
         <div className="space-y-5">
-          <Reveal delay={0.08}>
+          <RevealRight delay={0.08}>
             <div className="rounded-3xl border border-charcoal/5 bg-white p-7 md:p-9 shadow-card">
               <p className="text-[11px] tracking-[0.3em] uppercase text-golddark font-medium">Our Story</p>
               <h3 className="font-serif text-2xl md:text-3xl text-charcoal mt-3">
@@ -411,10 +396,10 @@ export function AboutSection() {
                 <MapPin size={15} className="text-gold" /> Agra, Uttar Pradesh · Open 24 Hours
               </p>
             </div>
-          </Reveal>
+          </RevealRight>
 
           {/* "How We Work" — process overview in the right column. */}
-          <Reveal delay={0.12}>
+          <RevealRight delay={0.12}>
             <div className="rounded-3xl bg-charcoal p-7 md:p-9 text-cream">
               <p className="text-[11px] tracking-[0.3em] uppercase text-gold">How We Work</p>
               <h4 className="font-serif text-2xl mt-2">From Vision to Reality</h4>
@@ -433,7 +418,7 @@ export function AboutSection() {
                 <Clock size={14} className="text-gold" /> Open 24 Hours — call or WhatsApp anytime for guidance.
               </p>
             </div>
-          </Reveal>
+          </RevealRight>
         </div>
       </div>
     </section>
@@ -460,7 +445,7 @@ export function ServicesSection({ limit }) {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
           {list.map((s, i) => (
-            <Reveal key={s.id} delay={(i % 4) * 0.08} className="h-full">
+            <Reveal key={s.id} direction={["left", "up", "right", "up"][i % 4]} delay={(i % 4) * 0.08} className="h-full">
               <ServiceCard s={s} />
             </Reveal>
           ))}

@@ -19,10 +19,10 @@ export default function ShopProductCard({ category, index = 0, compact = false }
 
   return (
     <motion.article
-      initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-30px" }}
-      transition={{ duration: 0.45, delay: Math.min((index % 6) * 0.04, 0.2), ease: [0.16, 1, 0.3, 1] }}
+      initial={reduceMotion ? false : { opacity: 0, y: 20, scale: 0.96 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.65, delay: Math.min((index % 6) * 0.08, 0.3), ease: [0.16, 1, 0.3, 1] }}
       className="group w-full"
     >
       <div className="overflow-hidden rounded-xl border border-charcoal/8 bg-white shadow-[0_2px_12px_rgba(28,25,23,0.05)] transition-all duration-300 hover:border-gold/40 hover:shadow-card">

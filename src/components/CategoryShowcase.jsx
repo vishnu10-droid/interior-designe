@@ -13,6 +13,7 @@ import {
 } from "../data/products";
 import { WHATSAPP_LINK, IMAGES } from "../data/services";
 import { useShop } from "../context/ShopContext";
+import { StaggerContainer, StaggerItem } from "./ui";
 
 const CATALOGUE = "/documents/Ananya%20Company%20Profile%20(May'25)%202_compressed.pdf";
 
@@ -199,29 +200,32 @@ function CategoryCards({ activeSlug, onSelect }) {
             <ChevronRight size={14} className={`transition-transform ${showAll ? "-rotate-90" : ""}`} />
           </button>
         </div>
-        <div className={`grid grid-cols-2 gap-3 overflow-hidden transition-[max-height] duration-500 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 ${showAll ? "max-h-[4000px]" : "max-h-[175px]"}`}>
-          {productCategories.map((item) => {
+        <StaggerContainer className={`grid grid-cols-2 gap-3 overflow-hidden transition-[max-height] duration-500 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 ${showAll ? "max-h-[4000px]" : "max-h-[250px]"}`} stagger={0.09}>
+          {productCategories.map((item, index) => {
             const active = item.slug === activeSlug;
             return (
+              <StaggerItem key={item.id} direction={["left", "up", "right"][index % 3]} scale={0.95}>
               <button
-                key={item.id}
                 type="button"
                 onClick={() => onSelect(item.slug)}
-                className={`group flex h-[175px] flex-col overflow-hidden rounded-xl border bg-white text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${active ? "border-[#D9B45B] ring-1 ring-[#D9B45B]/50" : "border-[#E3D8C7]"}`}
+                className={`group flex h-[250px] w-full flex-col overflow-hidden rounded-xl border bg-white text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${active ? "border-[#D9B45B] ring-1 ring-[#D9B45B]/50" : "border-[#E3D8C7]"}`}
               >
-                <div className="flex h-[128px] shrink-0 items-center justify-center overflow-hidden bg-[#EFE6D9] p-1.5">
-                  <SafeImage src={item.image} alt={item.name} className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110" />
+                <div className="flex h-[188px] shrink-0 items-center justify-center overflow-hidden bg-[#EFE6D9]">
+                  <div className="h-[160px] w-[112px] overflow-hidden rounded-md">
+                    <SafeImage src={item.image} alt={item.name} className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110" />
+                  </div>
                 </div>
-                <div className="flex flex-1 items-center gap-2 px-2">
+                <div className="flex flex-1 items-center gap-2 px-3">
                   <p className={`line-clamp-2 text-[11px] font-semibold leading-tight transition-colors ${active ? "text-[#8A6A16]" : "text-[#3A2A1B] group-hover:text-[#8A6A16]"}`}>
                     {item.name}
                   </p>
                   {active && <span className="h-2 w-2 shrink-0 rounded-full bg-[#B58A22]" />}
                 </div>
               </button>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
@@ -443,9 +447,13 @@ export default function CategoryShowcase({ initialSlug }) {
             )}
 
             {visible.length ? (
-              <div className={view === "grid" ? "grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4" : "grid grid-cols-1 gap-3 sm:grid-cols-2"}>
-                {visible.map((product, index) => <ProductCard key={product.id} product={product} view={view} index={index} />)}
-              </div>
+              <StaggerContainer className={view === "grid" ? "grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4" : "grid grid-cols-1 gap-3 sm:grid-cols-2"} stagger={0.05} inView={false}>
+                {visible.map((product, index) => (
+                  <StaggerItem key={product.id} direction={["left", "up", "right"][index % 3]} scale={0.95}>
+                    <ProductCard product={product} view={view} index={index} />
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
             ) : (
               <div className="rounded-xl border border-[#E6DCCB] bg-white py-16 text-center">
                 <p className="font-serif text-xl text-[#3A2A1B]">No products match your filters</p>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Maximize2 } from "lucide-react";
 import { galleryItems } from "../data/content";
-import { DetailModal, Reveal, SectionHeading } from "./ui";
+import { DetailModal, SectionHeading, StaggerContainer, StaggerItem } from "./ui";
 
 // Curated from the studio's existing gallery, with a bathroom view added to
 // complete the set of spaces requested for the showcase.
@@ -33,11 +33,12 @@ export function GallerySection() {
         desc="Living rooms, bedrooms, kitchens, bathrooms and workspaces — each one considered down to the last detail."
       />
 
-      <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[150px] sm:auto-rows-[190px] md:auto-rows-[210px] gap-3 md:gap-4 mt-12">
+      <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 auto-rows-[150px] sm:auto-rows-[190px] md:auto-rows-[210px] gap-3 md:gap-4 mt-12" stagger={0.1}>
         {showcase.map((item, i) => (
-          <Reveal
+          <StaggerItem
             key={item.id ?? item.title}
-            delay={(i % 4) * 0.06}
+            direction={["left", "up", "right", "up"][i % 4]}
+            scale={0.93}
             className={item.featured ? "col-span-2 row-span-2" : ""}
           >
             <button
@@ -63,9 +64,9 @@ export function GallerySection() {
                 </span>
               </div>
             </button>
-          </Reveal>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
 
       <DetailModal open={Boolean(active)} onClose={() => setActive(null)} label={active?.title || "Gallery image"}>
         {active && (

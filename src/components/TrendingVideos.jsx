@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Play, X } from "lucide-react";
-import { Reveal } from "./ui";
+import { RevealUp } from "./ui";
 
 /**
  * The reels live in /public/Trending and are served from /Trending by Vite.
@@ -291,7 +291,7 @@ export default function TrendingVideos() {
       className="w-full scroll-mt-[90px] bg-[#F5F1EE] px-[4.4%] pb-6 pt-[55px] md:pb-8"
       aria-labelledby="trending-heading"
     >
-      <Reveal className="mb-[16px] flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <RevealUp className="mb-[16px] flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-[11px] font-medium uppercase tracking-[3px] text-[#B08A6E]">Now Showing</p>
           <h2
@@ -308,7 +308,7 @@ export default function TrendingVideos() {
         >
           View all
         </Link>
-      </Reveal>
+      </RevealUp>
 
       <div className="relative">
         <div

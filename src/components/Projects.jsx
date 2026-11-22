@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight, CheckCircle2, MapPin } from "lucide-react";
 import { projects } from "../data/projects";
-import { DetailModal, Reveal, SectionHeading } from "./ui";
+import { DetailModal, SectionHeading, StaggerContainer, StaggerItem } from "./ui";
 
 export function ProjectsSection() {
   const [active, setActive] = useState(null);
@@ -15,9 +15,9 @@ export function ProjectsSection() {
         desc="A selection of homes, kitchens and workplaces crafted across Agra. Select a project to explore the story behind it."
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 mt-12">
+      <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 mt-12" stagger={0.11}>
         {featured.map((project, i) => (
-          <Reveal key={project.id} delay={(i % 4) * 0.07} className="h-full">
+          <StaggerItem key={project.id} direction={["left", "up", "right", "up"][i % 4]} scale={0.94} className="h-full">
             <article className="group relative h-full overflow-hidden rounded-2xl bg-charcoal shadow-card hover:shadow-lift transition-shadow duration-500">
               <img
                 src={project.image}
@@ -46,9 +46,9 @@ export function ProjectsSection() {
                 </button>
               </div>
             </article>
-          </Reveal>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
 
       <DetailModal open={Boolean(active)} onClose={() => setActive(null)} label={active?.name || "Project details"}>
         {active && (

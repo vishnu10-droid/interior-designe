@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, CalendarDays, CheckCircle2 } from "lucide-react";
 import { blogPosts } from "../data/content";
-import { DetailModal, Reveal, SectionHeading } from "./ui";
+import { DetailModal, SectionHeading, StaggerContainer, StaggerItem } from "./ui";
 
 export function BlogSection() {
   const [active, setActive] = useState(null);
@@ -15,9 +15,9 @@ export function BlogSection() {
           desc="Notes from our studio — practical thinking on materials, layouts and the details that make a space feel like yours."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 mt-12">
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 mt-12" stagger={0.11}>
           {blogPosts.map((post, i) => (
-            <Reveal key={post.id} delay={(i % 4) * 0.07} className="h-full">
+            <StaggerItem key={post.id} direction={["left", "up", "right", "up"][i % 4]} scale={0.94} className="h-full">
               <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-charcoal/5 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
                 <div className="relative h-48 overflow-hidden bg-charcoal">
                   <img
@@ -49,9 +49,9 @@ export function BlogSection() {
                   </button>
                 </div>
               </article>
-            </Reveal>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
 
       <DetailModal open={Boolean(active)} onClose={() => setActive(null)} label={active?.title || "Article"}>

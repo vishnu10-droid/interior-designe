@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import { services } from "../data/services";
 import { ServiceCard } from "../components/Sections";
 import { ContactSection } from "../components/Contact";
-import { Reveal } from "../components/ui";
+import { Reveal, RevealLeft } from "../components/ui";
 
 export function PageHero({ eyebrow, title, desc, image }) {
   const heroRef = useRef(null);
@@ -57,7 +57,7 @@ export function PageHero({ eyebrow, title, desc, image }) {
       <div className="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/65 to-charcoal/20" />
       <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-transparent to-charcoal/10" />
       <div className="relative mx-auto w-full max-w-7xl px-5 md:px-8">
-        <Reveal>
+        <RevealLeft>
           <p className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-charcoal/30 px-4 py-2 text-[10px] tracking-[0.3em] uppercase text-gold backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-gold shadow-[0_0_12px_rgba(198,168,124,0.9)]" />
             {eyebrow}
@@ -66,7 +66,7 @@ export function PageHero({ eyebrow, title, desc, image }) {
             {title}
           </h1>
           {desc && <p className="mt-5 max-w-2xl text-sm leading-relaxed text-cream/75 md:text-base">{desc}</p>}
-        </Reveal>
+        </RevealLeft>
       </div>
     </section>
   );
@@ -83,7 +83,7 @@ export default function ServicesPage() {
       />
       <section className="max-w-7xl mx-auto px-5 md:px-8 py-16 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {services.map((s, i) => (
-          <Reveal key={s.id} delay={(i % 4) * 0.06}>
+          <Reveal key={s.id} direction={["left", "up", "right", "up"][i % 4]} delay={(i % 4) * 0.08} scale={0.95}>
             <ServiceCard s={s} />
           </Reveal>
         ))}

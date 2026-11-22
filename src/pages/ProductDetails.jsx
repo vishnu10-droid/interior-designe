@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowRight, ArrowDown, ChevronRight, Mail, Phone, MapPin } from "lucide-react";
-import { SectionHeading } from "../components/ui";
+import { RevealLeft, RevealRight, SectionHeading } from "../components/ui";
 import { getProductImages, productCategories, PRODUCT_RANGE_FALLBACK_IMAGE } from "../data/products";
 import { ProductCard } from "../components/ProductCard";
 import { PHONE_LINK, ADDRESS, DISPLAY_CENTRE } from "../data/services";
@@ -49,7 +49,7 @@ export default function ProductDetails() {
 
         <div className="relative mx-auto grid max-w-7xl gap-10 px-5 pb-14 pt-10 md:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14 lg:pb-16 lg:pt-14">
           {/* ---------------------------- copy ---------------------------- */}
-          <div>
+          <RevealRight>
             {/* breadcrumb */}
             <nav className="flex flex-wrap items-center gap-1.5 text-[11px] text-[#D9CBB4]/70">
               <Link to="/" className="hover:text-[#D9B45B]">Home</Link>
@@ -106,10 +106,10 @@ export default function ProductDetails() {
                 <ArrowLeft size={14} /> All products
               </Link>
             </div>
-          </div>
+          </RevealRight>
 
           {/* ---------------------------- image --------------------------- */}
-          <div className="relative h-[280px] sm:h-[340px] lg:h-[440px]">
+          <RevealLeft className="relative h-[280px] sm:h-[340px] lg:h-[440px]">
             <div className="absolute inset-0 overflow-hidden rounded-2xl border border-[#D9B45B]/20 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]">
               <SafeImage
                 src={category.image}
@@ -134,7 +134,7 @@ export default function ProductDetails() {
             <span className="absolute -right-3 top-6 hidden rounded-full border border-[#D9B45B]/30 bg-[#140C07]/85 px-4 py-2 font-serif text-[11px] tracking-[0.18em] text-[#F4E4C6] backdrop-blur sm:block">
               THE EDIT · 01
             </span>
-          </div>
+          </RevealLeft>
         </div>
       </section>
 

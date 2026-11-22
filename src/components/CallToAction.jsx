@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Phone, MapPin, Clock } from "lucide-react";
 import { ADDRESS, PHONE, PHONE_LINK, WHATSAPP_LINK, MAPS_LINK, DISPLAY_CENTRE, GODOWN, MOBILE } from "../data/services";
+import { RevealUp } from "./ui";
 
 export function CallToAction({ title, desc, buttonText, buttonHref }) {
   return (
     <section className="relative py-20 md:py-28 overflow-hidden bg-charcoal">
       <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-espresso to-charcoal" />
-      <div className="relative max-w-7xl mx-auto px-5 md:px-8 text-center">
+      <RevealUp className="relative max-w-7xl mx-auto px-5 md:px-8 text-center">
         <p className="text-[11px] tracking-[0.3em] uppercase text-gold font-medium mb-4">
           Ready to transform your space?
         </p>
@@ -29,7 +30,7 @@ export function CallToAction({ title, desc, buttonText, buttonHref }) {
             <Phone size={16} /> Call Now
           </a>
         </div>
-      </div>
+      </RevealUp>
     </section>
   );
 }

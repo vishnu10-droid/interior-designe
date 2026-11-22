@@ -14,6 +14,14 @@ export default {
         gold: "#C6A87C",
         golddark: "#A98548",
         stonewarm: "#8A7E71",
+        // Ananya editorial palette (shared by the About experience)
+        ivory: "#F8F4EE",
+        parchment: "#EFE6DA",
+        walnut: "#2B201A",
+        brown: "#3A291F",
+        champagne: "#C49A5A",
+        ink: "#29231F",
+        muted: "#817467",
       },
       fontFamily: {
         serif: ['"Playfair Display"', "Georgia", "serif"],

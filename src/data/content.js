@@ -11,7 +11,7 @@ export const reviews = [
 export const blogPosts = [
   {
     id: "calm-living-room",
-    title: "Tradeing a Calm, Luxurious Living Room",
+    title: "Trading a Calm, Luxurious Living Room",
     category: "Trade Ideas",
     date: "12 Jan 2026",
     image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop",
@@ -41,9 +41,9 @@ export const blogPosts = [
   },
   {
     id: "workspace-natural-light",
-    title: "Bringing Natural Light into Modern Workspaces",
-    category: "Workplace",
-    date: "17 Sep 2025",
+    title: "Designing a Focused Home Workspace",
+    category: "Workspace",
+    date: "27 Sep 2025",
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop",
     excerpt: "A focused, client-ready workspace with acoustic pods and biophilic touches in oak, charcoal and brass.",
     body: "Twelve-seat studio offices work best when daylight leads the plan. A director cabin, meeting pod and breakout zone are arranged around the windows, with oak, charcoal and brass adding warmth and a clear brand accent.",

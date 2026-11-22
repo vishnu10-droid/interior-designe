@@ -2,18 +2,18 @@ import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import {
-  Heart, X,
+  X,
   ChevronDown, ChevronRight, Layers, DoorOpen, Layers3,
   ScrollText, PanelTop, ShieldCheck, Gem, Headphones, Truck, Download,
-  ArrowRight, LayoutGrid, List, MessageCircle, SlidersHorizontal, Leaf,
+  ArrowRight, LayoutGrid, List, SlidersHorizontal, Leaf,
 } from "lucide-react";
 import {
   productCategories, productRange, getProductImages, featuredBrands, allBrands,
   PRODUCT_RANGE_FALLBACK_IMAGE,
 } from "../data/products";
-import { WHATSAPP_LINK, IMAGES } from "../data/services";
-import { useShop } from "../context/ShopContext";
+import { IMAGES } from "../data/services";
 import { StaggerContainer, StaggerItem } from "./ui";
+import FlipProductCard from "./FlipProductCard";
 
 const CATALOGUE = "/documents/Ananya%20Company%20Profile%20(May'25)%202_compressed.pdf";
 
@@ -288,41 +288,6 @@ function FilterPanel({ category, brands, brandFilter, viewAllBrands, onBrandTogg
   );
 }
 
-/* ---------------------------- PRODUCT CARD --------------------------- */
-
-function ProductCard({ product, view }) {
-  const { isWishlisted, isInCart, toggleWishlist, toggleCart } = useShop();
-  const wished = isWishlisted(product.id);
-  const inCart = isInCart(product.id);
-  return (
-    <motion.article whileHover={{ y: -4 }} className="overflow-hidden rounded-xl border border-[#E8DECE] bg-white shadow-sm transition-shadow hover:shadow-lg">
-      <Link to={`/products/${product.slug}`} className="block">
-        <div className="relative aspect-square overflow-hidden bg-[#F1E9DD]">
-          <SafeImage src={product.image} alt={product.name} className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-110" />
-          <button
-            type="button"
-            onClick={(e) => { e.preventDefault(); toggleWishlist(product.id); }}
-            aria-label={wished ? "Remove from wishlist" : "Add to wishlist"}
-            className={`absolute right-2 top-2 grid h-7 w-7 place-items-center rounded-full bg-white/95 shadow ${wished ? "text-[#B5483F]" : "text-[#6B5A45]"}`}
-          ><Heart size={14} fill={wished ? "currentColor" : "none"} /></button>
-        </div>
-      </Link>
-      <div className="p-3">
-        <p className="text-[9px] uppercase tracking-[0.14em] text-[#B58A22]">{product.brand}</p>
-        <h3 className="mt-1 line-clamp-2 text-[12px] font-semibold leading-snug text-[#3A2A1B]">{product.name}</h3>
-        <p className="mt-1 text-[10px] text-[#8A7A66]">{product.thickness}</p>
-        <div className="mt-3 flex items-center justify-between border-t border-[#EFE7DA] pt-2">
-          <span className="text-[10px] font-medium text-[#6B5A45]">Price on request</span>
-          <button type="button" onClick={() => toggleCart(product.id)} aria-label={inCart ? "Remove from cart" : "Add to cart"} className={`rounded-full border px-2.5 py-1 text-[9px] font-semibold transition-colors ${inCart ? "border-[#B58A22] bg-[#D9B45B]/15 text-[#8A6A16]" : "border-[#D9B45B]/60 text-[#8A6A16] hover:bg-[#D9B45B]/10"}`}>
-            {inCart ? "Added" : "Enquire"}
-          </button>
-        </div>
-      </div>
-      {view === "list" && <p className="border-t border-[#EFE7DA] px-3 py-2 text-[11px] leading-relaxed text-[#7A6A56]">{product.detail}</p>}
-    </motion.article>
-  );
-}
-
 /* ------------------------------- PAGE -------------------------------- */
 
 export default function CategoryShowcase({ initialSlug }) {
@@ -354,6 +319,14 @@ export default function CategoryShowcase({ initialSlug }) {
         brand,
         thickness: type,
         detail: source.description,
+        // Data passed through to the reusable flip card — all from the
+        // existing category record, never invented specifications.
+        eyebrow: source.name,
+        description: source.description,
+        details: source.description,
+        brands: source.brands || [],
+        features: source.features || [],
+        variants: source.types || [],
       };
     });
   };
@@ -449,8 +422,20 @@ export default function CategoryShowcase({ initialSlug }) {
             {visible.length ? (
               <StaggerContainer className={view === "grid" ? "grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4" : "grid grid-cols-1 gap-3 sm:grid-cols-2"} stagger={0.05} inView={false}>
                 {visible.map((product, index) => (
-                  <StaggerItem key={product.id} direction={["left", "up", "right"][index % 3]} scale={0.95}>
-                    <ProductCard product={product} view={view} index={index} />
+                  <StaggerItem key={product.id} direction={["left", "up", "right"][index % 3]} scale={0.95} className="h-full">
+                    <FlipProductCard
+                      title={product.name}
+                      eyebrow={product.eyebrow}
+                      description={product.detail}
+                      details={product.details}
+                      image={product.image}
+                      brands={product.brands}
+                      features={product.features}
+                      variants={product.variants}
+                      slug={product.slug}
+                      productId={product.id}
+                      className="h-[470px]"
+                    />
                   </StaggerItem>
                 ))}
               </StaggerContainer>

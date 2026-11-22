@@ -16,6 +16,29 @@ body { @apply bg-cream text-charcoal font-sans antialiased; overflow-x: clip; }
 .img-zoom img { transition: transform 1.1s cubic-bezier(0.19,1,0.22,1); }
 .img-zoom:hover img { transform: scale(1.07); }
 
+/* --- Premium 3D flip product cards ------------------------------------ */
+/* The scene owns the perspective; the inner shell owns the 3D space.
+   Both faces share the exact same box and hide their reverse side, which
+   prevents flicker and any back-face text bleeding through the front. */
+.flip-scene { perspective: 1200px; -webkit-perspective: 1200px; }
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  will-change: transform;
+}
+.flip-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-face--front { transform: rotateY(0deg); }
+.flip-face--back { transform: rotateY(180deg); }
+
 .gold-line { background: linear-gradient(90deg, #C6A87C, rgba(198,168,124,0)); height: 1px; }
 
 input, select, textarea { outline: none; }
@@ -35,6 +58,38 @@ input:focus, select:focus, textarea:focus { border-color: #C6A87C !important; bo
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
 }
+/* Editorial helpers used across the About experience */
+.eyebrow-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: #C49A5A;
+}
+
+.wood-slats {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(196, 154, 90, 0.055) 0px,
+    rgba(196, 154, 90, 0.055) 1px,
+    transparent 1px,
+    transparent 9px
+  );
+}
+
+.soft-leaf-shadow {
+  background: radial-gradient(ellipse at center, rgba(120, 94, 66, 0.13) 0%, rgba(120, 94, 66, 0) 68%);
+  filter: blur(6px);
+}
+
+@keyframes hero-zoom {
+  from { transform: scale(1.1); }
+  to { transform: scale(1); }
+}
+.hero-zoom { animation: hero-zoom 14s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee { animation: none; }
+  .hero-zoom { animation: none; }
+  html { scroll-behavior: auto; }
 }

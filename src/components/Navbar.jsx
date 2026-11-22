@@ -6,7 +6,7 @@ import {
   Phone,
   Menu,
   X,
-  LayoutDashboard,
+  LayoutGrid,
   ArrowRight,
   ChevronDown,
   Search,
@@ -86,7 +86,7 @@ export default function Navbar() {
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           solid
-            ? "bg-cream/85 backdrop-blur-xl shadow-card"
+            ? "bg-[#F8F4EE]/95 backdrop-blur-xl shadow-[0_4px_24px_-12px_rgba(43,32,26,0.28)]"
             : "bg-transparent"
         }`}
       >
@@ -158,7 +158,7 @@ export default function Navbar() {
                 event.preventDefault();
                 navigate(search.trim() ? `/products?q=${encodeURIComponent(search.trim())}` : "/products");
               }}
-              className="relative hidden xl:block"
+              className="relative hidden lg:block"
             >
               <Search size={14} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-stonewarm" />
               <input
@@ -223,7 +223,7 @@ export default function Navbar() {
                   : "border-white/25 bg-white/10 text-white backdrop-blur hover:bg-white/20"
               }`}
             >
-              <LayoutDashboard size={17} />
+              <LayoutGrid size={17} />
             </button>
 
             {/* MOBILE MENU BUTTON */}
@@ -372,7 +372,7 @@ export default function Navbar() {
                   }}
                   className="mt-5 flex items-center gap-3 rounded-xl bg-charcoal text-cream px-5 py-4 text-sm tracking-wide"
                 >
-                  <LayoutDashboard size={17} />
+                  <LayoutGrid size={17} />
                   Open Dashboard
                 </button>
 

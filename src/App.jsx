@@ -39,12 +39,14 @@ function ScrollToTop() {
 function PublicLayout({ children }) {
   const { pathname } = useLocation();
   const isCategoryPage = pathname.startsWith("/categories");
+  // The About layout keeps its editorial composition free of floating widgets.
+  const isAboutPage = pathname === "/about";
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer />
-      {!isCategoryPage && <FloatingButtons />}
+      {!isCategoryPage && !isAboutPage && <FloatingButtons />}
     </div>
   );
 }

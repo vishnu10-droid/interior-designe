@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ChevronLeft, ChevronRight, Star, Truck, ShieldCheck, RotateCcw } from "lucide-react";
 import { productCategories, productFilters, getProductImages, PRODUCT_RANGE_FALLBACK_IMAGE } from "../data/products";
 import { IMAGES, services, WHATSAPP_LINK } from "../data/services";
@@ -36,6 +36,15 @@ const SLIDES = [
     cta: "Explore living picks",
     href: "/products?group=Wood%20%26%20Panels",
   },
+  {
+    id: "finishes",
+    image: IMAGES.texture,
+    eyebrow: "Surfaces & Finishes",
+    title: "Beauty you can feel",
+    text: "Wood-look laminates, veneers and rich textures that bring depth to every surface.",
+    cta: "Browse finishes",
+    href: "/products?group=Boards%20%26%20Laminates",
+  },
 ];
 
 export function AnnouncementBar() {
@@ -62,29 +71,39 @@ export function ShopHeroSlider() {
   const reduceMotion = useReducedMotion();
   const slide = SLIDES[active];
 
+  // Load all four images up front so a slide change never shows an empty frame.
+  useEffect(() => {
+    SLIDES.forEach((item) => {
+      const img = new Image();
+      img.src = item.image;
+    });
+  }, []);
+
   useEffect(() => {
     if (reduceMotion) return undefined;
-    const timer = window.setInterval(() => setActive((prev) => (prev + 1) % SLIDES.length), 6000);
+    const timer = window.setInterval(() => setActive((prev) => (prev + 1) % SLIDES.length), 5500);
     return () => window.clearInterval(timer);
-  }, [reduceMotion]);
+  }, [reduceMotion, active]);
 
   return (
     <section className="w-full bg-cream px-4 py-4 md:px-8 md:py-6" aria-label="Featured collections">
-      <div className="relative mx-auto h-[330px] max-w-[1600px] overflow-hidden rounded-xl bg-charcoal sm:h-[420px] lg:h-[500px]">
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={slide.id}
-            src={failed[slide.id] ? PRODUCT_RANGE_FALLBACK_IMAGE : slide.image}
-            alt=""
-            initial={{ opacity: 0, scale: 1.06 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            onError={() => setFailed((prev) => ({ ...prev, [slide.id]: true }))}
-            className="absolute inset-0 h-full w-full object-cover object-center"
-          />
-        </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/85 via-charcoal/45 to-transparent" />
+      <div className="relative mx-auto h-[330px] max-w-[1600px] overflow-hidden rounded-xl bg-[#EDE5D9] sm:h-[420px] lg:h-[500px]">
+        {/* Every slide stays mounted and cross-fades — no dark gap on change. */}
+        <div className="absolute inset-0">
+          {SLIDES.map((item, index) => (
+            <motion.img
+              key={item.id}
+              src={failed[item.id] ? PRODUCT_RANGE_FALLBACK_IMAGE : item.image}
+              alt=""
+              initial={false}
+              animate={{ opacity: index === active ? 1 : 0, scale: index === active ? 1 : 1.04 }}
+              transition={{ duration: reduceMotion ? 0 : 0.9, ease: "easeInOut" }}
+              onError={() => setFailed((prev) => ({ ...prev, [item.id]: true }))}
+              className="absolute inset-0 h-full w-full object-cover object-center"
+            />
+          ))}
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/30 to-transparent" />
 
         <div className="relative z-10 flex h-full max-w-xl flex-col justify-center px-6 sm:px-10 md:px-14">
           <motion.p key={`e-${active}`} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="text-[11px] font-medium uppercase tracking-[0.3em] text-gold">

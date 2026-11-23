@@ -13,7 +13,8 @@ import Brands from "./pages/Brands";
 import Categories from "./pages/Categories";
 import BlogPage from "./pages/BlogPage";
 import DashboardLayout from "./dashboard/DashboardLayout";
-import { DashHome, DashProjects, DashServices, DashGallery, DashLeads, DashReviews, DashMessages, DashSettings } from "./dashboard/pages";
+import { DashHome, DashProjects, DashServices, DashGallery, DashMessages, DashSettings } from "./dashboard/pages";
+import { DashProducts, DashCategories, DashBrands, DashCustomers, DashTestimonials, DashBlogs, DashAnalytics, DashUsers } from "./dashboard/pagesAdmin";
 import { allKeywords } from "./data/seo";
 import { ShopProvider } from "./context/ShopContext";
 
@@ -76,12 +77,20 @@ export default function App() {
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<DashHome />} />
           <Route path="projects" element={<DashProjects />} />
+          <Route path="products" element={<DashProducts />} />
+          <Route path="categories" element={<DashCategories />} />
+          <Route path="brands" element={<DashBrands />} />
           <Route path="services" element={<DashServices />} />
           <Route path="gallery" element={<DashGallery />} />
-          <Route path="leads" element={<DashLeads />} />
-          <Route path="reviews" element={<DashReviews />} />
+          <Route path="leads" element={<DashCustomers />} />
+          <Route path="customers" element={<DashCustomers />} />
+          <Route path="reviews" element={<DashTestimonials />} />
+          <Route path="testimonials" element={<DashTestimonials />} />
           <Route path="messages" element={<DashMessages />} />
+          <Route path="blogs" element={<DashBlogs />} />
+          <Route path="analytics" element={<DashAnalytics />} />
           <Route path="settings" element={<DashSettings />} />
+          <Route path="users" element={<DashUsers />} />
         </Route>
         <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
       </Routes>

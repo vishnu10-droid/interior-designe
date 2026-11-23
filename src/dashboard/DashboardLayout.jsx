@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { LayoutDashboard, FolderKanban, Layers, Images, Users, Star, MessageSquare, Settings, Menu, X, Search, Bell, Sun, Moon, LogOut, ChevronRight } from "lucide-react";
+import { LayoutDashboard, Users, Star, Settings, Menu, X, Search, Bell, Sun, Moon, LogOut, ChevronRight, Package, LayoutGrid, Tags, Newspaper, BarChart3, UserCog } from "lucide-react";
 
 export const dashLinks = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, end: true },
-  { to: "/dashboard/projects", label: "Projects", icon: FolderKanban },
-  { to: "/dashboard/services", label: "Services", icon: Layers },
-  { to: "/dashboard/gallery", label: "Gallery", icon: Images },
-  { to: "/dashboard/leads", label: "Leads", icon: Users },
-  { to: "/dashboard/reviews", label: "Reviews", icon: Star },
-  { to: "/dashboard/messages", label: "Messages", icon: MessageSquare },
+  { to: "/dashboard/products", label: "Products", icon: Package },
+  { to: "/dashboard/categories", label: "Categories", icon: LayoutGrid },
+  { to: "/dashboard/brands", label: "Brands", icon: Tags },
+  { to: "/dashboard/customers", label: "Customers & Enquiries", icon: Users },
+  { to: "/dashboard/testimonials", label: "Testimonials", icon: Star },
+  { to: "/dashboard/blogs", label: "Blogs", icon: Newspaper },
+  { to: "/dashboard/analytics", label: "Analytics & Report", icon: BarChart3 },
   { to: "/dashboard/settings", label: "Settings", icon: Settings },
+  { to: "/dashboard/users", label: "Users & Admin Roles", icon: UserCog },
 ];
 
 function SidebarContent({ onNav }) {

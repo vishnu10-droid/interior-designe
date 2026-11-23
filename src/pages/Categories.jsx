@@ -3,5 +3,7 @@ import CategoryShowcase from "../components/CategoryShowcase";
 
 export default function Categories() {
   const { slug } = useParams();
-  return <CategoryShowcase initialSlug={slug} />;
+  // Key by slug so switching categories always starts from the correct
+  // filtered state instead of reusing the previous category's UI state.
+  return <CategoryShowcase key={slug || "all"} initialSlug={slug} />;
 }

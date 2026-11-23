@@ -295,7 +295,8 @@ export default function CategoryShowcase({ initialSlug }) {
   const reduce = useReducedMotion();
   const [activeSlug, setActiveSlug] = useState(initialSlug || "plywood");
   const [brandFilter, setBrandFilter] = useState([]);
-  const [viewAllBrands, setViewAllBrands] = useState(true);
+  // A direct /categories/:slug URL must open filtered to that category.
+  const [viewAllBrands, setViewAllBrands] = useState(!initialSlug);
   const [sort, setSort] = useState("featured");
   const [view, setView] = useState("grid");
   const [mobileFilters, setMobileFilters] = useState(false);

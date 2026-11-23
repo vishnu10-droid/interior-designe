@@ -5,10 +5,10 @@ import { projects } from "../data/projects";
 import { services } from "../data/services";
 import { galleryItems, initialLeads, reviews } from "../data/content";
 
-function Card({ children, className = "" }) {
+export function Card({ children, className = "" }) {
   return <div className={`bg-white rounded-2xl shadow-card border border-charcoal/5 p-6 ${className}`}>{children}</div>;
 }
-function PageTitle({ title, desc, action }) {
+export function PageTitle({ title, desc, action }) {
   return (
     <div className="flex flex-wrap items-end justify-between gap-3 mb-6">
       <div><h1 className="font-serif text-3xl">{title}</h1>{desc && <p className="text-sm text-coffee mt-1">{desc}</p>}</div>

@@ -1,21 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
-import { Heart, ShoppingBag } from "lucide-react";
+import { Heart, ShoppingBag, Layers3 } from "lucide-react";
 import { PRODUCT_RANGE_FALLBACK_IMAGE } from "../data/products";
 import { useShop } from "../context/ShopContext";
 
 /**
  * Premium compact PLP card. Pricing/ratings are intentionally not invented —
  * this catalogue has no price fields, so the card shows "Price on request".
+ *
+ * The image area zooms into the card's own photograph on hover (desktop) or
+ * on tap of the detail toggle (touch devices), so the second view always
+ * belongs to the same product named on the card. Card content, dimensions
+ * and actions are untouched.
  */
 export default function ShopProductCard({ category, index = 0, compact = false }) {
   const [loaded, setLoaded] = useState(false);
-  const [failed, setFailed] = useState(false);
+  const [frontFailed, setFrontFailed] = useState(false);
+  const [showHover, setShowHover] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
   const reduceMotion = useReducedMotion();
   const { isWishlisted, isInCart, toggleWishlist, toggleCart } = useShop();
   const wished = isWishlisted(category.slug);
   const inCart = isInCart(category.slug);
+
+  const frontImage = frontFailed ? PRODUCT_RANGE_FALLBACK_IMAGE : category.image || PRODUCT_RANGE_FALLBACK_IMAGE;
+  // The hover view must belong to the same product as the card — never swap in
+  // another category's photo. Use the card's own image as a zoomed detail view.
+  const hoverImage = frontImage;
+  const secondImage = hoverImage;
+  const duration = reduceMotion ? 0 : 600;
+
+  useEffect(() => {
+    const query = window.matchMedia("(hover: none)");
+    const sync = () => setIsTouch(query.matches);
+    sync();
+    query.addEventListener?.("change", sync);
+    return () => query.removeEventListener?.("change", sync);
+  }, []);
+
+  // Warm the second image so the first hover/tap never shows an empty frame.
+  useEffect(() => {
+    const img = new Image();
+    img.src = secondImage;
+  }, [secondImage]);
 
   return (
     <motion.article
@@ -26,25 +54,63 @@ export default function ShopProductCard({ category, index = 0, compact = false }
       className="group w-full"
     >
       <div className="overflow-hidden rounded-xl border border-charcoal/8 bg-white shadow-[0_2px_12px_rgba(28,25,23,0.05)] transition-all duration-300 hover:border-gold/40 hover:shadow-card">
-        <Link to={`/products/${category.slug}`} className="block" aria-label={`View ${category.name}`}>
-          <div className={`relative overflow-hidden bg-beige ${compact ? "aspect-square" : "aspect-square"}`}>
-            {!loaded && <div className="absolute inset-0 animate-pulse bg-beige" />}
-            <img
-              src={failed ? PRODUCT_RANGE_FALLBACK_IMAGE : category.image}
-              alt={category.name}
-              loading="lazy"
-              onLoad={() => setLoaded(true)}
-              onError={() => {
-                if (!failed) setFailed(true);
-                else setLoaded(true);
+        <div className="relative">
+          <Link to={`/products/${category.slug}`} className="block" aria-label={`View ${category.name}`}>
+            <div
+              className={`relative overflow-hidden bg-beige ${compact ? "aspect-square" : "aspect-square"}`}
+              onMouseEnter={() => { if (!isTouch) setShowHover(true); }}
+              onMouseLeave={() => { if (!isTouch) setShowHover(false); }}
+            >
+              {!loaded && <div className="absolute inset-0 animate-pulse bg-beige" />}
+              <img
+                src={frontImage}
+                alt={category.name}
+                loading="lazy"
+                decoding="async"
+                onLoad={() => setLoaded(true)}
+                onError={() => {
+                  if (!frontFailed) setFrontFailed(true);
+                  else setLoaded(true);
+                }}
+                style={{ transitionDuration: `${duration}ms` }}
+                className={`absolute inset-0 h-full w-full object-cover object-center transition-[opacity,transform] ease-out ${
+                  showHover ? "opacity-0 scale-[1.04]" : "opacity-100 scale-100"
+                }`}
+              />
+              <img
+                src={hoverImage}
+                alt={`${category.name} — material detail`}
+                loading="lazy"
+                decoding="async"
+                aria-hidden={!showHover}
+                style={{ transitionDuration: `${duration}ms` }}
+                className={`absolute inset-0 h-full w-full object-cover object-center transition-[opacity,transform] ease-out ${
+                  showHover ? "opacity-100 scale-[1.28]" : "opacity-0 scale-[1.28]"
+                }`}
+              />
+              <span className="absolute left-2.5 top-2.5 rounded bg-white/95 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-golddark shadow-sm">
+                {category.brands?.[0] || "Premium"}
+              </span>
+            </div>
+          </Link>
+
+          {/* Touch devices have no hover — tap to swap the two photos. */}
+          {isTouch && (
+            <button
+              type="button"
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                setShowHover((value) => !value);
               }}
-              className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.08]"
-            />
-            <span className="absolute left-2.5 top-2.5 rounded bg-white/95 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-golddark shadow-sm">
-              {category.brands?.[0] || "Premium"}
-            </span>
-          </div>
-        </Link>
+              aria-label={showHover ? `Show ${category.name} main image` : `Show ${category.name} detail image`}
+              aria-pressed={showHover}
+              className="absolute bottom-2.5 right-2.5 z-10 grid h-8 w-8 place-items-center rounded-full bg-white/95 text-charcoal/70 shadow-sm transition-colors hover:text-golddark"
+            >
+              <Layers3 size={15} />
+            </button>
+          )}
+        </div>
 
         <div className="relative p-3.5">
           <div className="absolute -top-10 right-2.5 flex gap-1.5">

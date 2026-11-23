@@ -1,3 +1,5 @@
+import { materialGuides } from "./guides";
+
 // Local fallback used only if a category image fails to load.
 export const PRODUCT_RANGE_FALLBACK_IMAGE =
   "/images/company-profile/page-06-image-01.png";
@@ -10,20 +12,20 @@ export const productRange = [
   { name: "HDHMR & Boilo Boards Plain & Prelaminated", image: rangeImage(12), brands: ["Action TESA", "Greenply", "Merino", "Mother Wood", "Archid"] },
   { name: "Doors", image: rangeImage(11), brands: ["Greenply", "SRG", "Kalpataru", "Dormak"] },
   { name: "Decorative Laminates", image: rangeImage(7), brands: ["Merino", "Greenlam", "Mikasa", "Euro"] },
-  { name: "Decorative Veneers", image: rangeImage(22), brands: ["Greenlam Mikasa", "Greenply Deco Crest", "Turakhia"] },
-  { name: "Acrylic Laminates", image: rangeImage(20), brands: ["Vivre", "Euro Pratik", "Rehau"] },
-  { name: "HPL", image: rangeImage(23), brands: ["Greenlam", "Mikasa", "Century", "Merino"] },
+  { name: "Decorative Veneers", image: "/images/company-profile/IMG_4497.JPG", brands: ["Greenlam Mikasa", "Greenply Deco Crest", "Turakhia"] },
+  { name: "Acrylic Laminates", image: "/images/company-profile/IMG_4515.JPG", brands: ["Vivre", "Euro Pratik", "Rehau"] },
+  { name: "HPL", image: rangeImage(24), brands: ["Greenlam", "Mikasa", "Century", "Merino"] },
   { name: "ACP", image: rangeImage(21), brands: ["Timex", "Aludecor"] },
-  { name: "Stone Veneers", image: rangeImage(24), brands: ["Sattva"] },
-  { name: "Soft Stone", image: rangeImage(19), brands: ["MCM"] },
+  { name: "Stone Veneers", image: "/images/company-profile/IMG_4499.JPG", brands: ["Sattva"] },
+  { name: "Soft Stone", image: rangeImage(20), brands: ["MCM"] },
   { name: "Soffit", image: rangeImage(16), brands: ["Vox", "ALWUD"] },
-  { name: "Interior Wall Cladding", image: rangeImage(9), brands: ["Decmore", "Euro Pratik", "Vox", "Glo", "Ventura", "Vivre"] },
+  { name: "Interior Wall Cladding", image: rangeImage(20), brands: ["Decmore", "Euro Pratik", "Vox", "Glo", "Ventura", "Vivre"] },
   { name: "Exterior Wall Cladding", image: rangeImage(24), brands: ["Ventura", "Alfresco", "ALWUD", "Dario"] },
-  { name: "FCB Boards", image: rangeImage(14, 6), brands: ["Conwood", "Shera", "Ramco"] },
+  { name: "FCB Boards", image: rangeImage(9), brands: ["Conwood", "Shera", "Ramco"] },
   { name: "WPC Boards, Doors, Door Frames & Louvers", image: rangeImage(10), brands: ["Century", "Greenply", "Alstone"] },
   { name: "Bamboo Charcoal Sheets & Louvers", image: rangeImage(22), brands: ["Euro Pratik", "Glo", "Treelam"] },
   { name: "Wood & PVC Edgeband", image: rangeImage(18), brands: ["Rehau", "Turakhia"] },
-  { name: "Cubicles & Lockers", image: rangeImage(5, 4), brands: ["Merino", "Century", "Greenlam"] },
+  { name: "Cubicles & Lockers", image: "/images/company-profile/IMG_4519.JPG", brands: ["Merino", "Century", "Greenlam"] },
   { name: "Interior & Exterior Flooring", image: rangeImage(25), brands: ["Action TESA", "Greenlam Mikasa", "European"] },
   { name: "Thermo Treated Woods", image: rangeImage(23), brands: ["Thermo Pine", "Oak", "Ash", "IPE"] },
 ];
@@ -50,7 +52,9 @@ export const productCategories = [
     features: ["Moisture resistance", "Durability", "Structural strength", "Decorative finishes"],
     applications: ["Furniture", "Cabinetry", "Interior panelling", "Exterior cladding", "Doors"],
     brands: ["Greenply", "SRG", "Kalapatrau", "ANANYA Compact", "Austin", "Century", "Ironic"],
-    image: "/images/company-profile/page-05-image-01.png",
+    // Plywood sheet layers / edge close-up.
+    image: "/images/company-profile/page-06-image-01.png",
+    hoverImage: "/images/company-profile/page-12-image-01.png",
     pdfPage: 5,
     pdfImageCount: 6,
   },
@@ -71,7 +75,8 @@ export const productCategories = [
     features: ["High-gloss finish", "UV resistance", "Color stability", "Easy maintenance"],
     applications: ["Signage and displays", "Furniture and interior trade", "Retail and exhibition displays", "Architectural features"],
     brands: ["Merino", "NewMika", "Greenlam", "Pedro", "Shivshakti"],
-    image: "/images/company-profile/page-06-image-01.png",
+    image: "/images/company-profile/page-07-image-01.png",
+    hoverImage: "/images/company-profile/page-09-image-01.png",
     pdfPage: 6,
     pdfImageCount: 1,
   },
@@ -85,7 +90,9 @@ export const productCategories = [
     features: ["Durability", "Easy maintenance", "Trade versatility", "Cost-effective"],
     applications: ["Furniture making", "Interior trade", "Building construction", "Signage and displays"],
     brands: ["Merino", "Greenlam", "Century", "NewMika"],
-    image: "/images/company-profile/page-07-image-01.png",
+    // Decorative laminate / fluted panel finish.
+    image: "/images/company-profile/IMG_4501.JPG",
+    hoverImage: "/images/company-profile/page-07-image-01.png",
     pdfPage: 7,
     pdfImageCount: 1,
   },
@@ -99,7 +106,9 @@ export const productCategories = [
     features: ["Real wood appearance", "Trade consistency", "Elegant finish", "Versatile application"],
     applications: ["Furniture", "Cabinetry", "Wall panelling", "Doors"],
     brands: ["Greenlam Decowood", "Greenply", "Decmore", "Turakhia"],
-    image: "/images/company-profile/page-08-image-01.png",
+    // Natural veneer sheets and grain.
+    image: "/images/company-profile/IMG_4497.JPG",
+    hoverImage: "/images/company-profile/IMG_4499.JPG",
     pdfPage: 8,
     pdfImageCount: 1,
   },
@@ -113,7 +122,9 @@ export const productCategories = [
     features: ["Weather resistant", "Rot and decay resistant", "Insect damage resistant", "Low maintenance", "Slip-resistant surfaces"],
     applications: ["Exterior wall covering", "Decks", "Patios", "Walkways"],
     brands: ["Ventura", "Alfreso", "Alstone", "Dario"],
-    image: "/images/company-profile/page-09-image-01.png",
+    // Outdoor wooden decking.
+    image: "/images/company-profile/page-23-image-01.png",
+    hoverImage: "/images/company-profile/page-19-image-01.png",
     pdfPage: 9,
     pdfImageCount: 1,
   },
@@ -127,7 +138,8 @@ export const productCategories = [
     features: ["Moisture resistance", "Termite and borer proof", "Fire retardant", "Waterproof", "Stable", "Sustainable"],
     applications: ["Interior doors", "Exterior doors", "Door frames"],
     brands: ["Greenply", "Black Cobra", "ALSTONE"],
-    image: "/images/company-profile/page-10-image-01.png",
+    image: "/images/company-profile/page-14-image-06.png",
+    hoverImage: "/images/company-profile/page-10-image-01.png",
     pdfPage: 10,
     pdfImageCount: 1,
   },
@@ -141,7 +153,8 @@ export const productCategories = [
     features: ["Smooth surface", "Scratch resistant", "Moisture resistant", "Cost-effective", "Warping resistant"],
     applications: ["Furniture making", "Interior applications", "High-humidity areas", "Cabinetry"],
     brands: ["Merino", "Action TESA", "Greenply"],
-    image: "/images/company-profile/page-11-image-01.png",
+    image: "/images/company-profile/page-12-image-01.png",
+    hoverImage: "/images/company-profile/page-06-image-01.png",
     pdfPage: 11,
     pdfImageCount: 1,
   },
@@ -155,7 +168,9 @@ export const productCategories = [
     features: ["Airflow control", "Light control", "Aesthetic appeal", "Water-resistant", "Easy maintenance"],
     applications: ["Windows & doors", "Room dividers", "Decorative elements"],
     brands: ["Decmore", "Unique"],
-    image: "/images/company-profile/page-12-image-01.png",
+    // Wooden / PVC louvers and wall slats.
+    image: "/images/company-profile/page-22-image-01.png",
+    hoverImage: "/images/company-profile/page-10-image-01.png",
     pdfPage: 12,
     pdfImageCount: 1,
   },
@@ -169,7 +184,9 @@ export const productCategories = [
     features: ["Ready to fit", "Factory manufactured", "Moisture resistant", "Termite proof"],
     applications: ["Residential doors", "Commercial doors", "Interior doors", "Exterior doors"],
     brands: ["Greenply", "Century", "Legend", "ANANYA", "SRG", "Kalapatrau"],
-    image: "/images/company-profile/page-10-image-01.png",
+    // Installed doors → flush and panel door finishes.
+    image: "/images/company-profile/page-11-image-01.png",
+    hoverImage: "/images/company-profile/page-14-image-06.png",
     pdfPage: 13,
     pdfImageCount: 0,
   },
@@ -183,7 +200,9 @@ export const productCategories = [
     features: ["Durability", "Fire resistance", "Low maintenance", "Versatility", "Sustainability", "Rot and insect damage resistant"],
     applications: ["Exterior cladding", "Interior partitioning", "Ceiling linings", "Facade cladding"],
     brands: ["Woodium FCB", "Shera FCB", "Ramco", "Ramco HD"],
-    image: "/images/company-profile/page-14-image-06.png",
+    // Grooved and fluted fibre cement boards.
+    image: "/images/company-profile/page-09-image-01.png",
+    hoverImage: "/images/company-profile/page-21-image-01.png",
     pdfPage: 14,
     pdfImageCount: 6,
     additionalImages: [
@@ -204,7 +223,8 @@ export const productCategories = [
     features: ["Durable", "Water-resistant options", "Easy installation", "Multiple styles and colors"],
     applications: ["Residential flooring", "Commercial flooring", "Offices", "Restaurants", "Retail environments"],
     brands: ["Action TESA", "BVG", "Greenlam Mikasa", "Unique"],
-    image: "/images/company-profile/page-16-image-01.png",
+    image: "/images/company-profile/page-25-image-01.png",
+    hoverImage: "/images/company-profile/page-17-image-01.png",
     pdfPage: 16,
     pdfImageCount: 1,
     additionalImages: ["/images/company-profile/page-25-image-01.png"],
@@ -219,7 +239,9 @@ export const productCategories = [
     features: ["Durable", "Flexible", "Moisture resistant", "Scratch resistant", "Easy to apply", "Cost-effective"],
     applications: ["Furniture making", "Cabinetry", "Interior trade"],
     brands: ["Rehau", "E3", "Zarik"],
-    image: "/images/company-profile/page-17-image-01.png",
+    // Rolls of PVC and wooden edge band tape.
+    image: "/images/company-profile/page-18-image-01.png",
+    hoverImage: "/images/company-profile/page-06-image-01.png",
     pdfPage: 17,
     pdfImageCount: 1,
   },
@@ -233,7 +255,9 @@ export const productCategories = [
     features: ["Enhanced durability", "Stability", "Heat-treated", "Ground contact resistance"],
     applications: ["Exterior applications", "Interior applications", "Decking", "Cladding"],
     brands: [],
-    image: "/images/company-profile/page-18-image-01.png",
+    // Heat-treated timber decking / cladding.
+    image: "/images/company-profile/page-23-image-01.png",
+    hoverImage: "/images/company-profile/page-24-image-01.png",
     pdfPage: 18,
     pdfImageCount: 1,
   },
@@ -247,7 +271,9 @@ export const productCategories = [
     features: ["Environmental sustainability", "Realistic trades", "Variety of styles", "Ready-made 4x2 size"],
     applications: ["Interior wall cladding", "Decorative walls", "3D wall applications"],
     brands: [],
-    image: "/images/company-profile/page-19-image-01.png",
+    // Ready-made decorative wooden wall panels.
+    image: "/images/company-profile/page-20-image-01.png",
+    hoverImage: "/images/company-profile/IMG_4501.JPG",
     pdfPage: 19,
     pdfImageCount: 1,
   },
@@ -261,7 +287,9 @@ export const productCategories = [
     features: ["Lightweight", "Durable", "Versatile trades", "Fire resistant", "Low maintenance", "Eco-friendly"],
     applications: ["Exterior cladding for building facades", "Interior wall panels", "False ceilings and partitions", "Signage for shopfronts and hoardings", "Canopies and soffits"],
     brands: ["Alu Decor", "Timex"],
-    image: "/images/company-profile/page-20-image-01.png",
+    // Aluminium composite facade panels.
+    image: "/images/company-profile/page-21-image-01.png",
+    hoverImage: "/images/company-profile/page-20-image-01.png",
     pdfPage: 20,
     pdfImageCount: 1,
   },
@@ -275,7 +303,9 @@ export const productCategories = [
     features: ["Premium tradeer quality", "Eco-friendly", "Sustainable", "Wide variety of colors and trades"],
     applications: ["Residential interiors", "Commercial interiors", "Decorative wall surfaces"],
     brands: ["Decmore"],
-    image: "/images/company-profile/page-21-image-01.png",
+    // Premium fluted decorative wall panels.
+    image: "/images/company-profile/IMG_4515.JPG",
+    hoverImage: "/images/company-profile/page-20-image-01.png",
     pdfPage: 21,
     pdfImageCount: 1,
   },
@@ -289,7 +319,9 @@ export const productCategories = [
     features: ["Comprehensive building materials range", "Aesthetic and functional", "PVC panels for interior and exterior"],
     applications: ["Ceiling solutions", "Wall panels", "Facade cladding", "Flooring"],
     brands: ["VOX"],
+    // VOX slatted wall and ceiling panels.
     image: "/images/company-profile/page-22-image-01.png",
+    hoverImage: "/images/company-profile/page-10-image-01.png",
     pdfPage: 22,
     pdfImageCount: 1,
   },
@@ -303,7 +335,9 @@ export const productCategories = [
     features: ["Durability", "Low maintenance", "Trade versatility", "Sustainability"],
     applications: ["Building facades and exterior cladding", "Interior trade and decoration", "Furniture making and cabinetry", "Signage and branding"],
     brands: ["NewMika FX", "Greenlam Clads", "Century", "Heritage"],
-    image: "/images/company-profile/page-23-image-01.png",
+    // HPL exterior cladding / facade panels.
+    image: "/images/company-profile/page-24-image-01.png",
+    hoverImage: "/images/company-profile/page-19-image-01.png",
     pdfPage: 23,
     pdfImageCount: 1,
   },
@@ -317,7 +351,8 @@ export const productCategories = [
     features: ["Scratch resistant", "Waterproof", "Temperature stable", "Click-lock installation", "Low maintenance"],
     applications: ["Residential homes and apartments", "Commercial offices", "Restaurants", "Retail environments"],
     brands: ["VOX Primerra"],
-    image: "/images/company-profile/page-24-image-01.png",
+    image: "/images/company-profile/page-17-image-01.png",
+    hoverImage: "/images/company-profile/page-25-image-01.png",
     pdfPage: 24,
     pdfImageCount: 1,
   },
@@ -364,17 +399,55 @@ const excludedProfileImages = new Set([
 ]);
 
 export function getProductImages(category) {
-  const pageImages = Array.from(
-    { length: category.pdfImageCount },
-    (_, index) =>
-      `/images/company-profile/page-${String(category.pdfPage).padStart(2, "0")}-image-${String(index + 1).padStart(2, "0")}.png`,
-  );
+  // Prefer the curated photographs assigned to this category (and the guide
+  // entries that belong to it) over arbitrary PDF page images, so every card
+  // shows a material that actually matches its name.
+  const curated = [
+    category.image,
+    category.hoverImage,
+    ...(category.additionalImages || []),
+  ].filter(Boolean);
 
-  const images = [...pageImages, ...(category.additionalImages || [])]
-    .filter((src) => !excludedProfileImages.has(src));
+  const guideImages = allProducts
+    .filter((product) => product.categorySlug === category.slug)
+    .map((product) => product.image);
+
+  const images = [...curated, ...guideImages].filter(
+    (src) => !excludedProfileImages.has(src),
+  );
   const unique = [...new Set(images)];
   return unique.length > 0 ? unique : [category.image];
 }
+
+// Guides already pair every product name with a photograph of that exact
+// product (plywood sheets, flush doors, glossy laminate, natural veneer, ...).
+// Flatten them so every product card shows the image that matches its name.
+const GUIDE_CATEGORY_SLUGS = {
+  plywood: "plywood",
+  doors: "doors",
+  laminates: "decorative-laminate",
+  veneers: "veneers",
+  "wall-panels": "decmore-wall-panels",
+};
+
+export const allProducts = materialGuides.flatMap((guide, sectionIndex) =>
+  guide.sections.flatMap((section, groupIndex) =>
+    section.items.map((item, itemIndex) => {
+      const category = productCategories.find((c) => c.slug === GUIDE_CATEGORY_SLUGS[guide.id]);
+      return {
+        id: `${guide.id}-${sectionIndex}-${groupIndex}-${itemIndex}`,
+        name: item.name,
+        description: item.text,
+        bestFor: item.bestFor,
+        image: item.image,
+        categoryName: category?.name || guide.label,
+        categorySlug: category?.slug || "plywood",
+        guideId: guide.id,
+        brands: category?.brands || [],
+      };
+    })
+  )
+);
 
 export const allBrands = [
   "Greenply", "SRG", "Kalapatrau", "ANANYA Compact", "Austin", "Century", "Ironic",

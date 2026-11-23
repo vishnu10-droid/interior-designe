@@ -134,7 +134,7 @@ export default function Hero() {
         >
           <span className="inline-flex items-center gap-2.5 text-[11px] font-medium tracking-[0.35em] uppercase text-gold border border-gold/30 bg-charcoal/40 backdrop-blur-md px-4 py-2 rounded-full shadow-lg shadow-black/20">
             <Sparkles className="w-3.5 h-3.5 text-gold animate-pulse" />
-            Ananya Interior • Agra
+            Ananya - endless Decore Ideas
           </span>
         </motion.div>
 
@@ -145,13 +145,13 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className="font-serif text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.15] max-w-3xl mt-5 tracking-tight drop-shadow-md"
         >
-          <TextReveal delay={0.2}>Brand Spaces</TextReveal> <br />
-          <TextReveal delay={0.3}>
+          <TextReveal delay={0.2}>A Unit of Bansal Wood</TextReveal> <br />
+          {/* <TextReveal delay={0.3}>
             <span className="text-white/90">That Feel Like </span>
-          </TextReveal>
+          </TextReveal> */}
           <TextReveal delay={0.42}>
             <em className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-gold to-amber-400 not-italic font-serif italic">
-              Home.
+              Decore Pvt.Ltd
             </em>
           </TextReveal>
         </motion.h1>
@@ -176,10 +176,10 @@ export default function Hero() {
         >
           <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
             <Link
-              to="/#projects"
+              to="/products"
               className="group inline-flex items-center gap-2.5 bg-gradient-to-r from-gold via-amber-400 to-gold text-charcoal px-6 py-3 rounded-full text-xs font-semibold tracking-wider uppercase shadow-xl hover:shadow-gold/25 transition-all duration-300"
             >
-              Explore Projects
+              Explore Products
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </motion.div>

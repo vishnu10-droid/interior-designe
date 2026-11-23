@@ -81,7 +81,29 @@ export function DashProjects() {
   const [list, setList] = useState(projects);
   const [q, setQ] = useState("");
   const [view, setView] = useState(null);
+  const [editing, setEditing] = useState(null);
+  const [editForm, setEditForm] = useState({ name: "", category: "", location: "", date: "", status: "", description: "" });
   const filtered = list.filter((p) => (p.name + p.category + p.location).toLowerCase().includes(q.toLowerCase()));
+
+  const openEdit = (project) => {
+    setView(null);
+    setEditing(project);
+    setEditForm({
+      name: project.name,
+      category: project.category,
+      location: project.location,
+      date: project.date,
+      status: project.status,
+      description: project.description,
+    });
+  };
+
+  const saveEdit = (event) => {
+    event.preventDefault();
+    if (!editForm.name.trim()) return;
+    setList(list.map((item) => item.id === editing.id ? { ...item, ...editForm } : item));
+    setEditing(null);
+  };
   return (
     <>
       <PageTitle title="Projects" desc={`${filtered.length} projects`} action={
@@ -100,7 +122,7 @@ export function DashProjects() {
                 <p className="text-xs text-coffee mt-1">{p.category} • {p.location} • {p.date}</p>
                 <div className="flex gap-2 mt-4">
                   <button onClick={() => setView(p)} className="flex-1 flex items-center justify-center gap-1.5 text-xs bg-charcoal text-cream rounded-lg py-2.5 hover:bg-espresso"><Eye size={13} /> View</button>
-                  <button onClick={() => setView(p)} className="flex-1 flex items-center justify-center gap-1.5 text-xs border border-charcoal/15 rounded-lg py-2.5 hover:bg-beige"><Pencil size={13} /> Edit</button>
+                  <button onClick={() => openEdit(p)} className="flex-1 flex items-center justify-center gap-1.5 text-xs border border-charcoal/15 rounded-lg py-2.5 hover:bg-beige"><Pencil size={13} /> Edit</button>
                   <button onClick={() => setList(list.filter((x) => x.id !== p.id))} className="w-10 grid place-items-center text-xs border border-red-200 text-red-600 rounded-lg py-2.5 hover:bg-red-50" aria-label={`Delete ${p.name}`}><Trash2 size={14} /></button>
                 </div>
               </div>
@@ -116,8 +138,39 @@ export function DashProjects() {
             <button onClick={() => setView(null)} aria-label="Close" className="absolute top-4 right-4 w-9 h-9 rounded-full bg-cream grid place-items-center"><X size={16} /></button>
             <div className="p-7"><div className="flex items-center justify-between"><h3 className="font-serif text-2xl">{view.name}</h3>{badge(view.status)}</div>
               <p className="text-sm text-coffee mt-2">{view.category} • {view.location} • {view.date}</p>
-              <p className="text-sm mt-3 leading-relaxed">{view.description}</p></div>
+              <p className="text-sm mt-3 leading-relaxed">{view.description}</p>
+              <button onClick={() => openEdit(view)} className="mt-5 inline-flex items-center gap-2 rounded-full bg-charcoal text-cream px-5 py-2.5 text-xs hover:bg-espresso"><Pencil size={13} /> Edit project</button>
+            </div>
           </motion.div>
+        </div>
+      )}
+
+      {editing && (
+        <div className="fixed inset-0 z-[70] grid place-items-center p-4">
+          <div className="absolute inset-0 bg-charcoal/60" onClick={() => setEditing(null)} />
+          <motion.form onSubmit={saveEdit} initial={{ scale: 0.94, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative bg-cream rounded-3xl p-7 max-w-lg w-full shadow-lift">
+            <button type="button" onClick={() => setEditing(null)} aria-label="Close" className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white border border-charcoal/10 grid place-items-center"><X size={16} /></button>
+            <h3 className="font-serif text-2xl">Edit Project</h3>
+            <div className="grid sm:grid-cols-2 gap-3 mt-5">
+              {[["name", "Project name"], ["category", "Category"], ["location", "Location"], ["date", "Date"]].map(([key, label]) => (
+                <label key={key} className="block text-xs uppercase tracking-wider text-coffee">
+                  {label}
+                  <input required value={editForm[key]} onChange={(e) => setEditForm({ ...editForm, [key]: e.target.value })} className="mt-1.5 w-full bg-white border border-charcoal/10 rounded-xl px-4 py-2.5 text-sm" />
+                </label>
+              ))}
+              <label className="block text-xs uppercase tracking-wider text-coffee sm:col-span-2">
+                Status
+                <select value={editForm.status} onChange={(e) => setEditForm({ ...editForm, status: e.target.value })} className="mt-1.5 w-full bg-white border border-charcoal/10 rounded-xl px-4 py-2.5 text-sm">
+                  {["Completed", "In Progress", "Active"].map((status) => <option key={status}>{status}</option>)}
+                </select>
+              </label>
+              <label className="block text-xs uppercase tracking-wider text-coffee sm:col-span-2">
+                Description
+                <textarea rows={3} value={editForm.description} onChange={(e) => setEditForm({ ...editForm, description: e.target.value })} className="mt-1.5 w-full bg-white border border-charcoal/10 rounded-xl px-4 py-2.5 text-sm resize-none" />
+              </label>
+            </div>
+            <button type="submit" className="mt-5 w-full bg-charcoal text-cream rounded-full py-3 text-sm hover:bg-espresso">Save Changes</button>
+          </motion.form>
         </div>
       )}
     </>
@@ -128,18 +181,41 @@ export function DashProjects() {
 export function DashServices() {
   const [list, setList] = useState(services);
   const [modal, setModal] = useState(false);
+  const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState({ name: "", desc: "" });
-  const add = (e) => {
+
+  const openAdd = () => {
+    setEditingId(null);
+    setForm({ name: "", desc: "" });
+    setModal(true);
+  };
+
+  const openEdit = (service) => {
+    setEditingId(service.id);
+    setForm({ name: service.name, desc: service.desc });
+    setModal(true);
+  };
+
+  const save = (e) => {
     e.preventDefault();
     if (!form.name.trim()) return;
-    setList([{ id: form.name.toLowerCase().replace(/\s+/g, "-") + "-" + Date.now(), name: form.name, desc: form.desc || "Custom trade service.", icon: Layers, image: services[0].image, status: "Active" }, ...list]);
+
+    if (editingId) {
+      setList(list.map((item) => item.id === editingId
+        ? { ...item, name: form.name.trim(), desc: form.desc.trim() || item.desc }
+        : item));
+    } else {
+      setList([{ id: form.name.toLowerCase().replace(/\s+/g, "-") + "-" + Date.now(), name: form.name.trim(), desc: form.desc || "Custom trade service.", icon: Layers, image: services[0].image, status: "Active" }, ...list]);
+    }
+
     setForm({ name: "", desc: "" });
+    setEditingId(null);
     setModal(false);
   };
   return (
     <>
       <PageTitle title="Services" desc={`${list.length} active services`} action={
-        <button onClick={() => setModal(true)} className="flex items-center gap-2 bg-charcoal text-cream text-sm px-5 py-3 rounded-full hover:bg-espresso"><Plus size={16} /> Add New Service</button>} />
+        <button onClick={openAdd} className="flex items-center gap-2 bg-charcoal text-cream text-sm px-5 py-3 rounded-full hover:bg-espresso"><Plus size={16} /> Add New Service</button>} />
       <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
         {list.map((s) => (
           <Card key={s.id}>
@@ -149,7 +225,7 @@ export function DashServices() {
             </div>
             <p className="text-sm text-coffee mt-3 leading-relaxed">{s.desc}</p>
             <div className="flex gap-2 mt-4">
-              <button className="flex-1 text-xs border border-charcoal/15 rounded-lg py-2.5 hover:bg-beige flex items-center justify-center gap-1.5"><Pencil size={13} /> Edit</button>
+              <button onClick={() => openEdit(s)} className="flex-1 text-xs border border-charcoal/15 rounded-lg py-2.5 hover:bg-beige flex items-center justify-center gap-1.5"><Pencil size={13} /> Edit</button>
               <button onClick={() => setList(list.filter((x) => x.id !== s.id))} className="w-10 grid place-items-center border border-red-200 text-red-600 rounded-lg hover:bg-red-50" aria-label={`Delete ${s.name}`}><Trash2 size={14} /></button>
             </div>
           </Card>
@@ -157,15 +233,15 @@ export function DashServices() {
       </div>
       {modal && (
         <div className="fixed inset-0 z-[70] grid place-items-center p-4">
-          <div className="absolute inset-0 bg-charcoal/60" onClick={() => setModal(false)} />
-          <motion.form onSubmit={add} initial={{ scale: 0.94, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative bg-cream rounded-3xl p-8 max-w-md w-full shadow-lift">
-            <button type="button" onClick={() => setModal(false)} aria-label="Close" className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white border border-charcoal/10 grid place-items-center"><X size={16} /></button>
-            <h3 className="font-serif text-2xl">Add New Service</h3>
+          <div className="absolute inset-0 bg-charcoal/60" onClick={() => { setModal(false); setEditingId(null); }} />
+          <motion.form onSubmit={save} initial={{ scale: 0.94, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative bg-cream rounded-3xl p-8 max-w-md w-full shadow-lift">
+            <button type="button" onClick={() => { setModal(false); setEditingId(null); }} aria-label="Close" className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white border border-charcoal/10 grid place-items-center"><X size={16} /></button>
+            <h3 className="font-serif text-2xl">{editingId ? "Edit Service" : "Add New Service"}</h3>
             <label className="block text-xs uppercase tracking-wider text-coffee mt-5">Service name</label>
             <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="e.g. Lighting Trade" className="mt-1.5 w-full bg-white border border-charcoal/10 rounded-xl px-4 py-3 text-sm" />
             <label className="block text-xs uppercase tracking-wider text-coffee mt-4">Description</label>
             <textarea value={form.desc} onChange={(e) => setForm({ ...form, desc: e.target.value })} rows={3} placeholder="Short description…" className="mt-1.5 w-full bg-white border border-charcoal/10 rounded-xl px-4 py-3 text-sm resize-none" />
-            <button className="mt-6 w-full bg-charcoal text-cream rounded-full py-3.5 text-sm hover:bg-espresso">Save Service</button>
+            <button className="mt-6 w-full bg-charcoal text-cream rounded-full py-3.5 text-sm hover:bg-espresso">{editingId ? "Save Changes" : "Save Service"}</button>
           </motion.form>
         </div>
       )}

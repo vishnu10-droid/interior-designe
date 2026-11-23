@@ -1,9 +1,13 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, useSearchParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowRight, ArrowDown, ChevronRight, Mail, Phone, MapPin } from "lucide-react";
 import { RevealLeft, RevealRight, SectionHeading } from "../components/ui";
-import { getProductImages, productCategories, PRODUCT_RANGE_FALLBACK_IMAGE } from "../data/products";
+import {
+  allProducts,
+  getProductImages,
+  productCategories,
+  PRODUCT_RANGE_FALLBACK_IMAGE,
+} from "../data/products";
 import { ProductCard } from "../components/ProductCard";
 import { PHONE_LINK, ADDRESS, DISPLAY_CENTRE } from "../data/services";
 
@@ -22,14 +26,34 @@ function SafeImage({ src, alt, className = "" }) {
 
 export default function ProductDetails() {
   const { slug } = useParams();
+  const [params] = useSearchParams();
   const navigate = useNavigate();
   const category = productCategories.find((c) => c.slug === slug);
+  const selectedItem = params.get("item");
+  const productParam = params.get("product");
+
+  // Curated product opened from a Product Range card.
+  const product = allProducts.find((p) => p.id === selectedItem);
+
+  // Bring the selected product into view in the gallery below.
+  useEffect(() => {
+    const target = product
+      ? `product-${product.id}`
+      : productParam !== null
+      ? `product-${productParam}`
+      : null;
+    if (!target) return undefined;
+    const timer = window.setTimeout(() => {
+      document.getElementById(target)?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 150);
+    return () => window.clearTimeout(timer);
+  }, [slug, selectedItem, productParam]);
 
   if (!category) {
     return (
       <div className="pt-[72px] max-w-3xl mx-auto px-5 py-24 text-center">
         <h1 className="font-serif text-4xl text-charcoal mb-4">Product not found</h1>
-        <p className="text-coffee mb-6">The product category you're looking for doesn't exist.</p>
+        <p className="text-coffee mb-6">The product you're looking for doesn't exist.</p>
         <Link to="/products" className="inline-flex items-center gap-2 text-golddark font-medium hover:text-golddark/80 transition-colors">
           <ArrowLeft size={16} /> Back to Products
         </Link>
@@ -38,6 +62,35 @@ export default function ProductDetails() {
   }
 
   const productImages = getProductImages(category);
+  const productIndex = Math.min(
+    Math.max(Number.parseInt(productParam ?? "0", 10) || 0, 0),
+    Math.max(productImages.length - 1, 0)
+  );
+
+  const title = product?.name || category.name;
+  const description = product?.description || category.description;
+  const heroImage = product?.image || productImages[productIndex] || category.image;
+
+  const related = product
+    ? allProducts.filter((p) => p.guideId === product.guideId && p.id !== product.id)
+    : [];
+  const galleryItems = product
+    ? [product, ...related].map((p) => ({
+        id: p.id,
+        src: p.image,
+        name: p.name,
+        isSelected: p.id === product.id,
+        href: `/products/${p.categorySlug}?item=${p.id}`,
+      }))
+    : productImages.map((src, index) => ({
+        id: `product-${index}`,
+        src,
+        name:
+          category.types?.[index] ||
+          (productImages.length > 1 ? `${category.name} ${index + 1}` : category.name),
+        isSelected: productParam !== null && index === productIndex,
+        href: null,
+      }));
 
   return (
     <div className="pt-[72px]">
@@ -67,11 +120,21 @@ export default function ProductDetails() {
             </div>
 
             <h1 className="mt-4 font-serif text-[40px] leading-[1.05] text-[#FBF3E7] sm:text-5xl lg:text-[56px]">
-              {category.name}
+              {title}
             </h1>
             <p className="mt-4 max-w-xl text-[13px] leading-relaxed text-[#D9CBB4]">
-              {category.description}
+              {description}
             </p>
+            {(product || productParam !== null) && (
+              <p className="mt-3 text-[11px] font-medium uppercase tracking-[0.16em] text-[#D9B45B]">
+                Part of the {category.name} collection
+              </p>
+            )}
+            {product?.bestFor && (
+              <p className="mt-2 max-w-xl text-[12px] leading-relaxed text-[#D9CBB4]/85">
+                <span className="font-medium text-[#F4E4C6]">Best for:</span> {product.bestFor}
+              </p>
+            )}
 
             {/* featured brands */}
             {category.brands?.length > 0 && (
@@ -112,8 +175,8 @@ export default function ProductDetails() {
           <RevealLeft className="relative h-[280px] sm:h-[340px] lg:h-[440px]">
             <div className="absolute inset-0 overflow-hidden rounded-2xl border border-[#D9B45B]/20 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]">
               <SafeImage
-                src={category.image}
-                alt={category.name}
+                src={heroImage}
+                alt={title}
                 className="h-full w-full object-cover object-center"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1C1109]/45 via-transparent to-transparent" />
@@ -126,8 +189,8 @@ export default function ProductDetails() {
             </svg>
             <div className="absolute -bottom-5 -left-5 hidden h-24 w-24 overflow-hidden rounded-full border-[3px] border-[#D9B45B] shadow-[0_0_30px_rgba(217,180,91,0.35)] sm:block">
               <SafeImage
-                src={category.image}
-                alt={`${category.name} detail`}
+                src={heroImage}
+                alt={`${title} detail`}
                 className="h-full w-full scale-150 object-cover object-center"
               />
             </div>
@@ -140,8 +203,8 @@ export default function ProductDetails() {
 
       <section className="max-w-7xl mx-auto px-5 md:px-8 py-20 md:py-28 grid lg:grid-cols-2 gap-16">
         <div className="space-y-8">
-          <RevealSectionHeading title={`About ${category.name}`} />
-          <p className="text-coffee text-base leading-relaxed">{category.description}</p>
+          <RevealSectionHeading title={`About ${title}`} />
+          <p className="text-coffee text-base leading-relaxed">{description}</p>
 
           {category.types && category.types.length > 0 && (
             <div className="bg-beige/50 rounded-2xl p-6 border border-charcoal/5">
@@ -233,23 +296,48 @@ export default function ProductDetails() {
         </div>
       </section>
 
-      {productImages.length > 0 && (
+      {galleryItems.length > 0 && (
         <section id="category-products" className="max-w-7xl mx-auto scroll-mt-24 px-5 md:px-8 pb-16">
           <SectionHeading
-            eyebrow="Category Products"
-            title={`All ${category.name} Products`}
-            desc="Every product available in this category — each one shown only once."
+            eyebrow={product ? "Product Range" : "Category Products"}
+            title={product ? `More ${category.name} Products` : `All ${category.name} Products`}
+            desc={product ? "Other products in this range — tap any one for its details." : "Every product available in this category — each one shown only once."}
           />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
-            {productImages.map((src, index) => (
-              <div key={src} className="rounded-2xl overflow-hidden bg-white border border-charcoal/5 shadow-card">
-                <SafeImage
-                  src={src}
-                  alt={`${category.name} product ${index + 1}`}
-                  className="w-full h-72 object-contain p-3"
-                />
-              </div>
-            ))}
+            {galleryItems.map((entry) => {
+              const card = (
+                <>
+                  {entry.isSelected && (
+                    <span className="absolute left-3 top-3 z-10 rounded-full bg-charcoal/85 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-cream">
+                      Selected · {entry.name}
+                    </span>
+                  )}
+                  <SafeImage
+                    src={entry.src}
+                    alt={entry.name}
+                    className="w-full h-72 object-contain p-3"
+                  />
+                  <p className="border-t border-charcoal/5 px-4 py-3 text-[13px] font-medium text-charcoal">
+                    {entry.name}
+                  </p>
+                </>
+              );
+              return (
+                <div
+                  key={entry.id}
+                  id={`product-${entry.id}`}
+                  className={`relative scroll-mt-28 rounded-2xl overflow-hidden bg-white shadow-card border transition-all ${
+                    entry.isSelected ? "border-gold ring-2 ring-gold/40" : "border-charcoal/5"
+                  }`}
+                >
+                  {entry.href ? (
+                    <Link to={entry.href} className="block">{card}</Link>
+                  ) : (
+                    card
+                  )}
+                </div>
+              );
+            })}
           </div>
         </section>
       )}

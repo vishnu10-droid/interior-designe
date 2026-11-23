@@ -85,11 +85,7 @@ export default function ProductsPage() {
   return (
     <div className="pt-[72px]">
       <AnnouncementBar />
-      <CategoryNavStrip
-        activeSlug={categorySlug}
-        buildHref={(slug) => `/products?category=${encodeURIComponent(slug)}`}
-        onViewAll={showAll}
-      />
+      <CategoryNavStrip activeSlug={categorySlug} onViewAll={showAll} />
       <ShopHeroSlider />
 
       {/* Product collection — horizontal carousel */}

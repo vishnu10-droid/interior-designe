@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone, MapPin, Clock } from "lucide-react";
+import { ArrowRight, Phone, MapPin, Clock, CheckCircle2 } from "lucide-react";
 import { ADDRESS, PHONE, PHONE_LINK, WHATSAPP_LINK, MAPS_LINK, DISPLAY_CENTRE, GODOWN, MOBILE } from "../data/services";
 import { RevealUp } from "./ui";
 
@@ -36,6 +37,27 @@ export function CallToAction({ title, desc, buttonText, buttonHref }) {
 }
 
 export function ContactSection() {
+  const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
+  const [sent, setSent] = useState(false);
+
+  const set = (key) => (event) =>
+    setForm((prev) => ({ ...prev, [key]: event.target.value }));
+
+  const submit = (event) => {
+    event.preventDefault();
+    if (!form.name.trim() || !form.phone.trim() || !form.message.trim()) return;
+    if (!/^[0-9+\s-]{8,15}$/.test(form.phone.trim())) return;
+
+    // No enquiry API is configured — hand the enquiry to the studio's real
+    // email address so the button always performs a genuine action.
+    const subject = encodeURIComponent(`Website enquiry — ${form.name.trim()}`);
+    const body = encodeURIComponent(
+      `Name: ${form.name.trim()}\nPhone: ${form.phone.trim()}\nEmail: ${form.email.trim() || "-"}\n\n${form.message.trim()}`
+    );
+    window.location.href = `mailto:contact@ananyadesigns.com?subject=${subject}&body=${body}`;
+    setSent(true);
+  };
+
   return (
     <section className="max-w-7xl mx-auto px-5 md:px-8 py-20 md:py-28">
       <div className="grid lg:grid-cols-3 gap-10">
@@ -86,28 +108,33 @@ export function ContactSection() {
           </div>
           <div className="bg-white rounded-3xl p-8 shadow-card border border-charcoal/5">
             <h3 className="font-serif text-2xl text-charcoal mb-6">Send Enquiry</h3>
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-4" onSubmit={submit}>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs tracking-wider uppercase text-coffee mb-1.5">Name *</label>
-                  <input type="text" placeholder="Your full name" className="w-full bg-charcoal/5 border border-charcoal/10 rounded-xl px-4 py-3 text-sm focus:border-gold transition-colors" />
+                  <input required value={form.name} onChange={set("name")} type="text" placeholder="Your full name" className="w-full bg-charcoal/5 border border-charcoal/10 rounded-xl px-4 py-3 text-sm focus:border-gold transition-colors" />
                 </div>
                 <div>
                   <label className="block text-xs tracking-wider uppercase text-coffee mb-1.5">Phone *</label>
-                  <input type="tel" placeholder="+91 XXXXX XXXX" className="w-full bg-charcoal/5 border border-charcoal/10 rounded-xl px-4 py-3 text-sm focus:border-gold transition-colors" />
+                  <input required value={form.phone} onChange={set("phone")} type="tel" placeholder="+91 XXXXX XXXX" className="w-full bg-charcoal/5 border border-charcoal/10 rounded-xl px-4 py-3 text-sm focus:border-gold transition-colors" />
                 </div>
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs tracking-wider uppercase text-coffee mb-1.5">Email</label>
-                <input type="email" placeholder="you@email.com" className="w-full bg-charcoal/5 border border-charcoal/10 rounded-xl px-4 py-3 text-sm focus:border-gold transition-colors" />
+                <input value={form.email} onChange={set("email")} type="email" placeholder="you@email.com" className="w-full bg-charcoal/5 border border-charcoal/10 rounded-xl px-4 py-3 text-sm focus:border-gold transition-colors" />
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs tracking-wider uppercase text-coffee mb-1.5">Message *</label>
-                <textarea rows={4} placeholder="Tell us about your project…" className="w-full bg-charcoal/5 border border-charcoal/10 rounded-xl px-4 py-3 text-sm focus:border-gold transition-colors resize-none" />
+                <textarea required value={form.message} onChange={set("message")} rows={4} placeholder="Tell us about your project…" className="w-full bg-charcoal/5 border border-charcoal/10 rounded-xl px-4 py-3 text-sm focus:border-gold transition-colors resize-none" />
               </div>
               <button type="submit" className="w-full bg-charcoal text-cream px-8 py-3.5 rounded-full text-sm font-medium tracking-wide hover:bg-espresso transition-colors">
                 Send Enquiry
               </button>
+              {sent && (
+                <p className="flex items-center gap-2 rounded-xl bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-700">
+                  <CheckCircle2 size={16} /> Your email draft is ready — send it to complete the enquiry.
+                </p>
+              )}
             </form>
           </div>
         </div>

@@ -221,10 +221,14 @@ export default function FloatingButtons() {
                   onChange={set("role")}
                   className={`${inputCls} mt-1.5`}
                 >
-                  <option>Interior Tradeer</option>
+                  <option>HomeOwner</option>
+                    <option>Interior Designer</option>
+                  <option>Interior Trader</option>
                   <option>Architect</option>
                   <option>Builder</option>
                   <option>Contractor</option>
+                  <option>Other</option>
+                   
                 </select>
               </div>
 
@@ -263,7 +267,7 @@ export default function FloatingButtons() {
                 window.scrollTo({ top: 0, behavior: "smooth" })
               }
               aria-label="Back to top"
-              className="w-11 h-11 rounded-full bg-white shadow-lift border border-charcoal/10 grid place-items-center text-charcoal hover:bg-charcoal hover:text-cream transition-colors"
+              className="w-11 h-11 rounded-full bg-creamwarm shadow-lift border border-champagne/50 grid place-items-center text-espressodeep transition-colors hover:bg-champagne"
             >
               <ArrowUp size={17} />
             </motion.button>
@@ -278,7 +282,7 @@ export default function FloatingButtons() {
           title="Call us"
           whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.95 }}
-          className="w-14 h-14 rounded-full bg-charcoal text-gold grid place-items-center shadow-lift border border-gold/30"
+          className="w-14 h-14 rounded-full bg-champagne text-espressodeep grid place-items-center shadow-lift border border-[#e3c48f]/60 transition-colors hover:bg-[#d9b274]"
         >
           <Phone size={23} />
         </motion.a>

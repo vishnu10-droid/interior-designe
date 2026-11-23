@@ -54,6 +54,19 @@ input:focus, select:focus, textarea:focus { border-color: #C6A87C !important; bo
   animation: marquee 34s linear infinite;
 }
 .animate-marquee:hover { animation-play-state: paused; }
+
+/* Second row of the product marquee — travels the opposite way. */
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-reverse 34s linear infinite;
+}
+.animate-marquee-reverse:hover { animation-play-state: paused; }
+
 .marquee-fade {
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
@@ -90,6 +103,7 @@ input:focus, select:focus, textarea:focus { border-color: #C6A87C !important; bo
 
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee { animation: none; }
+  .animate-marquee-reverse { animation: none; }
   .hero-zoom { animation: none; }
   html { scroll-behavior: auto; }
 }

@@ -114,9 +114,9 @@ export default function Navbar() {
                 key={l.to}
                 to={l.to}
                 className={({ isActive }) =>
-                  `text-[13px] tracking-[0.14em] uppercase transition-colors ${
+                  `relative text-[13px] tracking-[0.14em] uppercase transition-colors ${
                     isActive
-                      ? "text-golddark"
+                      ? "text-champagne after:absolute after:-bottom-1.5 after:left-1/2 after:h-[2px] after:w-5 after:-translate-x-1/2 after:rounded-full after:bg-champagne"
                       : solid
                       ? "text-charcoal/80 hover:text-charcoal"
                       : "text-white/85 hover:text-white"
@@ -322,7 +322,7 @@ export default function Navbar() {
                       className={({ isActive }) =>
                         `flex items-center justify-between py-3.5 border-b border-charcoal/8 font-serif text-[20px] ${
                           isActive
-                            ? "text-golddark"
+                            ? "text-champagne"
                             : "text-charcoal"
                         }`
                       }

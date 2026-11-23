@@ -3,7 +3,7 @@ export const reviews = [
   { id: 2, name: "Priya Verma", location: "Agra", rating: 5, date: "Jan 2026", status: "Approved", text: "Amazing trade, great experience and beautiful finishing. Our living room now feels like a hotel lounge." },
   { id: 3, name: "Amit Agarwal", location: "Agra", rating: 5, date: "Jan 2026", status: "Approved", text: "Good work and professional behaviour. Kitchen storage planning is very practical for daily use." },
   { id: 4, name: "Neha Singh", location: "Agra", rating: 5, date: "Dec 2025", status: "Approved", text: "They renovated our bedroom beautifully. Transparent pricing and polite site team. Highly recommended in Agra." },
-  { id: 5, name: "Vikas Gupta", location: "Agra", rating: 4, date: "Dec 2025", status: "Approved", text: "Nice office interior, modern look and comfortable lighting. Small delay in material delivery but overall satisfied." },
+  { id: 5, name: "Vikas Bansal", location: "Agra", rating: 4, date: "Dec 2025", status: "Approved", text: "Nice office interior, modern look and comfortable lighting. Small delay in material delivery but overall satisfied." },
   { id: 6, name: "Kavita Jain", location: "Agra", rating: 5, date: "Nov 2025", status: "Pending", text: "Wardrobe and false ceiling work was neat and clean. Finishing quality is premium for the price." },
 ];
 

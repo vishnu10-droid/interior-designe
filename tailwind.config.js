@@ -22,6 +22,10 @@ export default {
         champagne: "#C49A5A",
         ink: "#29231F",
         muted: "#817467",
+        // Contact experience — exact brand palette from the design reference
+        creamwarm: "#F2EADF",
+        espressodeep: "#211914",
+        brownrich: "#493020",
       },
       fontFamily: {
         serif: ['"Playfair Display"', "Georgia", "serif"],
